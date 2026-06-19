@@ -80,12 +80,49 @@
 - Ganti password
 
 ### AI Sales Agent
-- Akses chat AI dari halaman khusus atau floating button
-- AI menggali kebutuhan, mood, budget, preferensi user secara conversational
-- AI merekomendasikan beberapa produk sekaligus beserta alasan
-- AI memberikan link langsung ke halaman produk yang direkomendasikan
-- AI bisa menjelaskan itinerary produk secara conversational
-- Context percakapan hilang saat sesi berakhir (incognito per sesi)
+
+**Layout Halaman AI:**
+- Bagian atas: interface chat (seperti ChatGPT/Gemini)
+- Bagian bawah: grid produk yang dinamis
+- Sebelum chat dimulai → grid menampilkan **semua produk aktif**
+- Setelah AI reply dengan rekomendasi → grid **otomatis difilter** hanya menampilkan produk yang direkomendasikan AI
+- Jika sesi direset → grid kembali ke semua produk
+
+**Fitur Chat:**
+- User chat bebas (mood, budget, jumlah orang, preferensi, dll)
+- AI menggali kebutuhan secara conversational — tidak langsung rekomendasiin
+- AI merekomendasikan beberapa produk sekaligus beserta alasan yang spesifik
+- AI bisa menjelaskan itinerary produk secara conversational jika ditanya
+- Context percakapan hilang saat sesi berakhir (incognito per sesi — tidak disimpan di DB)
+- History percakapan dikirim dari frontend tiap request (stateless di backend)
+
+**Mekanisme Rekomendasi Produk (Structured Output):**
+- AI tidak hanya return teks — return JSON terstruktur berisi pesan + daftar ID produk rekomendasi
+- Frontend baca `recommendedProductIds` → filter grid otomatis
+- Jika `showAll: true` → tampilkan semua produk (misal di awal sesi atau AI belum cukup info)
+- Jika `showAll: false` → tampilkan hanya produk yang direkomendasikan
+
+**Batasan & Keamanan:**
+- History percakapan dibatasi maksimal 10 pesan terakhir (hemat token)
+- Rate limiter ketat di endpoint AI (mencegah abuse & pembengkakan biaya)
+- Backend validasi semua product ID dari AI sebelum dikirim ke frontend (antisipasi hallucination)
+
+---
+
+### Manajemen Banner
+- Lihat semua banner aktif (public, sorted by urutan tampil)
+- Lihat detail banner berdasarkan ID (admin)
+- Upload banner baru (gambar wajib, judul wajib, link & urutan opsional)
+- Edit banner (judul, gambar, link, urutan, toggle aktif/nonaktif)
+- Hapus banner — hard delete, gambar di Supabase ikut terhapus otomatis
+
+### Upload & Manajemen Gambar
+- Upload gambar satuan (`POST /api/upload/single?folder=xxx`)
+- Upload gambar sekaligus banyak — max 10 file (`POST /api/upload/bulk?folder=xxx`)
+- Hapus gambar satuan dari Supabase (`DELETE /api/upload/single`)
+- Hapus banyak gambar sekaligus dari Supabase (`DELETE /api/upload/bulk`)
+- Semua endpoint upload/delete hanya untuk admin
+- Setiap data yang memiliki gambar dan dihapus → gambar di Supabase ikut terhapus otomatis
 
 ---
 
@@ -101,25 +138,37 @@
 - Produk yang akan segera expired (misal dalam 7 hari ke depan)
 
 ### Manajemen Kategori
-- Lihat semua kategori
-- Tambah kategori baru
-- Edit kategori (perubahan otomatis reflect ke semua produk terkait)
-- Hapus kategori (otomatis terhapus dari semua produk — produk tidak error)
-- Info: berapa produk yang menggunakan kategori ini
+- Lihat semua kategori (admin: semua status | public: active saja)
+- Search kategori berdasarkan nama (`?search=`)
+- Lihat detail kategori berdasarkan ID atau slug
+- Tambah kategori baru (nama, deskripsi, gambar opsional, urutan tampil)
+- Edit kategori (nama, deskripsi, gambar, status, urutan tampil)
+- Toggle status kategori (active ↔ inactive) tanpa hapus
+- Hapus kategori — hard delete, otomatis terhapus dari semua produk terkait
+- Slug otomatis di-generate dari nama, URL-friendly
+- Urutan tampil kategori bisa diatur via field `sortOrder`
 
 ### Manajemen Tipe
-- Lihat semua tipe (Romance, Family, Religi, Adventure, Kuliner, Alam, dll)
-- Tambah tipe baru
-- Edit tipe (perubahan otomatis reflect ke semua produk terkait)
-- Hapus tipe (otomatis terhapus dari semua produk — produk tidak error)
-- Info: berapa produk yang menggunakan tipe ini
+- Lihat semua tipe (admin: semua status | public: active saja)
+- Search tipe berdasarkan nama (`?search=`)
+- Lihat detail tipe berdasarkan ID atau slug
+- Tambah tipe baru (nama, deskripsi opsional)
+- Edit tipe (nama, deskripsi, status)
+- Toggle status tipe (active ↔ inactive) tanpa hapus
+- Hapus tipe — hard delete, otomatis terhapus dari semua produk terkait
+- Slug otomatis di-generate dari nama, URL-friendly
+- Tanpa gambar dan urutan tampil (lebih simpel dari kategori — cukup label)
 
 ### Manajemen Tags
-- Lihat semua tags (Promo, Terlaris, New, Limited Seat, Favorit, dll)
-- Tambah tag baru
-- Edit tag (perubahan otomatis reflect ke semua produk terkait)
-- Hapus tag (otomatis terhapus dari semua produk — produk tidak error)
-- Info: berapa produk yang menggunakan tag ini
+- Lihat semua tag (admin: semua status | public: active saja)
+- Search tag berdasarkan nama (`?search=`)
+- Lihat detail tag berdasarkan ID atau slug
+- Tambah tag baru (nama, warna badge hex opsional)
+- Edit tag (nama, warna, status)
+- Toggle status tag (active ↔ inactive) tanpa hapus
+- Hapus tag — hard delete, otomatis terhapus dari semua produk terkait
+- Slug otomatis di-generate dari nama, URL-friendly
+- Field `color` (hex, contoh: `#FF5733`) untuk warna badge tag di frontend
 
 ### Manajemen Produk
 **CRUD Produk:**
