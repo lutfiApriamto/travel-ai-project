@@ -143,6 +143,20 @@ const productSchema = new mongoose.Schema(
       enum:    ['draft', 'active', 'full', 'expired', 'cancelled'],
       default: 'draft',
     },
+
+    // bertambah setiap order confirmed (auto via payment)
+    soldCount: {
+      type:    Number,
+      default: 0,
+      min:     0,
+    },
+
+    // bertambah setiap detail produk dibuka oleh publik
+    viewCount: {
+      type:    Number,
+      default: 0,
+      min:     0,
+    },
   },
   {
     timestamps: true,

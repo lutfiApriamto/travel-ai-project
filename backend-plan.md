@@ -158,10 +158,9 @@ TRIP_BE/
 │   │   │   └── user.schema.js
 │   │   │
 │   │   ├── admin/
-│   │   │   ├── admin.routes.js         ← Dashboard stats, manajemen user, refund policy
+│   │   │   ├── admin.routes.js         ← Dashboard stats + manajemen user (admin only); dashboardLimiter 20req/menit
 │   │   │   ├── admin.controller.js
-│   │   │   ├── admin.service.js
-│   │   │   └── admin.schema.js
+│   │   │   └── admin.service.js
 │   │   │
 │   │   ├── category/
 │   │   │   ├── category.routes.js      ← CRUD (admin), list (public)
@@ -232,9 +231,10 @@ TRIP_BE/
 │   │   │   └── finance.service.js
 │   │   │
 │   │   ├── notification/
-│   │   │   ├── notification.routes.js  ← List, unread count, mark as read (user only)
+│   │   │   ├── notification.routes.js  ← List, unread count, mark as read, delete (user) + broadcast (admin)
 │   │   │   ├── notification.controller.js
-│   │   │   └── notification.service.js
+│   │   │   ├── notification.service.js
+│   │   │   └── notification.schema.js  ← broadcastSchema (title, message, targetUserIds?)
 │   │   │
 │   │   ├── wilayah/
 │   │   │   ├── wilayah.routes.js       ← List provinsi, kab/kota, kecamatan, desa (public + admin CRUD)
@@ -243,10 +243,10 @@ TRIP_BE/
 │   │   │   └── wilayah.schema.js
 │   │   │
 │   │   └── ai/
-│   │       ├── ai.routes.js            ← POST /api/ai/chat (auth required, rate limiter ketat)
+│   │       ├── ai.routes.js            ← POST /api/ai/chat (auth + aiLimiter 20req/15min + validate)
 │   │       ├── ai.controller.js
-│   │       ├── ai.service.js           ← Inject system prompt + katalog produk → Gemini → validasi ID → return structured output
-│   │       └── ai.schema.js            ← Validasi request body (message, conversationHistory)
+│   │       ├── ai.service.js           ← Build system prompt + inject katalog → Gemini → validasi ID → return structured output
+│   │       └── ai.schema.js            ← chatSchema: message (required) + conversationHistory (max 20 items)
 │   │
 │   ├── middlewares/
 │   │   ├── auth.middleware.js                  ← Verifikasi JWT, set req.user, cek isActive
@@ -279,10 +279,12 @@ TRIP_BE/
 │   │   └── expireProducts.job.js      ← Cron job harian: auto-expire produk yang tanggalnya lewat
 │   │
 │   ├── templates/
+│   │   ├── emailBase.js                ← Shared HTML wrapper + komponen (detailRow, ctaButton, statusBadge)
 │   │   ├── forgotPassword.template.js
 │   │   ├── resetPassword.template.js
+│   │   ├── passwordChanged.template.js ← Email notifikasi ganti password berhasil
 │   │   ├── orderConfirmed.template.js  ← Email konfirmasi order + ringkasan pesanan
-│   │   ├── orderCancelled.template.js  ← Email notifikasi produk di-cancel admin
+│   │   ├── productCancelled.template.js ← Email notifikasi produk di-cancel admin (kirim ke semua pemesan paid)
 │   │   ├── refundApproved.template.js  ← Email refund disetujui + nominal refund
 │   │   └── refundRejected.template.js  ← Email refund ditolak + alasan
 │   │
@@ -360,9 +362,11 @@ Finance
 
 Notification
   ├── userId    → User._id
-  ├── type: 'order_confirmed' | 'refund_approved' | 'refund_rejected' | 'product_cancelled'
-  ├── relatedId → orderId atau refundId (untuk tombol "Lihat Detail")
-  └── isRead: boolean
+  ├── type: 'order_confirmed' | 'ticket_generated' | 'order_cancelled' | 'refund_approved' | 'refund_rejected' | 'product_cancelled' | 'broadcast'
+  ├── relatedId → orderId / refundId / ticketId (untuk tombol "Lihat Detail", opsional)
+  ├── isRead: boolean
+  ├── readAt: Date | null
+  └── isDeleted: boolean (soft delete)
 
 Province / Regency / District / Village
   └── Hierarki: Province → Regency → District → Village
@@ -453,17 +457,27 @@ Response:
 - `showAll: true` → AI belum punya cukup info, tampilkan semua produk
 - `showAll: false` → AI sudah rekomendasiin, filter grid ke `recommendedProductIds`
 
+### Keputusan Desain AI Module
+- Model: `gemini-2.0-flash` — cepat dan hemat token
+- `responseMimeType: 'application/json'` — Gemini return JSON langsung, tidak perlu parsing manual
+- History dipotong ke **maks 10 pesan terakhir** sebelum dikirim ke Gemini
+- Katalog produk yang diinjek: `_id, name, categories, types, price, departureDate, destinations, shortDescription, availableSlots` (bukan full detail)
+- Fallback jika Gemini error → return `{ showAll: true, recommendedProductIds: [] }` + pesan error — frontend tidak crash
+- Jika semua ID dari Gemini hallucinated → paksa `showAll: true` agar grid tidak kosong
+- System prompt enforce: (1) Bahasa Indonesia, (2) topik travel only, (3) gali kebutuhan dulu, (4) JSON output format
+
 ### Risiko & Mitigasi
 
 | Risiko | Mitigasi |
 |---|---|
 | AI hallucinate product ID | Backend validasi semua ID ke DB — ID tidak valid dibuang sebelum dikirim ke frontend |
-| Rate abuse / biaya token membengkak | Rate limiter ketat di endpoint `/api/ai/chat` |
+| Rate abuse / biaya token membengkak | `createRateLimiter` — maks 20 req/15 menit per IP (skip di development) |
 | Response lambat (1-5 detik) | Frontend tampilkan loading state. Streaming bisa ditambahkan post-MVP |
 | Token mahal karena katalog besar | Inject hanya field minimal produk (bukan full detail + itinerary) |
-| Conversation history terlalu panjang | Batasi maksimal 10 pesan terakhir yang dikirim ke Gemini |
+| Conversation history terlalu panjang | Potong ke maks 10 pesan terakhir + AJV validasi maxItems: 20 |
+| AI bahas topik di luar travel | System prompt instruksikan tolak pertanyaan non-travel dengan sopan |
 | API key Gemini terekspos | Tidak mungkin — Gemini dipanggil server-side. Key aman di `.env` backend |
-| CORS | Tidak ada risiko — Gemini dipanggil dari backend, bukan dari browser |
+| Gemini API down / timeout | Try-catch dengan fallback response — endpoint tidak throw error ke user |
 
 ---
 
@@ -505,19 +519,53 @@ Dibuat dari dalam service lain via `notificationHelper.createNotification()`.
 
 ### Endpoint Notifikasi
 ```
-GET   /api/notifications              ← list notifikasi user (paginated)
-GET   /api/notifications/unread-count ← jumlah belum dibaca (untuk badge)
-PATCH /api/notifications/:id/read     ← tandai satu sudah dibaca
-PATCH /api/notifications/read-all     ← tandai semua sudah dibaca
+GET    /api/notifications              ← list notifikasi user (cursor-based, filter ?isRead, ?category, ?search)
+GET    /api/notifications/unread-count ← jumlah belum dibaca (untuk badge)
+PATCH  /api/notifications/read-all     ← tandai semua sudah dibaca
+PATCH  /api/notifications/:id/read     ← tandai satu sudah dibaca (set isRead=true, readAt=now)
+DELETE /api/notifications/:id          ← soft delete notifikasi milik user
+POST   /api/notifications/broadcast    ← admin kirim notifikasi ke semua user atau user tertentu (targetUserIds[])
+```
+
+### Query Params `GET /api/notifications`
+| Param | Nilai | Keterangan |
+|---|---|---|
+| `cursor` | ObjectId string | Cursor dari batch sebelumnya (infinity scroll) |
+| `limit` | number (default 20, max 50) | Jumlah item per batch |
+| `isRead` | `true` / `false` | Filter status baca |
+| `category` | `activity` / `announcement` | Filter tab kategori |
+| `search` | string | Cari di title & message (regex case-insensitive) |
+
+Response shape:
+```json
+{
+  "notifications": [...],
+  "nextCursor": "<ObjectId atau null>",
+  "hasMore": true
+}
 ```
 
 ### Trigger Notifikasi
-| Trigger | Tipe | Pesan |
+| Trigger | Tipe | Category |
 |---|---|---|
-| Pembayaran sukses | `order_confirmed` | "Pesanan kamu untuk [nama produk] berhasil dikonfirmasi" |
-| Refund diapprove | `refund_approved` | "Refund sebesar Rp X untuk [nama produk] telah diproses" |
-| Refund direject | `refund_rejected` | "Pengajuan refund untuk [nama produk] ditolak" |
-| Produk di-cancel admin | `product_cancelled` | "Paket [nama produk] dibatalkan. Silakan hubungi admin" |
+| Pembayaran sukses | `order_confirmed` | `activity` |
+| Tiket digenerate | `ticket_generated` | `activity` |
+| Order dibatalkan | `order_cancelled` | `activity` |
+| Refund diapprove | `refund_approved` | `activity` |
+| Refund direject | `refund_rejected` | `activity` |
+| Produk di-cancel admin | `product_cancelled` | `announcement` |
+| Admin broadcast | `broadcast` | `announcement` |
+
+### Keputusan Desain Notifikasi
+- **Pagination:** cursor-based (bukan offset) — konsisten saat item baru masuk, ideal untuk infinity scroll
+- **Category:** auto-derive dari `type` di `notificationHelper.js` — tidak perlu dikirim di request
+- **Search:** regex case-insensitive di `title` + `message` — cukup untuk portfolio scale
+- Tidak real-time — user perlu refresh/buka halaman untuk melihat yang baru
+- Soft delete (`isDeleted: true`) — data tetap tersimpan, tidak tampil ke user
+- `readAt` field — catat kapan tepatnya notifikasi dibaca
+- Admin tidak bisa melihat notifikasi user (tiap user hanya lihat milik sendiri)
+- Broadcast ke semua user → `User.find({ role: 'user' })` + `Notification.insertMany()` (fan-out)
+- Broadcast ke user tertentu → `targetUserIds[]` di request body (opsional)
 
 ---
 
@@ -587,3 +635,47 @@ Untuk filtering destinasi produk, yang dipakai user/admin adalah level **Provins
 | 19 | Auto-delete Supabase | Setiap module yang memiliki field image wajib menghapus file dari Supabase saat: (1) data dihapus, (2) image diupdate dengan file baru. Gunakan `extractStoragePath(url)` + `deleteFile(path)` dari `uploadHelper.js`. Wrap dengan `.catch(() => {})` agar kegagalan hapus file tidak membatalkan operasi utama |
 | 20 | Upload module | Module dedicated `/api/upload` untuk upload/delete gambar secara independen (admin only). Endpoint: `POST /single`, `POST /bulk` (max 10), `DELETE /single`, `DELETE /bulk` (max 50). Query param `?folder=xxx` menentukan subfolder Supabase (disanitasi, default: `uploads`). `DELETE /bulk` pakai `Promise.allSettled` agar satu kegagalan tidak menghentikan penghapusan lainnya |
 | 21 | Banner model | Menggunakan `isActive` (boolean) dan `order` (number) — bukan `status` enum dan `sortOrder` seperti module lain. Ini sesuai model yang sudah dirancang sebelumnya, tidak diubah. Image **wajib** saat create |
+| 22 | Product — image handling | Admin upload image terlebih dahulu via `/api/upload`, lalu kirim URL ke endpoint produk. Tidak ada multer di product routes — body selalu JSON. Saat update: diff gallery lama vs baru, URL yang dihapus otomatis di-delete dari Supabase. Thumbnail: jika URL berubah atau di-set null, URL lama dihapus dari Supabase. Saat delete produk: semua URL (thumbnail + gallery) dihapus dari Supabase |
+| 23 | Product — duplicate | Clone semua field teks saja. Thumbnail dan gallery dikosongkan (null/[]) — tidak share URL dengan produk asal (mencegah broken image jika produk asal dihapus). Status selalu `draft`, bookedSlots/soldCount/viewCount di-reset ke 0. Slug di-generate dari "[nama] copy" |
+| 24 | Product — soldCount & viewCount | `soldCount` auto-increment saat order confirmed (via payment module). `viewCount` auto-increment saat `GET /api/products/:id` atau `GET /api/products/slug/:slug` dipanggil oleh publik (non-admin). Admin tidak men-trigger increment viewCount |
+| 25 | Product — filter & search | Full-text search via `?search=` mencakup name, shortDescription, destinations. Filter tersedia: `?status=` (admin only), `?category=`, `?type=`, `?tag=` (by ObjectId), `?departureCity=`, `?destination=` (partial match), `?minPrice=`, `?maxPrice=`. Bulk status update hanya bisa set status admin-settable: draft, active, cancelled (bukan full/expired yang auto) |
+| 26 | User — change password email | Saat user ganti password via `PATCH /api/users/me/change-password`, sistem kirim email notifikasi plain text ke email user. Template: `passwordChanged.template.js` (sama polanya dengan `resetPassword.template.js`, `html: null`). `sendMail` di-wrap `.catch(() => {})` agar kegagalan email tidak membatalkan proses ganti password. Endpoint dilindungi `createRateLimiter` (max 5x per 15 menit) — sama seperti auth endpoints |
+| 27 | User — suspend | Toggle `isActive` via `PATCH /api/users/:id/suspend` (admin only). Saat di-suspend, user tidak bisa login (dicek di `auth.service.js` login + refresh). Token yang sudah ada dibiarkan expired natural (15 menit) — tidak ada blacklist. Admin tidak bisa di-suspend (guard di service) |
+| 28 | User — riwayat order | Tidak digabung di `GET /api/users/:id`. Riwayat order diambil terpisah dari module order via `GET /api/orders?userId=xxx` (admin) |
+| 29 | Wishlist — filter & search | Filter diterapkan pada data produk bukan wishlist document. Strategi: (1) ambil semua productId dari wishlist user, (2) query Product dengan `_id: { $in: productIds }` + filter tambahan. Lebih efisien dari populate-then-filter di memory. Filter: `?search=` (name/shortDescription/destinations), `?category=`, `?type=`, `?tag=`, `?destination=`, `?minPrice=`, `?maxPrice=`, pagination |
+| 30 | Wishlist — add idempotent | `POST /api/wishlist/:productId` bersifat idempotent — jika produk sudah ada di wishlist, return sukses tanpa error. Mencegah error saat user double-click tombol wishlist di frontend |
+| 31 | Wishlist — check endpoint | `GET /api/wishlist/check/:productId` return `{ isWishlisted: true/false }` untuk satu produk. Digunakan frontend untuk tampilkan icon hati terisi/kosong di halaman listing & detail produk tanpa harus load seluruh wishlist. Diregister SEBELUM `/:productId` untuk hindari konflik route |
+| 32 | Cart — add idempotent/upsert | `POST /api/cart/items` bersifat upsert — jika produk sudah ada di cart, item di-update (participants, addOns, note). Jika belum ada, di-push ke array items. Tidak ada 409 Conflict |
+| 33 | Cart — addOns price dari DB | Request hanya kirim `name` untuk addOn yang dipilih. Service mencari addOn di `product.addOns` dan menggunakan price dari DB. Mencegah price manipulation dari frontend |
+| 34 | Cart — validasi slot | Saat add/edit item, dicek: (1) `product.status === 'active'`, (2) `participants <= quota - bookedSlots`. Edit item hanya fetch product jika `participants` atau `addOns` berubah (efisiensi) |
+| 35 | Cart — isAvailable flag | GET /api/cart menambahkan `isAvailable` di tiap item: `true` jika `product.status === 'active'` DAN `remainingSlots >= participants`. Frontend tampilkan warning untuk item yang tidak tersedia. Checkout di order module akan menolak item dengan `isAvailable: false` |
+| 36 | Cart — search & filter | Sama seperti wishlist: filter diterapkan pada product data di antara productId yang ada di cart. Filter: `?search=`, `?category=`, `?type=`, `?tag=`, `?destination=`, `?minPrice=`, `?maxPrice=`, pagination |
+| 37 | Order — checkout multi-item | `POST /api/orders` menerima `{ productIds: [] }` — user memilih item mana dari cart yang di-checkout. Sistem buat 1 order per productId. Semua validasi (product active, slot cukup) dilakukan DULU untuk semua item sebelum `Order.create()` dipanggil — agar tidak ada partial order jika validasi gagal di tengah |
+| 38 | Order — totalPrice formula | `totalPrice = (product.price × participants) + sum(addOn.price)` — addOns dihitung sebagai flat fee per booking, bukan per orang |
+| 39 | Order — productSnapshot | Saat checkout, field minimal produk di-snapshot ke `productSnapshot`: name, price, departureDate, returnDate, duration, departureCity, destinations, meetingPoint, thumbnail. Data order tetap akurat meski produk diedit/dihapus admin. `productId` tetap disimpan untuk populate detail jika produk masih ada |
+| 40 | Order — bookedSlots | `bookedSlots` TIDAK di-increment saat checkout. Hanya di-increment saat payment confirmed via Midtrans webhook (di payment module). Cancel pending order tidak butuh rollback slot |
+| 41 | Order — role-based list | `GET /api/orders` satu endpoint — user hanya lihat ordernya sendiri (`filter.userId = user._id`), admin bisa filter by `?userId=`. Tidak ada endpoint terpisah untuk admin vs user |
+| 42 | Order — search & filter | Search by `productSnapshot.name` + `orderCode`. Filter: `?status=`, `?startDate=`, `?endDate=`, `?userId=` (admin only), `?productId=` (admin only), pagination |
+| 43 | Payment — Midtrans Sandbox | `isProduction: false` di `midtrans.js`. Tidak ada uang sungguhan. Test card Midtrans tersedia di dashboard sandbox. Webhook URL dikonfigurasi di dashboard Midtrans: `https://<backend>.vercel.app/api/payment/webhook` |
+| 44 | Payment — midtransOrderId | Format: `${order.orderCode}-${Date.now()}`. Unik per attempt — memungkinkan user generate snap token baru (re-payment) tanpa konflik di Midtrans |
+| 45 | Payment — webhook sederhana | Hanya cek `transaction_status` dan `fraud_status`. Success: `settlement` OR `capture`+`accept`. Expire: order → `cancelled`. Cancel/deny: biarkan `pending_payment` (user bisa retry). Webhook controller selalu return 200 — error di-catch dan di-log, tidak di-throw (mencegah Midtrans retry loop) |
+| 46 | Payment — idempotency | Guard pertama di `handleWebhook`: jika `order.status === 'paid'`, langsung return. Mencegah duplicate ticket, duplicate finance record, dsb jika Midtrans kirim webhook sama dua kali |
+| 47 | Payment — efek samping sukses | Semua diproses di `handleWebhook`: (1) order paid+paidAt+paymentMethod, (2) product bookedSlots+1 soldCount+1 → auto full jika quota tercapai, (3) ticket generate, (4) finance income record, (5) email orderConfirmed, (6) in-app notification. Email dan notification di-wrap `.catch(() => {})` agar tidak abort flow utama |
+| 48 | Payment — CoreApi | `core` (Midtrans.CoreApi) ditambahkan ke `midtrans.js` untuk endpoint `GET /api/payment/status/:orderId` yang hit Midtrans API langsung. `snap` tetap sebagai default export untuk kompatibilitas |
+| 49 | Ticket — QR code | Package `qrcode` ditambahkan ke dependencies. `pdfHelper.js` diupdate menjadi `async` — generate QR code sebagai PNG buffer sebelum PDF stream dimulai, lalu embed via `doc.image()`. QR meng-encode `ticketCode` string. Pesan scan ditampilkan di bawah QR di PDF |
+| 50 | Ticket — checkedIn vs isValid | Dua kondisi dipisah: `isValid: false` = tiket hangus karena refund/cancel. `checkedIn: true` = tiket sudah digunakan check-in. Field baru: `checkedIn` (boolean) + `checkedInAt` (Date) di ticket model. Computed field `canUse = isValid && !checkedIn` di setiap response |
+| 51 | Ticket — check-in error informatif | Tiga jenis error check-in: (1) tiket tidak ditemukan, (2) `isValid: false` → pesan spesifik refund/cancel, (3) `checkedIn: true` → pesan berisi waktu check-in sebelumnya. Error 400 dengan pesan lengkap |
+| 52 | Ticket — check-in response | Return data penumpang lengkap setelah check-in berhasil: ticketCode, checkedInAt, participants, passenger (name/email/phone), trip info (productName, departureDate, departureCity, destinations, duration, meetingPoint) |
+| 53 | Ticket — route order | `/my`, `/my/:id`, `/my/:id/download` diregister SEBELUM `/:id` agar "my" tidak diinterpretasikan sebagai MongoDB ObjectId |
+| 54 | Refund — kebijakan default | Policy diseed otomatis saat pertama kali `GET /api/refunds/policy` dipanggil (upsert). Default: H-14+ = 100%, H-7–13 = 50%, H-3–6 = 25%, H-0–2 = 0%. Admin bisa update via `PATCH /api/refunds/policy` |
+| 55 | Refund — kalkulasi otomatis | Saat approve, sistem hitung `daysLeft = daysBetween(today, departureDate)`, cocokkan dengan rules policy, hitung `refundAmount = floor(totalPrice * percentage / 100)`. Admin tidak input manual — auto dari policy |
+| 56 | Refund — simulasi Midtrans | Tidak call Midtrans refund API. Hanya update status di DB. `midtransRefundKey` di model dibiarkan null. Cukup untuk portfolio Sandbox |
+| 57 | Refund — efek samping approve | (1) refund=approved+amount+percentage, (2) order=refunded, (3) ticket=isValid:false+invalidatedAt, (4) product.bookedSlots-1 jika belum expired/cancelled + status kembali active jika sebelumnya full, (5) finance outcome (hanya jika amount>0), (6) email+notifikasi |
+| 58 | Refund — suggestedRefundAmount | Field tambahan di response `GET /api/refunds/:id` (admin only): kalkulasi refund berdasarkan policy saat ini. Hanya diisi jika status masih pending. Membantu admin tahu nominal sebelum approve |
+| 59 | Refund — route order | `/policy`, `/my`, `/my/:id` diregister SEBELUM `/:id`. `GET /policy` tidak butuh auth (public) agar user bisa lihat kebijakan sebelum login |
+| 60 | Finance — current balance | Diambil dari field `balanceAfter` record Finance terbaru (sorted by `createdAt: -1`). Jika belum ada transaksi → 0. Tidak dihitung ulang dari aggregate setiap request (lebih efisien) |
+| 61 | Finance — balance period | `GET /api/finance/balance` menerima `?startDate=&endDate=` opsional. Tanpa filter → all-time summary saja. Dengan filter → all-time + period summary (income, outcome, net untuk rentang tanggal tersebut) via MongoDB aggregation |
+| 62 | Finance — withdrawal validation | (1) `amount >= 10000` (min Rp 10.000, validasi AJV schema), (2) `amount <= currentBalance` (validasi di service, error 400 dengan pesan saldo saat ini) |
+| 63 | Finance — export CSV | `GET /api/finance/export/csv` — sama filternya dengan transactions (type, category, startDate, endDate), tapi tanpa pagination (ambil semua). Sorted ascending (terlama ke terbaru) untuk laporan. Return string CSV dengan BOM via `generateFinanceCsv` dari `csvHelper.js` |
+| 64 | Product cancelled — notify users | Saat admin set status produk → `cancelled` (via `update()` atau `bulkUpdateStatus()`), sistem otomatis kirim email + in-app notification ke semua user yang punya order `paid` untuk produk tersebut. Di `bulkUpdateStatus`, produk yang belum cancelled di-query SEBELUM `updateMany` agar bisa dibedakan yang baru di-cancel. Notif tidak memblokir response — dijalankan fire-and-forget dengan `.catch(() => {})` |
+| 65 | Mailer — sender name | Fix `from` di `config/mailer.js` dari `"TripSense"` → `"Travia"`. Berlaku untuk semua email yang dikirim sistem |

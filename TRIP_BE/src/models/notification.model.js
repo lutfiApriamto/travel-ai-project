@@ -23,11 +23,26 @@ const notificationSchema = new mongoose.Schema(
     // tipe notifikasi — menentukan ikon dan warna di frontend
     type: {
       type:     String,
-      enum:     ['order_confirmed', 'refund_approved', 'refund_rejected', 'product_cancelled'],
+      enum:     [
+        'order_confirmed',
+        'ticket_generated',
+        'order_cancelled',
+        'refund_approved',
+        'refund_rejected',
+        'product_cancelled',
+        'broadcast',
+      ],
       required: true,
     },
 
-    // ID order atau refund — untuk tombol "Lihat Detail" di frontend
+    // kelompok notifikasi — untuk filter tab di frontend
+    category: {
+      type:     String,
+      enum:     ['activity', 'announcement'],
+      required: true,
+    },
+
+    // ID order / refund / ticket — untuk tombol "Lihat Detail" di frontend
     relatedId: {
       type:    mongoose.Schema.Types.ObjectId,
       default: null,
@@ -37,13 +52,26 @@ const notificationSchema = new mongoose.Schema(
       type:    Boolean,
       default: false,
     },
+
+    readAt: {
+      type:    Date,
+      default: null,
+    },
+
+    // soft delete — user hapus notifikasi tapi data tetap tersimpan
+    isDeleted: {
+      type:    Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
   }
 );
 
-// index untuk mempercepat query notifikasi per user (sorted terbaru)
-notificationSchema.index({ userId: 1, createdAt: -1 });
+// index utama: query notifikasi per user sorted terbaru (cursor-based)
+notificationSchema.index({ userId: 1, _id: -1 });
+// index untuk filter category + isRead
+notificationSchema.index({ userId: 1, category: 1, _id: -1 });
 
 export default mongoose.model('Notification', notificationSchema);

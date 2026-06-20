@@ -36,48 +36,85 @@
   - Syarat & ketentuan
 
 ### Wishlist
-- Tambah / hapus produk dari wishlist
-- Lihat daftar wishlist
-- Wishlist otomatis terhapus jika produk dihapus admin
+- Lihat daftar wishlist sendiri (populate data minimal produk: nama, slug, thumbnail, harga, status)
+- Search wishlist by nama produk, deskripsi singkat, destinasi (`?search=`)
+- Filter wishlist by kategori, tipe, tags, destinasi, range harga — sama seperti filter produk
+- Pagination (`?page=`, `?limit=`)
+- Cek status wishlist satu produk (`GET /api/wishlist/check/:productId`) — return `{ isWishlisted: true/false }`
+- Tambah produk ke wishlist (idempotent — tidak error jika sudah ada)
+- Hapus produk dari wishlist
+- Wishlist otomatis terhapus jika produk dihapus admin (ditangani di product module)
 
 ### Keranjang (Cart)
-- Tambah / hapus / edit item di keranjang
-- Keranjang otomatis bersih jika produk dihapus admin
+- Lihat isi keranjang (populate data produk minimal + flag `isAvailable` per item)
+- Search & filter item di keranjang — sama seperti filter produk (`?search=`, `?category=`, `?type=`, `?tag=`, dll)
+- Tambah item ke keranjang (validasi: produk harus `active`, slot harus cukup; jika produk sudah ada → update otomatis)
+- Edit item di keranjang (ubah jumlah peserta, add-on, catatan)
+- Hapus satu item dari keranjang
+- Kosongkan seluruh keranjang
+- Add-on divalidasi dari data produk — price diambil dari DB, bukan dari request
+- Keranjang otomatis bersih jika produk dihapus admin (ditangani di product module)
 
 ### Pemesanan & Pembayaran
-- Checkout dari keranjang
-- Isi detail pemesanan (jumlah peserta, catatan khusus)
-- Ringkasan order sebelum bayar
-- Pembayaran via Midtrans Sandbox
-- Setelah pembayaran sukses:
-  - Order otomatis confirmed (tanpa approval manual admin)
+- Checkout dari keranjang — pilih item mana yang di-checkout (bisa lebih dari satu sekaligus), sistem buat 1 order per produk
+- Semua validasi (produk active, slot cukup) dilakukan sebelum order dibuat — tidak ada partial order
+- Data produk di-snapshot ke order saat checkout (nama, harga, tanggal, dll) — akurat meski produk diedit kemudian
+- Inisiasi pembayaran — buat Midtrans Snap token (`POST /api/payment/create/:orderId`), return `snapToken` + `paymentUrl` untuk frontend
+- Generate ulang token jika expired — endpoint yang sama bisa dipanggil ulang untuk order `pending_payment`
+- Pembayaran via Midtrans Sandbox — no real money, test card tersedia
+- Cek status pembayaran real-time dari Midtrans (`GET /api/payment/status/:orderId`)
+- Setelah pembayaran sukses (via webhook Midtrans):
+  - Order status → `paid`, metode bayar tersimpan
   - E-tiket otomatis digenerate
+  - Slot produk berkurang, produk jadi `full` jika kuota habis
   - Saldo keuangan platform otomatis bertambah
-  - Slot produk otomatis berkurang
+  - Email konfirmasi + in-app notification dikirim ke user
+- Order expire (tidak bayar dalam 24 jam) → otomatis `cancelled`
 
 ### Manajemen Pesanan
-- Lihat riwayat pesanan
+- Lihat riwayat pesanan sendiri (search by nama produk/kode order, filter by status & tanggal, pagination)
 - Lihat status pesanan:
-  - `Pending Payment` — menunggu pembayaran
-  - `Paid & Confirmed` — pembayaran sukses, tiket terbit
-  - `Cancelled` — dibatalkan
-  - `Refunded` — refund disetujui & diproses
+  - `pending_payment` — menunggu pembayaran
+  - `paid` — pembayaran sukses, tiket terbit
+  - `cancelled` — dibatalkan
+  - `refunded` — refund disetujui & diproses
 - Lihat detail pesanan per transaksi
+- Batalkan order yang masih `pending_payment` (belum bayar) — langsung tanpa refund
 
 ### Pembatalan & Refund
-- Ajukan pembatalan pesanan (dengan alasan)
-- Lihat status pengajuan refund (Pending, Approved, Rejected)
-- Setelah approved → refund otomatis diproses via Midtrans Sandbox
-- Notifikasi hasil keputusan refund dari admin
+- Ajukan refund (orderId + alasan min 10 karakter) — syarat: order `paid`, belum ada pengajuan pending, tanggal keberangkatan belum lewat
+- Lihat daftar pengajuan refund sendiri (filter by status, pagination)
+- Lihat detail pengajuan refund sendiri
+- Setelah approved → email + in-app notification dengan nominal refund
+- Setelah rejected → email + in-app notification dengan alasan penolakan
 
 ### E-Tiket
-- Lihat e-tiket setelah order confirmed
-- Download tiket (PDF)
-- Tiket otomatis tidak valid jika order dibatalkan / refunded
+- Lihat daftar tiket sendiri (filter by status: valid / used / invalid, pagination)
+- Lihat detail tiket sendiri (include info order & produk)
+- Download e-tiket PDF — berisi QR code, detail perjalanan, detail pemesanan
+- QR code meng-encode kode tiket untuk keperluan scan check-in
+- Field `canUse` di setiap response — `true` jika tiket masih bisa digunakan
+- Tiket otomatis tidak valid jika order di-refund atau dibatalkan (dihandle di refund module)
 
 ### Profil
-- Lihat & edit profil (nama, foto, nomor HP)
-- Ganti password
+- Lihat profil sendiri
+- Edit profil (nama, nomor HP, avatar — URL pre-uploaded via `/api/upload`)
+- Ganti password (wajib input password lama, sistem kirim notifikasi email plain text setelah berhasil)
+
+### Notifikasi
+- Lihat daftar notifikasi sendiri — **cursor-based / infinity scroll** (filter by `?isRead=`, `?category=activity/announcement`, `?search=`, `?cursor=`, `?limit=`)
+- Lihat jumlah notifikasi belum dibaca — untuk badge/indikator di UI (`GET /api/notifications/unread-count`)
+- Tandai satu notifikasi sebagai sudah dibaca — set `isRead=true` + catat `readAt`
+- Tandai semua notifikasi sebagai sudah dibaca sekaligus
+- Hapus notifikasi (soft delete — data tetap tersimpan di DB, tidak tampil lagi ke user)
+- Notifikasi hanya milik user sendiri — admin tidak bisa melihat notifikasi user lain
+- Notifikasi otomatis dibuat oleh sistem saat:
+  - Pembayaran sukses (`order_confirmed`)
+  - Tiket digenerate (`ticket_generated`)
+  - Order dibatalkan (`order_cancelled`)
+  - Refund disetujui admin (`refund_approved`) + nominal refund
+  - Refund ditolak admin (`refund_rejected`) + alasan penolakan
+  - Produk dibatalkan admin (`product_cancelled`)
 
 ### AI Sales Agent
 
@@ -103,9 +140,14 @@
 - Jika `showAll: false` → tampilkan hanya produk yang direkomendasikan
 
 **Batasan & Keamanan:**
-- History percakapan dibatasi maksimal 10 pesan terakhir (hemat token)
-- Rate limiter ketat di endpoint AI (mencegah abuse & pembengkakan biaya)
-- Backend validasi semua product ID dari AI sebelum dikirim ke frontend (antisipasi hallucination)
+- History percakapan dipotong ke maksimal 10 pesan terakhir sebelum dikirim ke Gemini (hemat token)
+- AJV validasi `conversationHistory` — max 20 item, setiap item wajib punya `role` + `content`
+- Rate limiter ketat: maks 20 request per 15 menit per IP (`createRateLimiter` dari rateLimiter.middleware.js)
+- Backend validasi semua product ID dari Gemini ke DB sebelum dikirim ke frontend (antisipasi hallucination)
+- AI enforce Bahasa Indonesia via system prompt — apapun bahasa yang dipakai user
+- AI menolak pertanyaan di luar topik travel via system prompt
+- Fallback jika Gemini API error — return `showAll: true` + pesan ramah, frontend tidak crash
+- Jika semua ID dari Gemini hallucinated → paksa `showAll: true` agar grid tidak kosong
 
 ---
 
@@ -131,11 +173,14 @@
 ### Autentikasi Admin
 - Login / Logout admin
 
-### Dashboard
-- Total pesanan, total pendapatan, produk terlaris, user aktif
-- Grafik tren pesanan & pendapatan
-- Ringkasan refund request yang masih pending
-- Produk yang akan segera expired (misal dalam 7 hari ke depan)
+### Dashboard (`GET /api/admin/dashboard?days=30`)
+- **Stats:** total pesanan, total pendapatan (paid orders), total user, produk aktif, refund pending, produk hampir expired (dalam 7 hari ke depan)
+- **Recent Activity:** 5 pesanan terbaru + 5 user terbaru mendaftar
+- **Top Products:** top 5 by `soldCount` + top 5 by `viewCount`
+- **Trend:** data harian `{ date, orders, revenue }` — default 30 hari, customizable via `?days=N` (max 365)
+- Tanggal tanpa transaksi tetap muncul dengan nilai 0 (skeleton fill)
+- Semua query dashboard dijalankan paralel (`Promise.all`) untuk performa optimal
+- Rate limiter pada endpoint dashboard: maks 20 request/menit per IP (`createRateLimiter`) — cegah spam aggregation query berat
 
 ### Manajemen Kategori
 - Lihat semua kategori (admin: semua status | public: active saja)
@@ -172,88 +217,104 @@
 
 ### Manajemen Produk
 **CRUD Produk:**
-- Tambah produk baru
-- Edit produk
-- Hapus produk (otomatis bersihkan wishlist & cart semua user)
-- Duplikasi produk (clone produk existing, tinggal ubah tanggal & kuota)
-- Publish / unpublish produk (Draft ↔ Active)
+- Tambah produk baru (body JSON — URL gambar dikirim setelah upload via `/api/upload`)
+- Edit produk (URL gallery yang dihapus otomatis dihapus dari Supabase)
+- Hapus produk (thumbnail + gallery dihapus dari Supabase, wishlist & cart semua user otomatis bersih)
+- Duplikasi produk (clone teks saja, gambar dikosongkan, status selalu draft)
+- Publish / unpublish produk (Draft ↔ Active via PATCH status)
 
 **Field Produk:**
 - Nama produk
-- Kategori (many — search & pilih dari daftar)
-- Tipe (many — search & pilih dari daftar)
-- Tags (many — search & pilih dari daftar)
-- Deskripsi singkat
+- Slug (auto-generate dari nama, re-generate jika nama berubah)
+- Kategori (many — array ObjectId)
+- Tipe (many — array ObjectId)
+- Tags (many — array ObjectId)
+- Deskripsi singkat (max 300 karakter)
 - Deskripsi lengkap
-- Foto utama / thumbnail
-- Galeri foto (multiple)
+- Foto utama / thumbnail (URL Supabase, opsional)
+- Galeri foto (array URL Supabase, max 20)
 - Kota keberangkatan
-- Destinasi (bisa lebih dari satu, dalam Indonesia)
+- Destinasi (array kota, dalam Indonesia, max 20)
 - Tanggal keberangkatan
 - Tanggal kepulangan
-- Durasi (auto-hitung)
+- Durasi (auto-hitung: "X Hari Y Malam")
 - Meeting point / assembly point
 - Harga per orang
 - Kuota maksimal peserta
 - Minimum peserta (opsional)
-- Itinerary per hari (judul, aktivitas, hotel, makan)
-- Include (list)
-- Exclude (list)
+- Itinerary per hari (day, judul, aktivitas, hotel, makan: breakfast/lunch/dinner)
+- Include (list string)
+- Exclude (list string)
 - Add-on opsional (nama + harga tambahan)
 - Syarat & ketentuan
+- `soldCount` (auto-increment tiap order confirmed)
+- `viewCount` (auto-increment tiap halaman detail dibuka oleh publik)
 
 **Status Produk:**
 | Status | Keterangan |
 |---|---|
-| `Draft` | Belum dipublish, tidak terlihat user |
-| `Active` | Bisa dipesan, masih ada slot |
-| `Full` | Kuota habis, tidak bisa dipesan |
-| `Expired` | Tanggal keberangkatan sudah lewat |
-| `Cancelled` | Dibatalkan admin |
+| `draft` | Belum dipublish, tidak terlihat user |
+| `active` | Bisa dipesan, masih ada slot |
+| `full` | Kuota habis, tidak bisa dipesan (auto) |
+| `expired` | Tanggal keberangkatan sudah lewat (auto via cron) |
+| `cancelled` | Dibatalkan admin |
 
-**Fitur Tambahan:**
-- Filter produk by status (Draft, Active, Full, Expired, Cancelled)
-- Bulk status update (update beberapa produk sekaligus)
+**Browse & Filter (Public):**
+- Search: nama, deskripsi singkat, destinasi (`?search=`)
+- Filter by kategori, tipe, tags (ObjectId)
+- Filter by kota keberangkatan, destinasi (partial match)
+- Filter by range harga (`?minPrice=`, `?maxPrice=`)
+- Pagination (`?page=`, `?limit=`)
+
+**Fitur Admin Tambahan:**
+- Filter by status (`?status=`) — admin only
+- Bulk status update (max 50 produk, status: draft/active/cancelled)
 
 ### Manajemen Pesanan
-- Lihat semua pesanan (sudah auto-confirmed via payment)
-- Filter pesanan (by status, tanggal, produk, user)
-- Lihat detail pesanan per transaksi
+- Lihat semua pesanan (search by nama produk/kode order, filter by status, tanggal, produk, user, pagination)
+- Lihat detail pesanan per transaksi (include data user & produk lengkap)
 
 ### Manajemen Refund
-- Lihat semua pengajuan pembatalan & refund
-- Review detail pengajuan (alasan user, tanggal pesan, tanggal keberangkatan)
-- Tentukan jumlah refund (full / partial sesuai kebijakan)
-- Approve → sistem trigger refund Midtrans Sandbox otomatis
-- Reject → user dinotifikasi
+- Lihat semua pengajuan refund (filter by status, userId, search by alasan, pagination)
+- Lihat detail pengajuan (include data user, order, + `suggestedRefundAmount` kalkulasi otomatis dari policy)
+- Approve → sistem auto-kalkulasi refund dari policy, update order+tiket+slot+finance, email+notifikasi user
+- Reject (wajib isi alasan) → email+notifikasi user dengan alasan penolakan
+- Refund disimulasi (tidak call Midtrans refund API — cukup untuk portfolio Sandbox)
 
 ### Kebijakan Refund (Configurable oleh Admin)
-- Admin bisa set kebijakan refund berdasarkan H- keberangkatan
-- Contoh default:
-  - Batal H-30 atau lebih → refund 100%
-  - Batal H-14 sampai H-29 → refund 75%
-  - Batal H-7 sampai H-13 → refund 50%
-  - Batal H-3 sampai H-6 → refund 25%
-  - Batal H-0 sampai H-2 → no refund
+- Lihat kebijakan saat ini (public, tanpa login)
+- Update kebijakan (admin only)
+- Default kebijakan:
+  - H-14 atau lebih → refund 100%
+  - H-7 sampai H-13 → refund 50%
+  - H-3 sampai H-6 → refund 25%
+  - H-0 sampai H-2 → refund 0% (bisa ajukan tapi tidak ada pengembalian dana)
 
 ### Manajemen Tiket
-- Lihat semua tiket yang diterbitkan
-- Tiket otomatis invalid jika order di-refund / dibatalkan
+- Lihat semua tiket yang diterbitkan (search by kode tiket / nama produk, filter by userId / isValid / checkedIn / tanggal, pagination)
+- Lihat detail tiket siapapun (include data user, order, produk)
+- Scan check-in tiket (`POST /api/tickets/checkin`, body: `{ ticketCode }`)
+  - Validasi tiket: tidak ditemukan → 404, sudah refund/cancel → error informatif, sudah check-in → error + waktu check-in sebelumnya
+  - Jika valid → `checkedIn: true`, return info penumpang & detail perjalanan lengkap
+- Tiket otomatis invalid jika order di-refund / dibatalkan (dihandle di refund module)
 
 ### Manajemen User
-- Lihat daftar semua user terdaftar
-- Lihat profil & riwayat pesanan per user
-- Suspend / ban user (opsional)
+- Lihat daftar semua user terdaftar (search by nama/email via `?search=`, filter by `?isActive=true/false`, pagination)
+- Lihat profil detail user + ringkasan aktivitas (`totalOrders`, `totalSpent`, `totalRefunds`)
+- Suspend / unsuspend user — toggle `isActive` (admin tidak bisa di-suspend, return 403)
+
+### Broadcast Notifikasi (Admin)
+- Kirim notifikasi ke **semua user** sekaligus (type: `broadcast`) — berguna untuk pengumuman, info perubahan trip, dll
+- Kirim notifikasi ke **user tertentu** — via `targetUserIds[]` di request body (opsional)
+- Sistem buat satu Notification document per user (fan-out via `insertMany`) — efisien untuk portfolio scale
+- Response berisi jumlah user yang berhasil menerima broadcast (`sentTo: N`)
 
 ### Manajemen Keuangan
-- Lihat saldo platform (total pemasukan - refund - withdrawal)
-- Riwayat transaksi keuangan:
-  - Pemasukan: setiap order paid & confirmed
-  - Pengeluaran: setiap refund approved
-  - Pengeluaran: setiap withdrawal
-- Fitur Withdrawal (dummy): admin input nominal → saldo berkurang → tercatat di riwayat
-- Export laporan keuangan (CSV / PDF)
-- Filter laporan by periode (harian, mingguan, bulanan, custom range)
+- Lihat saldo platform saat ini + ringkasan all-time (total income, total outcome, net)
+- Ringkasan per periode opsional (`?startDate=&endDate=`) — income, outcome, net untuk rentang tanggal tersebut
+- Riwayat transaksi (filter by type, category, startDate, endDate, pagination)
+- Withdrawal dummy — admin input nominal (min Rp 10.000, tidak boleh melebihi saldo), tercatat di riwayat
+- Export laporan CSV (`GET /api/finance/export/csv`) — filter by type, category, periode, sorted ascending
 
 ---
 
@@ -265,7 +326,7 @@
 | Slot tersisa = 0 | Status produk → `Full` otomatis |
 | Tanggal keberangkatan terlewat | Status produk → `Expired` otomatis (cron job harian) |
 | Refund approved | Midtrans Sandbox refund triggered + e-tiket invalid + saldo berkurang + slot +1 (jika belum expired) |
-| Status produk → `Cancelled` | Semua pemesan dinotifikasi, refund massal bisa di-trigger admin |
+| Status produk → `Cancelled` | Semua pemesan dengan order `paid` otomatis dinotifikasi via email + in-app notification (`product_cancelled`). Dijalankan fire-and-forget — tidak memblokir response admin |
 | Produk dihapus | Wishlist & cart semua user otomatis bersih |
 | Kategori / Tipe / Tags dihapus | Otomatis terhapus dari semua produk terkait (produk tidak error) |
 | Kategori / Tipe / Tags diedit | Perubahan otomatis reflect ke semua produk terkait |

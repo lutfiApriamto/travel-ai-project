@@ -55,8 +55,20 @@ const ticketSchema = new mongoose.Schema(
       default: true,
     },
 
-    // waktu tiket diinvalidasi
+    // waktu tiket diinvalidasi (refund/cancel)
     invalidatedAt: {
+      type:    Date,
+      default: null,
+    },
+
+    // true setelah admin scan QR dan lakukan check-in
+    checkedIn: {
+      type:    Boolean,
+      default: false,
+    },
+
+    // waktu check-in dilakukan
+    checkedInAt: {
       type:    Date,
       default: null,
     },

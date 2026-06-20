@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 
 export const sendMail = async ({ to, subject, text, html }) => {
   return transporter.sendMail({
-    from: `"TripSense" <${process.env.EMAIL_USER}>`,
+    from: `"Travia" <${process.env.EMAIL_USER}>`,
     to,
     subject,
     text,

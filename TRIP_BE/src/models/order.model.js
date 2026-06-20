@@ -91,6 +91,13 @@ const orderSchema = new mongoose.Schema(
       default: null,
     },
 
+    // metode pembayaran yang digunakan (diisi saat webhook sukses)
+    // contoh: credit_card, bank_transfer, gopay, shopeepay, qris
+    paymentMethod: {
+      type:    String,
+      default: null,
+    },
+
     // waktu payment sukses dikonfirmasi via webhook Midtrans
     paidAt: {
       type:    Date,
