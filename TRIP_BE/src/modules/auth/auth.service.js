@@ -22,7 +22,7 @@ const sanitizeUser = (user) => ({
 
 // Generate access token (JWT 15m) + opaque refresh token (hashed SHA-256 disimpan di DB)
 const createTokens = async (user) => {
-  const accessToken        = signToken({ id: user._id, role: user.role }, '15m');
+  const accessToken        = signToken({ id: user._id, role: user.role }, '1h');
   const rawRefreshToken    = crypto.randomBytes(40).toString('hex');
   const hashedRefreshToken = crypto.createHash('sha256').update(rawRefreshToken).digest('hex');
 
@@ -126,7 +126,7 @@ export const refreshAccessToken = async (rawRefreshToken) => {
   user.refreshToken = newHashed;
   await user.save();
 
-  const accessToken = signToken({ id: user._id, role: user.role }, '15m');
+  const accessToken = signToken({ id: user._id, role: user.role }, '1h');
   return { accessToken, rawRefreshToken: newRaw, user: sanitizeUser(user) };
 };
 

@@ -81,10 +81,9 @@ api.interceptors.response.use(
       return api(originalRequest);
 
     } catch (refreshError) {
-      // Refresh gagal → session berakhir → paksa logout
+      // Refresh gagal → bersihkan auth state, biarkan ProtectedRoute handle redirect via modal
       processQueue(refreshError, null);
       useAuthStore.getState().clearAuth();
-      window.location.href = '/auth/login';
       return Promise.reject(refreshError);
 
     } finally {

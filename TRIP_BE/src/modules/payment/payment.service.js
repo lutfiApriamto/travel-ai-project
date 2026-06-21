@@ -170,6 +170,8 @@ export const handleWebhook = async (body) => {
 };
 
 // ─── Check Status ─────────────────────────────────────────────────────────────
+// Selain mengecek status, juga auto-sync ke DB jika Midtrans sudah sukses
+// tapi webhook belum diterima (misal backend di localhost saat development).
 
 export const checkStatus = async (orderId, user) => {
   const order = await Order.findById(orderId);
@@ -190,12 +192,37 @@ export const checkStatus = async (orderId, user) => {
     return { orderStatus: order.status, midtransStatus: null, message: 'Pembayaran belum diinisiasi' };
   }
 
-  const midtransStatus = await core.transaction.status(order.midtransOrderId);
+  const midtransData = await core.transaction.status(order.midtransOrderId);
+  const { transaction_status, fraud_status, payment_type } = midtransData;
+
+  // Auto-sync: jika Midtrans sudah sukses tapi DB masih pending (webhook belum diterima)
+  if (order.status === 'pending_payment') {
+    const isSuccess =
+      transaction_status === 'settlement' ||
+      (transaction_status === 'capture' && fraud_status === 'accept');
+
+    if (isSuccess) {
+      try {
+        await handleWebhook({
+          order_id:           order.midtransOrderId,
+          transaction_status,
+          fraud_status,
+          payment_type,
+        });
+      } catch (syncErr) {
+        // Jangan lempar error — tetap return status walau sync gagal
+        console.error('[Payment] Auto-sync gagal:', syncErr.message);
+      }
+    }
+  }
+
+  // Reload order untuk mendapatkan status terbaru setelah sync
+  const updated = await Order.findById(orderId).lean();
 
   return {
-    orderStatus:     order.status,
-    midtransStatus:  midtransStatus.transaction_status,
-    paymentMethod:   midtransStatus.payment_type || null,
-    fraudStatus:     midtransStatus.fraud_status || null,
+    orderStatus:    updated.status,
+    midtransStatus: transaction_status,
+    paymentMethod:  payment_type || null,
+    fraudStatus:    fraud_status || null,
   };
 };
