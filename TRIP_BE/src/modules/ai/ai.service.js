@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import genAI    from '../../config/gemini.js';
 import Product  from '../../models/product.model.js';
 
-const MODEL       = 'gemini-2.0-flash';
+const MODEL       = 'gemini-1.5-flash';
 const MAX_HISTORY = 10; // potong history ke N pesan terakhir sebelum dikirim ke Gemini
 
 // ─── System Prompt ────────────────────────────────────────────────────────────
@@ -76,9 +76,22 @@ export const chat = async ({ message, conversationHistory = [] }) => {
       },
     });
 
-    parsed = JSON.parse(response.text);
+    // Defensive access — response.text bisa throw jika response blocked/empty
+    let rawText;
+    try {
+      rawText = response.text;
+    } catch {
+      rawText = response.candidates?.[0]?.content?.parts?.[0]?.text;
+    }
+
+    if (!rawText) {
+      throw new Error('Gemini response kosong atau diblokir');
+    }
+
+    parsed = JSON.parse(rawText);
   } catch (err) {
     console.error('[AI] Gemini error:', err.message);
+    console.error('[AI] Pastikan GEMINI_API_KEY sudah diisi di file .env backend');
     return {
       message:               'Maaf, asisten sedang sibuk. Silakan coba lagi dalam beberapa saat. 🙏',
       recommendedProductIds: [],

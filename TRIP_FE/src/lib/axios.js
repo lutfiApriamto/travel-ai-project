@@ -72,7 +72,7 @@ api.interceptors.response.use(
     try {
       // Backend set cookie trip_refresh baru otomatis di response ini
       const res = await api.post('/auth/refresh');
-      const { accessToken, user } = res.data.data;
+      const { accessToken, user } = res.data.data.data;
 
       useAuthStore.getState().setAuth({ accessToken, user });
       originalRequest.headers.Authorization = `Bearer ${accessToken}`;

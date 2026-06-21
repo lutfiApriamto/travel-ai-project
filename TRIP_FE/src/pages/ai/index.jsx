@@ -279,9 +279,9 @@ const AiChatPage = () => {
   const [showClearConfirm,  setShowClearConfirm]  = useState(false);
   const [forceShowAll,      setForceShowAll]      = useState(false);
 
-  const bottomRef     = useRef(null);
-  const textareaRef   = useRef(null);
-  const productRef    = useRef(null);
+  const messagesContainerRef = useRef(null);
+  const textareaRef          = useRef(null);
+  const productRef           = useRef(null);
 
   const aiChat = useAiChat();
 
@@ -326,19 +326,28 @@ const AiChatPage = () => {
     return () => window.removeEventListener('beforeunload', handler);
   }, [hasConversation]);
 
-  // ── Auto-scroll to bottom of messages ─────────────────────────────────────
+  // ── Auto-scroll dalam container chat (bukan scroll halaman) ───────────────
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const container = messagesContainerRef.current;
+    if (!container) return;
+    container.scrollTop = container.scrollHeight;
   }, [messages, aiChat.isPending]);
 
-  // ── Scroll to products section after AI updates recommendations ───────────
+  // ── Scroll ke bagian produk HANYA saat AI punya rekomendasi spesifik ──────
   useEffect(() => {
-    if (latestAiResponse && !latestAiResponse.isError) {
-      const t = setTimeout(() => {
-        productRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 600);
-      return () => clearTimeout(t);
-    }
+    const hasRecommendations =
+      latestAiResponse &&
+      !latestAiResponse.isError &&
+      !latestAiResponse.showAll &&
+      Array.isArray(latestAiResponse.recommendedProductIds) &&
+      latestAiResponse.recommendedProductIds.length > 0;
+
+    if (!hasRecommendations) return;
+
+    const t = setTimeout(() => {
+      productRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 600);
+    return () => clearTimeout(t);
   }, [latestAiResponse]);
 
   // ── Send message ───────────────────────────────────────────────────────────
@@ -452,7 +461,7 @@ const AiChatPage = () => {
           <div className="bg-card border border-border rounded-2xl overflow-hidden">
 
             {/* Messages area */}
-            <div className="h-[320px] sm:h-[380px] overflow-y-auto px-4 sm:px-6 py-5 space-y-4">
+            <div ref={messagesContainerRef} className="h-[320px] sm:h-[380px] overflow-y-auto px-4 sm:px-6 py-5 space-y-4">
               {messages.length === 0 ? (
                 /* Welcome */
                 <div className="flex flex-col items-center justify-center h-full text-center gap-5">
@@ -497,7 +506,7 @@ const AiChatPage = () => {
                 </div>
               )}
 
-              <div ref={bottomRef} />
+              <div />
             </div>
 
             {/* Input area */}
