@@ -12,6 +12,16 @@ export const updateMe = asyncHandler(async (req, res) => {
   sendSuccess(res, data, 'Profil berhasil diperbarui');
 });
 
+export const uploadMyAvatar = asyncHandler(async (req, res) => {
+  if (!req.file) {
+    const err = new Error('File gambar wajib dipilih');
+    err.statusCode = 400;
+    throw err;
+  }
+  const url = await svc.uploadAvatar(req.user._id, req.file.buffer);
+  sendSuccess(res, url, 'Avatar berhasil diupload', 201);
+});
+
 export const changePassword = asyncHandler(async (req, res) => {
   await svc.changePassword(req.user._id, req.body);
   sendSuccess(res, null, 'Password berhasil diubah');

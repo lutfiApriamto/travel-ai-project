@@ -50,3 +50,14 @@ export const resetPasswordSchema = {
     newPassword: { type: 'string', minLength: 8 },
   },
 };
+
+// Verifikasi token reset password + email sebelum user isi password baru.
+// Token diambil dari URL param, email dari body.
+export const verifyResetTokenSchema = {
+  type: 'object',
+  required: ['email'],
+  additionalProperties: false,
+  properties: {
+    email: { type: 'string', pattern: '^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$' },
+  },
+};

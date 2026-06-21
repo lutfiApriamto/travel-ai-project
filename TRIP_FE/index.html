@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Favicon — universal (berfungsi di dark & light browser tab) -->
+  <link rel="icon" type="image/svg+xml" href="/brand-logo/favicon.svg" />
+  <link rel="apple-touch-icon" href="/brand-logo/favicon.svg" />
+
+  <!-- Viewport & PWA -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes, viewport-fit=cover" />
+  <meta name="theme-color" content="#FAF7F0" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#1A1510" media="(prefers-color-scheme: dark)" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- Google Fonts — Inter (Georgia web-safe, tidak perlu dimuat) -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="preload"
+    as="style"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <noscript>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+    />
+  </noscript>
+
+  <!-- Primary Meta Tags -->
+  <title>Travia — AI Travel Agent</title>
+  <meta name="title"       content="Travia — AI Travel Agent" />
+  <meta name="description" content="Temukan paket perjalanan impianmu bersama Travia — AI Travel Agent yang membantu kamu merencanakan liburan melalui percakapan natural yang cerdas dan personal." />
+  <meta name="keywords"    content="Travia, AI Travel Agent, Paket Wisata, Liburan Indonesia, Travel AI, Open Trip, Honeymoon Trip" />
+  <meta name="author"      content="Muhammad Lutfi Apriamto" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://travia.app/" />
+  <meta property="og:title"       content="Travia — AI Travel Agent" />
+  <meta property="og:description" content="AI Travel Agent yang membantu kamu menemukan paket perjalanan impian melalui percakapan natural. Ceritakan keinginanmu — Travia akan rekomendasikan yang terbaik." />
+  <meta property="og:image"       content="/brand-logo/logo-horizontal-light.svg" />
+
+  <!-- Twitter Card -->
+  <meta property="twitter:card"        content="summary" />
+  <meta property="twitter:url"         content="https://travia.app/" />
+  <meta property="twitter:title"       content="Travia — AI Travel Agent" />
+  <meta property="twitter:description" content="AI Travel Agent yang membantu kamu menemukan paket perjalanan impian melalui percakapan natural." />
+  <meta property="twitter:image"       content="/brand-logo/logo-horizontal-light.svg" />
+
+  <!--
+    Inline script: terapkan tema SEBELUM React mount.
+    Mencegah "flash of wrong theme" — layar tidak sempat tampil dengan warna salah.
+    Membaca preferensi dari localStorage, fallback ke preferensi sistem.
+  -->
+  <script>
+    (function () {
+      var stored = localStorage.getItem('travia-theme');
+      var theme  = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+</head>
+
+<body>
+  <noscript>Aktifkan JavaScript untuk menjalankan aplikasi ini.</noscript>
+  <div id="root"></div>
+
+  <!-- Midtrans Snap SDK (Sandbox) -->
+  <!-- Client key diisi otomatis oleh Vite dari file .env (VITE_MIDTRANS_CLIENT_KEY) -->
+  <script
+    src="https://app.sandbox.midtrans.com/snap/snap.js"
+    data-client-key="%VITE_MIDTRANS_CLIENT_KEY%">
+  </script>
+
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>

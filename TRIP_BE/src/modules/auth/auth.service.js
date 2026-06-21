@@ -153,6 +153,31 @@ export const forgotPassword = async ({ email }) => {
   await sendMail({ to: user.email, subject, html, text });
 };
 
+// Verifikasi token + email sebelum user isi password baru.
+// Return { name } jika valid — dipakai frontend untuk sapa user by name.
+export const verifyResetToken = async ({ token, email }) => {
+  const hashedToken = crypto.createHash('sha256').update(token).digest('hex');
+
+  const user = await User.findOne({
+    resetPasswordToken:  hashedToken,
+    resetPasswordExpiry: { $gt: Date.now() },
+  });
+
+  if (!user) {
+    const err = new Error('Link reset password tidak valid atau sudah kedaluwarsa');
+    err.statusCode = 400;
+    throw err;
+  }
+
+  if (user.email !== email.toLowerCase()) {
+    const err = new Error('Email tidak cocok dengan link reset password ini');
+    err.statusCode = 400;
+    throw err;
+  }
+
+  return { name: user.name };
+};
+
 export const resetPassword = async ({ token, newPassword }) => {
   const hashedToken = crypto.createHash('sha256').update(token).digest('hex');
 

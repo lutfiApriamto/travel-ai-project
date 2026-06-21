@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import User   from '../../models/user.model.js';
-import { deleteFile, extractStoragePath }          from '../../utils/uploadHelper.js';
+import { uploadImage, deleteFile, extractStoragePath } from '../../utils/uploadHelper.js';
 import { getPaginationParams, buildPaginationMeta } from '../../utils/paginate.js';
 import { sendMail }                                from '../../config/mailer.js';
 import { passwordChangedTemplate }                 from '../../templates/passwordChanged.template.js';
@@ -12,6 +12,13 @@ const SAFE_FIELDS = '-password -refreshToken -resetPasswordToken -resetPasswordE
 
 export const getMe = async (userId) =>
   User.findById(userId).select(SAFE_FIELDS).lean();
+
+// Upload avatar ke Supabase — disimpan di folder 'avatars/'
+export const uploadAvatar = async (userId, fileBuffer) => {
+  const filename = `avatars/${userId}-${Date.now()}.webp`;
+  return uploadImage(fileBuffer, filename);
+  // Return: public URL string dari Supabase
+};
 
 export const updateMe = async (userId, body) => {
   const user = await User.findById(userId);

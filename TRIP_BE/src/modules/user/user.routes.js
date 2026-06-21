@@ -1,10 +1,11 @@
-import { Router }             from 'express';
-import auth                   from '../../middlewares/auth.middleware.js';
-import admin                  from '../../middlewares/admin.middleware.js';
-import validate               from '../../middlewares/validate.middleware.js';
-import { createRateLimiter }  from '../../middlewares/rateLimiter.middleware.js';
-import * as schema            from './user.schema.js';
-import * as ctrl              from './user.controller.js';
+import { Router }                            from 'express';
+import auth                                  from '../../middlewares/auth.middleware.js';
+import admin                                 from '../../middlewares/admin.middleware.js';
+import validate                              from '../../middlewares/validate.middleware.js';
+import { createRateLimiter }                 from '../../middlewares/rateLimiter.middleware.js';
+import upload, { handleUploadError }         from '../../middlewares/upload.middleware.js';
+import * as schema                           from './user.schema.js';
+import * as ctrl                             from './user.controller.js';
 
 const router = Router();
 
@@ -20,6 +21,7 @@ const changePasswordLimiter = createRateLimiter({
 
 router.get  ('/me',                 auth, ctrl.getMe);
 router.patch('/me',                 auth, validate(schema.updateMeSchema),       ctrl.updateMe);
+router.post ('/me/avatar',          auth, upload.single('image'), handleUploadError, ctrl.uploadMyAvatar);
 router.patch('/me/change-password', auth, changePasswordLimiter, validate(schema.changePasswordSchema), ctrl.changePassword);
 
 // ─── Admin — Manajemen User ───────────────────────────────────────────────────

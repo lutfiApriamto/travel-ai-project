@@ -56,6 +56,14 @@ export const forgotPassword = asyncHandler(async (req, res) => {
   sendSuccess(res, null, 'Jika email Anda terdaftar, link reset password telah dikirim ke inbox Anda');
 });
 
+export const verifyResetToken = asyncHandler(async (req, res) => {
+  const result = await authService.verifyResetToken({
+    token: req.params.token,
+    email: req.body.email,
+  });
+  sendSuccess(res, result, 'Token valid');
+});
+
 export const resetPassword = asyncHandler(async (req, res) => {
   await authService.resetPassword({
     token:       req.params.token,

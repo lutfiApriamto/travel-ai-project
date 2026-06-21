@@ -26,6 +26,9 @@ router.post('/login', authLimiter, validate(schema.loginSchema), ctrl.login);
 // POST /api/auth/forgot-password
 router.post('/forgot-password', authLimiter, validate(schema.forgotPasswordSchema), ctrl.forgotPassword);
 
+// POST /api/auth/verify-reset-token/:token — cek token + email sebelum isi password baru
+router.post('/verify-reset-token/:token', validate(schema.verifyResetTokenSchema), ctrl.verifyResetToken);
+
 // POST /api/auth/reset-password/:token
 router.post('/reset-password/:token', validate(schema.resetPasswordSchema), ctrl.resetPassword);
 
