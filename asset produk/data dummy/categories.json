@@ -1,0 +1,92 @@
+[
+  {
+    "_id": "507f1f77bcf86cd799439011",
+    "name": "Private Trip",
+    "slug": "private-trip",
+    "description": "Paket perjalanan eksklusif yang dirancang khusus untuk kebutuhan Anda. Nikmati fleksibilitas jadwal, privasi penuh, dan pelayanan premium dari pemandu wisata profesional.",
+    "image": null,
+    "status": "active",
+    "sortOrder": 1
+  },
+  {
+    "_id": "507f1f77bcf86cd799439012",
+    "name": "Solo Traveling",
+    "slug": "solo-traveling",
+    "description": "Paket perjalanan untuk petualang mandiri yang ingin menjelajahi Indonesia dengan kebebasan penuh. Cocok untuk solo traveler yang ingin pengalaman autentik.",
+    "image": null,
+    "status": "active",
+    "sortOrder": 2
+  },
+  {
+    "_id": "507f1f77bcf86cd799439013",
+    "name": "FIT / Backpacking",
+    "slug": "fit-backpacking",
+    "description": "Free Independent Traveler — paket hemat dengan kebebasan mengatur itinerary sendiri. Ideal untuk backpacker yang ingin mengeksplorasi destinasi dengan anggaran terjangkau.",
+    "image": null,
+    "status": "active",
+    "sortOrder": 3
+  },
+  {
+    "_id": "507f1f77bcf86cd799439014",
+    "name": "Flashpacking",
+    "slug": "flashpacking",
+    "description": "Perpaduan antara gaya hidup backpacker dengan kenyamanan akomodasi berkualitas. Jelajahi destinasi seru tanpa mengorbankan kenyamanan tidur dan fasilitas.",
+    "image": null,
+    "status": "active",
+    "sortOrder": 4
+  },
+  {
+    "_id": "507f1f77bcf86cd799439015",
+    "name": "Corporate / Incentive Trip",
+    "slug": "corporate-incentive-trip",
+    "description": "Paket perjalanan khusus tim perusahaan untuk team building, reward karyawan, atau gathering. Dirancang untuk memperkuat ikatan tim sambil menikmati destinasi indah Indonesia.",
+    "image": null,
+    "status": "active",
+    "sortOrder": 5
+  },
+  {
+    "_id": "507f1f77bcf86cd799439016",
+    "name": "Staycation",
+    "slug": "staycation",
+    "description": "Nikmati liburan berkualitas tanpa perlu jauh dari kota. Paket staycation kami menawarkan pengalaman menginap di hotel atau resort pilihan dengan fasilitas lengkap.",
+    "image": null,
+    "status": "active",
+    "sortOrder": 6
+  },
+  {
+    "_id": "507f1f77bcf86cd799439017",
+    "name": "Honeymoon Trip",
+    "slug": "honeymoon-trip",
+    "description": "Rayakan momen spesial bersama pasangan dengan paket honeymoon romantis kami. Setiap detail dirancang untuk menciptakan kenangan tak terlupakan bagi pasangan baru.",
+    "image": null,
+    "status": "active",
+    "sortOrder": 7
+  },
+  {
+    "_id": "507f1f77bcf86cd799439018",
+    "name": "Open Trip",
+    "slug": "open-trip",
+    "description": "Bergabung dengan sesama traveler dalam paket perjalanan kelompok yang seru dan hemat. Open trip adalah cara terbaik untuk membuat teman baru sambil menjelajahi destinasi impian.",
+    "image": null,
+    "status": "active",
+    "sortOrder": 8
+  },
+  {
+    "_id": "507f1f77bcf86cd799439019",
+    "name": "Luar Negeri",
+    "slug": "luar-negeri",
+    "description": "Paket wisata internasional ke berbagai destinasi populer di Asia dan seluruh dunia. Kami mengurus semua kebutuhan perjalanan Anda dari visa hingga akomodasi.",
+    "image": null,
+    "status": "active",
+    "sortOrder": 9
+  },
+  {
+    "_id": "507f1f77bcf86cd79943901a",
+    "name": "Adventure Trip",
+    "slug": "adventure-trip",
+    "description": "Paket petualangan seru untuk jiwa-jiwa pemberani. Dari hiking, diving, rafting, hingga camping — rasakan adrenalin dan keindahan alam Indonesia yang sesungguhnya.",
+    "image": null,
+    "status": "active",
+    "sortOrder": 10
+  }
+]

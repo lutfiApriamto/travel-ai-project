@@ -16,7 +16,13 @@ export const useOrders = (params = {}) =>
           startDate:  params.startDate || undefined,
           endDate:    params.endDate   || undefined,
         },
-      }).then(r => r.data.data.data),
+      }).then(r => ({
+        orders: r.data.data.data ?? [],
+        meta: {
+          total:      r.data.data.totalData ?? 0,
+          totalPages: r.data.data.totalPage ?? 1,
+        },
+      })),
     staleTime:       30_000,
     placeholderData: prev => prev,
   });

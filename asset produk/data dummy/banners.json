@@ -1,0 +1,26 @@
+[
+  {
+    "_id": "507f1f77bcf86cd799440001",
+    "title": "Promo Liburan Akhir Tahun — Diskon Hingga 30%",
+    "image": "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/promo%201.jpeg",
+    "link": "/products?category=507f1f77bcf86cd799439018",
+    "order": 1,
+    "isActive": true
+  },
+  {
+    "_id": "507f1f77bcf86cd799440002",
+    "title": "Honeymoon Impian ke Bali & Lombok — Paket Spesial Pasangan",
+    "image": "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/promo%202.jpeg",
+    "link": "/products?category=507f1f77bcf86cd799439017",
+    "order": 2,
+    "isActive": true
+  },
+  {
+    "_id": "507f1f77bcf86cd799440003",
+    "title": "Jelajahi Raja Ampat & Labuan Bajo — Surga Bahari Indonesia",
+    "image": "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/promo%203.jpeg",
+    "link": "/products?type=507f1f77bcf86cd79943902c",
+    "order": 3,
+    "isActive": true
+  }
+]

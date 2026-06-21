@@ -19,14 +19,20 @@ export const getById = async (id) => {
 // ─── Admin CRUD ───────────────────────────────────────────────────────────────
 
 export const create = async (body, file) => {
-  if (!file) {
+  let image;
+
+  if (file) {
+    // file upload (multipart)
+    const filename = `banners/${Date.now()}-${Math.random().toString(36).slice(2)}.webp`;
+    image = await uploadImage(file.buffer, filename);
+  } else if (body.image) {
+    // URL already uploaded to Supabase by frontend
+    image = body.image;
+  } else {
     const err = new Error('Gambar banner wajib diupload');
     err.statusCode = 400;
     throw err;
   }
-
-  const filename = `banners/${Date.now()}-${Math.random().toString(36).slice(2)}.webp`;
-  const image    = await uploadImage(file.buffer, filename);
 
   return Banner.create({ ...body, image });
 };
@@ -40,11 +46,18 @@ export const update = async (id, body, file) => {
   }
 
   if (file) {
+    // New file → delete old from Supabase, upload new
     const oldPath = extractStoragePath(banner.image);
     if (oldPath) await deleteFile(oldPath).catch(() => {});
 
     const filename = `banners/${Date.now()}-${Math.random().toString(36).slice(2)}.webp`;
-    body.image     = await uploadImage(file.buffer, filename);
+    body.image = await uploadImage(file.buffer, filename);
+  } else if ('image' in body) {
+    // image field explicitly sent (URL or empty = cleared)
+    body.image = body.image || null;
+  } else {
+    // not in body → keep existing
+    delete body.image;
   }
 
   Object.assign(banner, body);

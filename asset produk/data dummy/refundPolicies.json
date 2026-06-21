@@ -1,0 +1,41 @@
+[
+  {
+    "_id": "507f1f77bcf86cd799540001",
+    "rules": [
+      {
+        "minDaysBeforeDeparture": 30,
+        "maxDaysBeforeDeparture": null,
+        "refundPercentage": 100,
+        "description": "Pembatalan H-30 atau lebih: refund 100% dari total pembayaran"
+      },
+      {
+        "minDaysBeforeDeparture": 14,
+        "maxDaysBeforeDeparture": 29,
+        "refundPercentage": 75,
+        "description": "Pembatalan H-14 hingga H-29: refund 75% dari total pembayaran"
+      },
+      {
+        "minDaysBeforeDeparture": 7,
+        "maxDaysBeforeDeparture": 13,
+        "refundPercentage": 50,
+        "description": "Pembatalan H-7 hingga H-13: refund 50% dari total pembayaran"
+      },
+      {
+        "minDaysBeforeDeparture": 3,
+        "maxDaysBeforeDeparture": 6,
+        "refundPercentage": 25,
+        "description": "Pembatalan H-3 hingga H-6: refund 25% dari total pembayaran"
+      },
+      {
+        "minDaysBeforeDeparture": 0,
+        "maxDaysBeforeDeparture": 2,
+        "refundPercentage": 0,
+        "description": "Pembatalan H-2 atau kurang dari keberangkatan: tidak ada refund"
+      }
+    ],
+    "noRefundDays": 2,
+    "updatedBy": "507f1f77bcf86cd799460001",
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z"
+  }
+]

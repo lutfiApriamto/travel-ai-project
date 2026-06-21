@@ -1,0 +1,68 @@
+[
+  {
+    "_id": "507f1f77bcf86cd799460001",
+    "name": "Lutfi Apriamto",
+    "email": "lutfi@travia.id",
+    "password": "$2b$12$hash_password_admin_here",
+    "phone": "081234567890",
+    "avatar": null,
+    "role": "admin",
+    "isActive": true,
+    "_note": "ADMIN — password harus di-hash dengan bcrypt sebelum dimasukkan. Gunakan bcrypt.hash('Admin@123', 12)"
+  },
+  {
+    "_id": "507f1f77bcf86cd799460002",
+    "name": "Andi Pratama",
+    "email": "andi.pratama@gmail.com",
+    "password": "$2b$12$hash_password_user_here",
+    "phone": "082198765432",
+    "avatar": null,
+    "role": "user",
+    "isActive": true,
+    "_note": "USER — password: User@123"
+  },
+  {
+    "_id": "507f1f77bcf86cd799460003",
+    "name": "Siti Rahayu",
+    "email": "siti.rahayu@yahoo.com",
+    "password": "$2b$12$hash_password_user_here",
+    "phone": "085711223344",
+    "avatar": null,
+    "role": "user",
+    "isActive": true,
+    "_note": "USER — password: User@123"
+  },
+  {
+    "_id": "507f1f77bcf86cd799460004",
+    "name": "Budi Santoso",
+    "email": "budi.santoso@outlook.com",
+    "password": "$2b$12$hash_password_user_here",
+    "phone": "089955443322",
+    "avatar": null,
+    "role": "user",
+    "isActive": true,
+    "_note": "USER — password: User@123"
+  },
+  {
+    "_id": "507f1f77bcf86cd799460005",
+    "name": "Dewi Kusuma",
+    "email": "dewi.kusuma@gmail.com",
+    "password": "$2b$12$hash_password_user_here",
+    "phone": "087766554433",
+    "avatar": null,
+    "role": "user",
+    "isActive": true,
+    "_note": "USER — password: User@123"
+  },
+  {
+    "_id": "507f1f77bcf86cd799460006",
+    "name": "Rizky Firmansyah",
+    "email": "rizky.f@gmail.com",
+    "password": "$2b$12$hash_password_user_here",
+    "phone": "081399887766",
+    "avatar": null,
+    "role": "user",
+    "isActive": true,
+    "_note": "USER — password: User@123"
+  }
+]

@@ -1,0 +1,51 @@
+[
+  {
+    "_id": "507f1f77bcf86cd79943902a",
+    "name": "Wisata Alam",
+    "slug": "wisata-alam",
+    "description": "Jelajahi keindahan alam Indonesia yang menakjubkan — dari hutan tropis, pegunungan, hingga savana eksotis.",
+    "status": "active"
+  },
+  {
+    "_id": "507f1f77bcf86cd79943902b",
+    "name": "Wisata Budaya",
+    "slug": "wisata-budaya",
+    "description": "Selami kekayaan budaya Nusantara melalui kunjungan ke situs bersejarah, pertunjukan seni tradisional, dan interaksi dengan masyarakat lokal.",
+    "status": "active"
+  },
+  {
+    "_id": "507f1f77bcf86cd79943902c",
+    "name": "Wisata Bahari",
+    "slug": "wisata-bahari",
+    "description": "Nikmati pesona bawah laut Indonesia yang tiada duanya. Diving, snorkeling, island hopping, dan berbagai aktivitas air seru menanti Anda.",
+    "status": "active"
+  },
+  {
+    "_id": "507f1f77bcf86cd79943902d",
+    "name": "Wisata Kuliner",
+    "slug": "wisata-kuliner",
+    "description": "Eksplorasi cita rasa Nusantara melalui kuliner khas daerah. Dari pasar tradisional hingga restoran fine dining, setiap suap adalah petualangan rasa.",
+    "status": "active"
+  },
+  {
+    "_id": "507f1f77bcf86cd79943902e",
+    "name": "Wisata Petualangan",
+    "slug": "wisata-petualangan",
+    "description": "Uji batas diri Anda dengan aktivitas petualangan ekstrem — hiking ke puncak gunung, arung jeram, zip-line, dan banyak lagi.",
+    "status": "active"
+  },
+  {
+    "_id": "507f1f77bcf86cd79943902f",
+    "name": "Eco Tourism",
+    "slug": "eco-tourism",
+    "description": "Perjalanan wisata yang bertanggung jawab terhadap lingkungan dan mendukung keberlanjutan alam serta komunitas lokal.",
+    "status": "active"
+  },
+  {
+    "_id": "507f1f77bcf86cd799439030",
+    "name": "City Tour",
+    "slug": "city-tour",
+    "description": "Jelajahi denyut kehidupan kota-kota menarik di Indonesia dan dunia. Dari pusat belanja modern hingga gang-gang bersejarah yang penuh cerita.",
+    "status": "active"
+  }
+]

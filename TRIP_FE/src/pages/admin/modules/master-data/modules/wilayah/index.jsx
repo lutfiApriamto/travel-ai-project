@@ -241,7 +241,7 @@ const RegencyTab = () => {
     { name: 'id',          label: 'Kode BPS',     required: true, readOnly: true, placeholder: 'Contoh: 1101',
       rules: { required: 'Kode wajib diisi' } },
     { name: 'province_id', label: 'Provinsi',      required: true, type: 'select',
-      options: provinces.map(p => ({ value: p._id, label: p.name })),
+      options: provinces.map(p => ({ value: p.id, label: p.name })),
       rules: { required: 'Provinsi wajib dipilih' } },
     { name: 'name',        label: 'Nama Kab/Kota', required: true, placeholder: 'Contoh: Kabupaten Simeulue',
       rules: { required: 'Nama wajib diisi', minLength: { value: 2, message: 'Min 2 karakter' } } },
@@ -255,7 +255,7 @@ const RegencyTab = () => {
             text-foreground focus:outline-none focus:ring-1 focus:ring-travia-orange focus:border-travia-orange
             transition-colors min-w-[180px]">
           <option value="">— Pilih Provinsi —</option>
-          {provinces.map(p => <option key={p._id} value={p._id}>{p.name}</option>)}
+          {provinces.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
         </select>
         {provinceId && (
           <div className="relative flex-1 max-w-sm">
@@ -336,7 +336,7 @@ const DistrictTab = () => {
     { name: 'id',         label: 'Kode BPS',   required: true, readOnly: true, placeholder: 'Contoh: 110101',
       rules: { required: 'Kode wajib diisi' } },
     { name: 'regency_id', label: 'Kab/Kota',   required: true, type: 'select',
-      options: regencies.map(r => ({ value: r._id, label: r.name })),
+      options: regencies.map(r => ({ value: r.id, label: r.name })),
       rules: { required: 'Kab/Kota wajib dipilih' } },
     { name: 'name',       label: 'Nama Kecamatan', required: true, placeholder: 'Contoh: Teupah Selatan',
       rules: { required: 'Nama wajib diisi', minLength: { value: 2, message: 'Min 2 karakter' } } },
@@ -349,7 +349,7 @@ const DistrictTab = () => {
           className="h-9 px-3 rounded-lg border border-border bg-white dark:bg-travia-dark3 text-sm
             text-foreground focus:outline-none focus:ring-1 focus:ring-travia-orange transition-colors min-w-[160px]">
           <option value="">— Provinsi —</option>
-          {provinces.map(p => <option key={p._id} value={p._id}>{p.name}</option>)}
+          {provinces.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
         </select>
         <select value={regencyId} onChange={e => { setRegencyId(e.target.value); setSearch(''); }}
           disabled={!provinceId}
@@ -357,7 +357,7 @@ const DistrictTab = () => {
             text-foreground focus:outline-none focus:ring-1 focus:ring-travia-orange transition-colors
             min-w-[160px] disabled:opacity-50">
           <option value="">— Kab/Kota —</option>
-          {regencies.map(r => <option key={r._id} value={r._id}>{r.name}</option>)}
+          {regencies.map(r => <option key={r.id} value={r.id}>{r.name}</option>)}
         </select>
         {regencyId && (
           <div className="relative flex-1 max-w-xs">
@@ -439,7 +439,7 @@ const VillageTab = () => {
     { name: 'id',          label: 'Kode BPS',     required: true, readOnly: true, placeholder: 'Contoh: 1101012001',
       rules: { required: 'Kode wajib diisi' } },
     { name: 'district_id', label: 'Kecamatan',    required: true, type: 'select',
-      options: districts.map(d => ({ value: d._id, label: d.name })),
+      options: districts.map(d => ({ value: d.id, label: d.name })),
       rules: { required: 'Kecamatan wajib dipilih' } },
     { name: 'name',        label: 'Nama Kelurahan', required: true, placeholder: 'Contoh: Latiung',
       rules: { required: 'Nama wajib diisi', minLength: { value: 2, message: 'Min 2 karakter' } } },
@@ -458,7 +458,7 @@ const VillageTab = () => {
               text-foreground focus:outline-none focus:ring-1 focus:ring-travia-orange transition-colors
               min-w-[140px] disabled:opacity-50">
             <option value="">{sel.placeholder}</option>
-            {sel.options.map(o => <option key={o._id} value={o._id}>{o.name}</option>)}
+            {sel.options.map(o => <option key={o.id} value={o.id}>{o.name}</option>)}
           </select>
         ))}
         {districtId && (

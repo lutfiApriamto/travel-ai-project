@@ -1,0 +1,86 @@
+[
+  {
+    "_id": "507f1f77bcf86cd799490001",
+    "orderId": "507f1f77bcf86cd799470004",
+    "userId": "507f1f77bcf86cd799460003",
+    "reason": "Ada urusan keluarga mendadak yang tidak bisa ditinggalkan sehingga saya tidak dapat berangkat pada tanggal tersebut.",
+    "refundAmount": null,
+    "refundPercentage": null,
+    "status": "rejected",
+    "adminNote": "Pengajuan refund ditolak karena dilakukan kurang dari 7 hari sebelum keberangkatan (H-6) dan dokumentasi pendukung yang diberikan tidak lengkap. Sesuai kebijakan refund yang berlaku, pembatalan pada periode ini memerlukan dokumen resmi keadaan darurat.",
+    "processedBy": "507f1f77bcf86cd799460001",
+    "processedAt": "2026-09-01T10:00:00.000Z",
+    "midtransRefundKey": null,
+    "createdAt": "2026-08-30T14:30:00.000Z",
+    "updatedAt": "2026-09-01T10:00:00.000Z",
+    "_note": "Siti Rahayu — refund untuk Lombok Adventure (order 004), H-6 sebelum keberangkatan, ditolak"
+  },
+
+  {
+    "_id": "507f1f77bcf86cd799490002",
+    "orderId": "507f1f77bcf86cd799470009",
+    "userId": "507f1f77bcf86cd799460006",
+    "reason": "Pacar saya mendapat promosi kerja yang mengharuskan lembur selama bulan Juli, sehingga kami harus membatalkan perjalanan ke Singapore ini.",
+    "refundAmount": null,
+    "refundPercentage": null,
+    "status": "pending",
+    "adminNote": null,
+    "processedBy": null,
+    "processedAt": null,
+    "midtransRefundKey": null,
+    "createdAt": "2026-06-20T09:15:00.000Z",
+    "updatedAt": "2026-06-20T09:15:00.000Z",
+    "_note": "Rizky Firmansyah — refund untuk Singapore City Explorer (order 009), H-35 sebelum keberangkatan, masih pending"
+  },
+
+  {
+    "_id": "507f1f77bcf86cd799490003",
+    "orderId": "507f1f77bcf86cd799470012",
+    "userId": "507f1f77bcf86cd799460004",
+    "reason": "Istri saya hamil dan dokter menyarankan untuk tidak bepergian jauh selama trimester pertama. Kami dengan berat hati harus membatalkan honeymoon kami.",
+    "refundAmount": 9000000,
+    "refundPercentage": 100,
+    "status": "approved",
+    "adminNote": "Refund disetujui 100% berdasarkan bukti surat dokter yang dilampirkan dan pembatalan dilakukan lebih dari H-30 sebelum keberangkatan. Dana akan dikembalikan ke kartu kredit dalam 5-7 hari kerja. Selamat atas kehamilannya!",
+    "processedBy": "507f1f77bcf86cd799460001",
+    "processedAt": "2026-07-05T10:30:00.000Z",
+    "midtransRefundKey": "refund-midtrans-BALI-HON-012",
+    "createdAt": "2026-07-01T11:00:00.000Z",
+    "updatedAt": "2026-07-05T10:30:00.000Z",
+    "_note": "Budi Santoso — refund untuk Bali Honeymoon (order 012), H-45 sebelum keberangkatan, disetujui 100%"
+  },
+
+  {
+    "_id": "507f1f77bcf86cd799490004",
+    "orderId": "507f1f77bcf86cd799470013",
+    "userId": "507f1f77bcf86cd799460002",
+    "reason": "Saya mendapat tawaran pekerjaan baru yang mengharuskan masuk kerja pertama kali bertepatan dengan tanggal keberangkatan tour ke Toraja.",
+    "refundAmount": 8250000,
+    "refundPercentage": 75,
+    "status": "approved",
+    "adminNote": "Refund disetujui sebesar 75% (Rp 8.250.000) sesuai kebijakan pembatalan H-31 sebelum keberangkatan. Selamat atas pekerjaan barunya! Dana akan dikembalikan ke rekening bank dalam 3-5 hari kerja.",
+    "processedBy": "507f1f77bcf86cd799460001",
+    "processedAt": "2026-10-05T14:00:00.000Z",
+    "midtransRefundKey": "refund-midtrans-TORAJA-013",
+    "createdAt": "2026-10-01T08:30:00.000Z",
+    "updatedAt": "2026-10-05T14:00:00.000Z",
+    "_note": "Andi Pratama — refund untuk Toraja Cultural (order 013), H-31 sebelum keberangkatan, disetujui 75%"
+  },
+
+  {
+    "_id": "507f1f77bcf86cd799490005",
+    "orderId": "507f1f77bcf86cd799470014",
+    "userId": "507f1f77bcf86cd799460005",
+    "reason": "Ada musibah keluarga yang tidak terduga mengharuskan saya untuk tinggal di kota dan tidak bisa meninggalkan tanggung jawab saat ini.",
+    "refundAmount": 13350000,
+    "refundPercentage": 50,
+    "status": "approved",
+    "adminNote": "Refund disetujui sebesar 50% (Rp 13.350.000) sesuai kebijakan pembatalan H-10 sebelum keberangkatan. Kami turut berduka atas musibah yang dialami. Dana akan dikembalikan ke kartu kredit dalam 5-7 hari kerja.",
+    "processedBy": "507f1f77bcf86cd799460001",
+    "processedAt": "2026-07-18T11:00:00.000Z",
+    "midtransRefundKey": "refund-midtrans-SGP-014",
+    "createdAt": "2026-07-15T16:00:00.000Z",
+    "updatedAt": "2026-07-18T11:00:00.000Z",
+    "_note": "Dewi Kusuma — refund untuk Singapore City Explorer (order 014), H-10 sebelum keberangkatan, disetujui 50%"
+  }
+]

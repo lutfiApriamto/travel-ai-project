@@ -4,6 +4,7 @@ import { Heart, ShoppingCart, Minus, Plus, ChevronDown, ChevronUp, Loader2 } fro
 import { cn }          from '../../../lib/utils.js';
 import { ROUTES }      from '../../../utils/consts/routes.js';
 import { useToggleWishlist, useAddToCart } from '../api/useProductDetail.js';
+import AuthRequiredModal from '../../../components/shared/AuthRequiredModal.jsx';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -64,6 +65,8 @@ const BookingCard = ({
   const toggleWishlist = useToggleWishlist();
   const addToCart      = useAddToCart();
 
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
   const remaining = Math.max(0, (product?.quota ?? 0) - (product?.bookedSlots ?? 0));
   const isFull    = remaining === 0;
   const hasAddOns = Array.isArray(product?.addOns) && product.addOns.length > 0;
@@ -82,18 +85,12 @@ const BookingCard = ({
   };
 
   const handleWishlist = () => {
-    if (!isAuthenticated) {
-      navigate(`${ROUTES.AUTH.LOGIN}?redirect=${encodeURIComponent(window.location.pathname)}`);
-      return;
-    }
+    if (!isAuthenticated) { setShowAuthModal(true); return; }
     toggleWishlist.mutate({ productId, isWishlisted });
   };
 
   const handleAddToCart = () => {
-    if (!isAuthenticated) {
-      navigate(`${ROUTES.AUTH.LOGIN}?redirect=${encodeURIComponent(window.location.pathname)}`);
-      return;
-    }
+    if (!isAuthenticated) { setShowAuthModal(true); return; }
     if (!productId || isFull) return;
     addToCart.mutate({
       productId,
@@ -109,6 +106,12 @@ const BookingCard = ({
   };
 
   return (
+    <>
+    <AuthRequiredModal
+      isOpen={showAuthModal}
+      onClose={() => setShowAuthModal(false)}
+      onLogin={() => navigate(`${ROUTES.AUTH.LOGIN}?redirect=${encodeURIComponent(window.location.pathname)}`)}
+    />
     <div className="bg-card border border-border rounded-2xl p-5 space-y-5 shadow-sm">
       {/* Price */}
       <div>
@@ -242,6 +245,7 @@ const BookingCard = ({
         </button>
       </div>
     </div>
+    </>
   );
 };
 

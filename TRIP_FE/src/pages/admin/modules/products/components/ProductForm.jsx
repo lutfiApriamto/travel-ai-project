@@ -1,12 +1,14 @@
-import { useState, useMemo }             from 'react';
+import { useState, useMemo, useEffect }  from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { useQuery } from '@tanstack/react-query';
+import { useBlocker } from 'react-router-dom';
 import {
   Plus, Trash2, Loader2, ImagePlus, X, GripVertical,
   ChevronDown, ChevronUp, Info,
 } from 'lucide-react';
 import { cn }         from '../../../../../lib/utils.js';
 import PriceInput from '../../../../../components/shared/PriceInput.jsx';
+import UnsavedChangesModal from '../../../../../components/shared/admin/UnsavedChangesModal.jsx';
 import api from '../../../../../lib/axios.js';
 import { useUploadSingle, useUploadBulk, useDeleteImage } from '../api/useUpload.js';
 
@@ -152,19 +154,13 @@ const ThumbnailUploader = ({ value, onChange }) => {
   return (
     <div>
       {value ? (
-        <div className="relative rounded-xl overflow-hidden group">
+        <div className="relative rounded-xl overflow-hidden">
           <img src={value} alt="Thumbnail" className="w-full h-52 object-cover" />
-          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity
-            flex items-center justify-center gap-3">
-            <label className="flex items-center gap-1.5 h-8 px-3 rounded-lg bg-white/90 text-xs font-medium cursor-pointer">
-              <ImagePlus className="w-3.5 h-3.5" /> Ganti
-              <input type="file" accept="image/*" onChange={handleFile} className="hidden" />
-            </label>
-            <button type="button" onClick={handleDelete}
-              className="flex items-center gap-1.5 h-8 px-3 rounded-lg bg-red-500/90 text-white text-xs font-medium">
-              <Trash2 className="w-3.5 h-3.5" /> Hapus
-            </button>
-          </div>
+          <button type="button" onClick={handleDelete}
+            className="absolute top-2 right-2 w-8 h-8 rounded-full bg-red-500 shadow-md
+              flex items-center justify-center text-white hover:bg-red-600 transition-colors">
+            <Trash2 className="w-4 h-4" />
+          </button>
         </div>
       ) : (
         <label className={cn(
@@ -208,12 +204,12 @@ const GalleryUploader = ({ value = [], onChange }) => {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
       {value.map((url, i) => (
-        <div key={url} className="relative aspect-square rounded-lg overflow-hidden group">
+        <div key={url} className="relative aspect-square rounded-lg overflow-hidden">
           <img src={url} alt={`Galeri ${i + 1}`} className="w-full h-full object-cover" />
           <button type="button" onClick={() => handleDelete(url, i)}
-            className="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-black/60 flex items-center
-              justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-            <X className="w-3 h-3 text-white" />
+            className="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-red-500 shadow-sm
+              flex items-center justify-center text-white hover:bg-red-600 transition-colors">
+            <Trash2 className="w-3 h-3" />
           </button>
         </div>
       ))}
@@ -373,7 +369,7 @@ const AddOnsSection = ({ control, register, errors }) => {
 // ─── ProductForm ──────────────────────────────────────────────────────────────
 
 const ProductForm = ({ defaultValues, onSubmit, isLoading, isEdit = false }) => {
-  const { register, control, handleSubmit, watch, setValue, formState: { errors } } = useForm({
+  const { register, control, handleSubmit, watch, setValue, formState: { errors, isDirty } } = useForm({
     defaultValues: defaultValues || {
       name: '', shortDescription: '', description: '',
       categories: [], types: [], tags: [],
@@ -402,6 +398,25 @@ const ProductForm = ({ defaultValues, onSubmit, isLoading, isEdit = false }) => 
 
   const duration = useMemo(() => calcDuration(depDate, retDate), [depDate, retDate]);
 
+  // ── Leave warning: block React Router navigation when form is dirty ───────────
+  const blocker = useBlocker(
+    ({ currentLocation, nextLocation }) =>
+      isDirty &&
+      !isLoading &&
+      currentLocation.pathname !== nextLocation.pathname,
+  );
+
+  // Block browser refresh/close when form is dirty
+  useEffect(() => {
+    const handler = (e) => {
+      if (!isDirty) return;
+      e.preventDefault();
+      e.returnValue = '';
+    };
+    window.addEventListener('beforeunload', handler);
+    return () => window.removeEventListener('beforeunload', handler);
+  }, [isDirty]);
+
   // Fetch options for multi-selects
   const { data: categoryOptions = [] } = useQuery({
     queryKey: ['form-categories'],
@@ -420,6 +435,14 @@ const ProductForm = ({ defaultValues, onSubmit, isLoading, isEdit = false }) => 
   });
 
   return (
+    <>
+    {/* Leave warning modal — shown when React Router navigation is blocked */}
+    <UnsavedChangesModal
+      isOpen={blocker.state === 'blocked'}
+      onCancel={() => blocker.reset?.()}
+      onConfirm={() => blocker.proceed?.()}
+      description="Form produk ini memiliki perubahan yang belum disimpan. Jika Anda meninggalkan halaman ini, semua perubahan termasuk gambar yang sudah diupload akan hilang."
+    />
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 
       {/* ── Informasi Dasar ─────────────────────────────────────────────── */}
@@ -621,6 +644,7 @@ const ProductForm = ({ defaultValues, onSubmit, isLoading, isEdit = false }) => 
         </button>
       </div>
     </form>
+    </>
   );
 };
 

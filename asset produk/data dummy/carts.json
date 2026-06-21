@@ -1,0 +1,118 @@
+[
+  {
+    "_id": "507f1f77bcf86cd799560001",
+    "userId": "507f1f77bcf86cd799460002",
+    "items": [
+      {
+        "productId": "507f1f77bcf86cd799450005",
+        "participants": 2,
+        "addOns": [
+          { "name": "Boat Charter Komodo Sunset", "price": 750000 }
+        ],
+        "note": "Tolong siapkan kabin dengan pemandangan laut jika ada ya."
+      },
+      {
+        "productId": "507f1f77bcf86cd799450006",
+        "participants": 1,
+        "addOns": [],
+        "note": null
+      }
+    ],
+    "createdAt": "2026-06-10T08:00:00.000Z",
+    "updatedAt": "2026-06-15T14:30:00.000Z",
+    "_note": "Andi Pratama cart: Labuan Bajo (2 pax) + Bromo (1 pax)"
+  },
+  {
+    "_id": "507f1f77bcf86cd799560002",
+    "userId": "507f1f77bcf86cd799460003",
+    "items": [
+      {
+        "productId": "507f1f77bcf86cd799450003",
+        "participants": 2,
+        "addOns": [
+          { "name": "Sewa Kamera Bawah Air", "price": 450000 }
+        ],
+        "note": "Kami sangat excited untuk diving di Raja Ampat!"
+      },
+      {
+        "productId": "507f1f77bcf86cd799450009",
+        "participants": 1,
+        "addOns": [],
+        "note": null
+      }
+    ],
+    "createdAt": "2026-06-12T10:15:00.000Z",
+    "updatedAt": "2026-06-18T09:00:00.000Z",
+    "_note": "Siti Rahayu cart: Raja Ampat (2 pax) + Toraja (1 pax)"
+  },
+  {
+    "_id": "507f1f77bcf86cd799560003",
+    "userId": "507f1f77bcf86cd799460004",
+    "items": [
+      {
+        "productId": "507f1f77bcf86cd799450007",
+        "participants": 3,
+        "addOns": [],
+        "note": "Kami bertiga teman SMA, ini trip reunian."
+      },
+      {
+        "productId": "507f1f77bcf86cd79945000a",
+        "participants": 2,
+        "addOns": [
+          { "name": "Paket Snorkeling Premium 3 Titik", "price": 600000 }
+        ],
+        "note": null
+      }
+    ],
+    "createdAt": "2026-06-08T16:00:00.000Z",
+    "updatedAt": "2026-06-20T11:45:00.000Z",
+    "_note": "Budi Santoso cart: Flores (3 pax) + Wakatobi (2 pax)"
+  },
+  {
+    "_id": "507f1f77bcf86cd799560004",
+    "userId": "507f1f77bcf86cd799460005",
+    "items": [
+      {
+        "productId": "507f1f77bcf86cd79945000e",
+        "participants": 2,
+        "addOns": [
+          { "name": "Tiket Universal Studios Singapore", "price": 1200000 },
+          { "name": "Merlion Cruise Sunset", "price": 350000 }
+        ],
+        "note": "Trip anniversary kami, mohon diperhatikan untuk romantic setup jika bisa."
+      },
+      {
+        "productId": "507f1f77bcf86cd79945000b",
+        "participants": 4,
+        "addOns": [],
+        "note": "Kami 4 orang keluarga, ada 2 anak usia 8 dan 10 tahun."
+      }
+    ],
+    "createdAt": "2026-06-05T07:30:00.000Z",
+    "updatedAt": "2026-06-19T15:20:00.000Z",
+    "_note": "Dewi Kusuma cart: Singapore (2 pax) + Komodo (4 pax)"
+  },
+  {
+    "_id": "507f1f77bcf86cd799560005",
+    "userId": "507f1f77bcf86cd799460006",
+    "items": [
+      {
+        "productId": "507f1f77bcf86cd799450009",
+        "participants": 2,
+        "addOns": [
+          { "name": "Dokumentasi Foto & Video Toraja", "price": 800000 }
+        ],
+        "note": "Saya dan pacar ingin menikmati budaya Toraja yang autentik."
+      },
+      {
+        "productId": "507f1f77bcf86cd799450004",
+        "participants": 3,
+        "addOns": [],
+        "note": null
+      }
+    ],
+    "createdAt": "2026-06-11T12:00:00.000Z",
+    "updatedAt": "2026-06-17T08:30:00.000Z",
+    "_note": "Rizky Firmansyah cart: Toraja (2 pax) + Yogyakarta (3 pax)"
+  }
+]

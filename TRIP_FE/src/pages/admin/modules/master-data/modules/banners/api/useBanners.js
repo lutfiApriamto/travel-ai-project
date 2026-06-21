@@ -14,11 +14,14 @@ export const useBanners = () =>
 const toFormData = (data) => {
   const fd = new FormData();
   if (data.title)   fd.append('title',    data.title);
-  if (data.link)    fd.append('link',     data.link);
+  if (data.link !== undefined) fd.append('link', data.link);
   if (data.order !== undefined && data.order !== '')
     fd.append('order', data.order);
   if (data.isActive !== undefined) fd.append('isActive', data.isActive);
-  if (data.image instanceof File) fd.append('image', data.image);
+  // image can be a File (legacy), a URL string (new flow), or null/'' (cleared)
+  if (data.image instanceof File)          fd.append('image', data.image);
+  else if (typeof data.image === 'string') fd.append('image', data.image);
+  else if (data.image === null)            fd.append('image', '');
   return fd;
 };
 

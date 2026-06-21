@@ -217,7 +217,6 @@ const WithdrawModal = ({ isOpen, onClose, currentBalance, onSuccess }) => {
                 />
               )}
             />
-            </div>
             {errors.amount && (
               <p className="mt-1.5 text-xs text-red-500 flex items-center gap-1">
                 <AlertCircle className="w-3 h-3" /> {errors.amount.message}

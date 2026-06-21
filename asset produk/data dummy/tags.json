@@ -1,0 +1,72 @@
+[
+  {
+    "_id": "507f1f77bcf86cd79943903a",
+    "name": "Family Friendly",
+    "slug": "family-friendly",
+    "color": "#22C55E",
+    "status": "active"
+  },
+  {
+    "_id": "507f1f77bcf86cd79943903b",
+    "name": "Budget Friendly",
+    "slug": "budget-friendly",
+    "color": "#3B82F6",
+    "status": "active"
+  },
+  {
+    "_id": "507f1f77bcf86cd79943903c",
+    "name": "Luxury",
+    "slug": "luxury",
+    "color": "#D97706",
+    "status": "active"
+  },
+  {
+    "_id": "507f1f77bcf86cd79943903d",
+    "name": "Adventure",
+    "slug": "adventure",
+    "color": "#EF4444",
+    "status": "active"
+  },
+  {
+    "_id": "507f1f77bcf86cd79943903e",
+    "name": "Romantic",
+    "slug": "romantic",
+    "color": "#EC4899",
+    "status": "active"
+  },
+  {
+    "_id": "507f1f77bcf86cd79943903f",
+    "name": "Solo",
+    "slug": "solo",
+    "color": "#8B5CF6",
+    "status": "active"
+  },
+  {
+    "_id": "507f1f77bcf86cd799439040",
+    "name": "Group",
+    "slug": "group",
+    "color": "#FF6B35",
+    "status": "active"
+  },
+  {
+    "_id": "507f1f77bcf86cd799439041",
+    "name": "Weekend Trip",
+    "slug": "weekend-trip",
+    "color": "#14B8A6",
+    "status": "active"
+  },
+  {
+    "_id": "507f1f77bcf86cd799439042",
+    "name": "Long Holiday",
+    "slug": "long-holiday",
+    "color": "#6366F1",
+    "status": "active"
+  },
+  {
+    "_id": "507f1f77bcf86cd799439043",
+    "name": "Hidden Gem",
+    "slug": "hidden-gem",
+    "color": "#F59E0B",
+    "status": "active"
+  }
+]

@@ -1,0 +1,1193 @@
+[
+  {
+    "_id": "507f1f77bcf86cd799450001",
+    "name": "Bali Honeymoon Romantis 4D3N",
+    "slug": "bali-honeymoon-romantis-4d3n",
+    "categories": ["507f1f77bcf86cd799439017"],
+    "types": ["507f1f77bcf86cd79943902a", "507f1f77bcf86cd79943902b"],
+    "tags": ["507f1f77bcf86cd79943903e", "507f1f77bcf86cd79943903c"],
+    "shortDescription": "Rayakan cinta di Pulau Dewata dengan paket honeymoon eksklusif — villa private pool, sunset dinner, spa couple, dan pengalaman budaya Bali yang tak terlupakan.",
+    "description": "Sambut babak baru kehidupan pernikahan Anda dengan perjalanan honeymoon impian ke Bali. Paket ini dirancang khusus untuk pasangan yang menginginkan keintiman, kemewahan, dan kenangan abadi di Pulau Dewata.\n\nSelama 4 hari 3 malam, Anda akan menginap di villa private pool yang menghadap sawah hijau Ubud, menikmati sunset dinner romantis di tepi tebing Uluwatu, dimanjakan dengan couples spa treatment tradisional Bali, sekaligus menyelami kekayaan budaya dan spiritualitas Bali yang autentik.",
+    "thumbnail": "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%201.jpeg",
+    "gallery": [
+      "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%205.jpeg",
+      "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%207.jpeg"
+    ],
+    "departureCity": "Jakarta",
+    "destinations": ["Bali", "Ubud", "Uluwatu", "Seminyak"],
+    "departureDate": "2026-08-15T00:00:00.000Z",
+    "returnDate": "2026-08-18T00:00:00.000Z",
+    "duration": "4 Hari 3 Malam",
+    "meetingPoint": "Bandara Internasional I Gusti Ngurah Rai, Bali",
+    "price": 4500000,
+    "quota": 4,
+    "bookedSlots": 0,
+    "minParticipants": 2,
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Tiba di Bali — Check-in & Santai",
+        "activities": "Tiba di Bandara Ngurah Rai, disambut oleh pemandu wisata kami dengan bunga selamat datang. Transfer ke villa private pool di Ubud. Sore hari, nikmati couples spa 90 menit dengan teknik pijat tradisional Bali. Malam: Romantic dinner di restoran tepi sawah dengan menu set Balinese cuisine.",
+        "hotel": "Villa Padi Private Pool, Ubud",
+        "meals": { "breakfast": false, "lunch": false, "dinner": true }
+      },
+      {
+        "day": 2,
+        "title": "Ubud Cultural Experience",
+        "activities": "Pagi: Sarapan di villa sambil menikmati panorama sawah. Kunjungi Pura Tirta Empul untuk pengalaman spiritual, lalu Tegallalang Rice Terrace. Siang: Lunch di The Sayan House dengan pemandangan sungai Ayung. Sore: Cooking class pasangan — belajar membuat makanan Bali bersama chef lokal. Malam: Nonton pertunjukan Kecak Dance di Uluwatu.",
+        "hotel": "Villa Padi Private Pool, Ubud",
+        "meals": { "breakfast": true, "lunch": true, "dinner": false }
+      },
+      {
+        "day": 3,
+        "title": "Seminyak & Sunset Dinner",
+        "activities": "Pagi: Sarapan santai di villa. Check-out dan pindah ke resort Seminyak. Siang: Nikmati pantai private, bebas berenang dan berjemur. Sore: Perawatan tubuh di spa resort. Malam: Sunset dinner eksklusif di Ku De Ta Beach Club — Anda akan menemukan meja berhias bunga dan Champagne sudah menanti.",
+        "hotel": "The Layar Seminyak Private Villas",
+        "meals": { "breakfast": true, "lunch": false, "dinner": true }
+      },
+      {
+        "day": 4,
+        "title": "Kepulangan",
+        "activities": "Sarapan terakhir di resort. Waktu bebas untuk berbelanja oleh-oleh di Seminyak. Transfer ke Bandara Ngurah Rai untuk penerbangan pulang. Sampai jumpa dan selamat menikmati memori indah honeymoon Bali.",
+        "hotel": null,
+        "meals": { "breakfast": true, "lunch": false, "dinner": false }
+      }
+    ],
+    "includes": [
+      "Tiket pesawat PP Jakarta-Bali (kelas ekonomi)",
+      "Akomodasi 3 malam villa private pool",
+      "Couples spa treatment 90 menit",
+      "Romantic dinner di restoran tepi sawah",
+      "Sunset dinner di Seminyak + Champagne",
+      "Cooking class tradisional Bali",
+      "Tiket pertunjukan Kecak Dance Uluwatu",
+      "Pemandu wisata berbahasa Indonesia",
+      "Transportasi AC selama tour",
+      "Welcome drink & bunga selamat datang"
+    ],
+    "excludes": [
+      "Biaya visa (untuk WNA)",
+      "Pengeluaran pribadi dan oleh-oleh",
+      "Aktivitas tambahan di luar itinerary",
+      "Tip untuk pemandu dan driver",
+      "Asuransi perjalanan"
+    ],
+    "addOns": [
+      { "name": "Upgrade kamar ke Pool Suite", "price": 800000 },
+      { "name": "Romantic bed decoration + bunga", "price": 350000 },
+      { "name": "Foto profesional prewedding 2 jam", "price": 1200000 }
+    ],
+    "terms": "Pemesanan minimal 14 hari sebelum keberangkatan. Pembatalan 14 hari sebelum keberangkatan mendapat refund 100%. Pembatalan 7-13 hari mendapat refund 50%. Pembatalan kurang dari 7 hari tidak mendapat refund. Harga sudah termasuk pajak dan service charge.",
+    "status": "active",
+    "soldCount": 0,
+    "viewCount": 0
+  },
+
+  {
+    "_id": "507f1f77bcf86cd799450002",
+    "name": "Lombok Adventure Trip 3D2N",
+    "slug": "lombok-adventure-trip-3d2n",
+    "categories": ["507f1f77bcf86cd79943901a"],
+    "types": ["507f1f77bcf86cd79943902a", "507f1f77bcf86cd79943902e"],
+    "tags": ["507f1f77bcf86cd79943903d", "507f1f77bcf86cd79943903b"],
+    "shortDescription": "Taklukkan Gunung Rinjani, jelajahi Pantai Pink yang legendaris, dan rasakan keindahan alam Lombok yang masih terjaga. Petualangan sesungguhnya dimulai di sini!",
+    "description": "Lombok menyimpan keajaiban alam yang tak kalah menakjubkan dari Bali — namun dengan suasana yang lebih tenang dan autentik. Paket adventure ini dirancang untuk jiwa-jiwa pemberani yang ingin merasakan sensasi mendaki, menjelajah pantai tersembunyi, dan menyelami kehidupan masyarakat Sasak.\n\nDari trekking di kaki Gunung Rinjani, snorkeling di Gili Trawangan, hingga menyaksikan sunrise di atas awan, setiap momen akan menjadi cerita yang layak diceritakan.",
+    "thumbnail": "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%202.jpeg",
+    "gallery": [
+      "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%206.jpeg",
+      "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%2011.jpeg"
+    ],
+    "departureCity": "Surabaya",
+    "destinations": ["Lombok", "Gili Trawangan", "Pantai Pink", "Senaru"],
+    "departureDate": "2026-07-25T00:00:00.000Z",
+    "returnDate": "2026-07-27T00:00:00.000Z",
+    "duration": "3 Hari 2 Malam",
+    "meetingPoint": "Bandara Internasional Zainuddin Abdul Madjid, Lombok",
+    "price": 2800000,
+    "quota": 12,
+    "bookedSlots": 0,
+    "minParticipants": 1,
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Tiba Lombok — Senaru & Air Terjun",
+        "activities": "Tiba di Bandara Lombok, langsung menuju Desa Senaru di kaki Gunung Rinjani. Kunjungi Air Terjun Sendang Gile dan Tiu Kelep yang menakjubkan — trekking ringan 1-2 jam melalui hutan tropis yang rimbun. Malam: Makan malam di warung lokal sambil menikmati udara pegunungan yang segar.",
+        "hotel": "Rinjani Lodge, Senaru",
+        "meals": { "breakfast": false, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 2,
+        "title": "Gili Trawangan & Pantai Pink",
+        "activities": "Pagi: Sarapan dan perjalanan ke Pelabuhan Bangsal. Naik speedboat ke Gili Trawangan — snorkeling di spot terumbu karang terbaik, melihat penyu laut, dan berenang di air biru jernih. Siang: Lunch seafood segar di tepi pantai. Sore: Jelajahi Pantai Pink (Pink Beach) Lombok yang unik dengan pasir berwarna merah muda alami. Malam: Kembali ke penginapan, makan malam dan istirahat.",
+        "hotel": "Rinjani Lodge, Senaru",
+        "meals": { "breakfast": true, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 3,
+        "title": "Desa Sade & Kepulangan",
+        "activities": "Pagi: Sarapan dan check-out. Kunjungi Desa Sade — desa tradisional suku Sasak yang masih mempertahankan adat istiadat leluhur. Lihat proses pembuatan tenun ikat Lombok dan berinteraksi langsung dengan warga lokal. Siang: Makan siang di Mataram. Transfer ke Bandara Lombok untuk penerbangan pulang.",
+        "hotel": null,
+        "meals": { "breakfast": true, "lunch": true, "dinner": false }
+      }
+    ],
+    "includes": [
+      "Tiket pesawat PP (kelas ekonomi)",
+      "Akomodasi 2 malam",
+      "Tiket speedboat ke Gili Trawangan",
+      "Peralatan snorkeling lengkap",
+      "Pemandu wisata berpengalaman",
+      "Transportasi AC selama tour",
+      "Semua makan sesuai itinerary",
+      "Tiket masuk objek wisata"
+    ],
+    "excludes": [
+      "Pengeluaran pribadi dan oleh-oleh",
+      "Tip untuk pemandu dan driver",
+      "Asuransi perjalanan",
+      "Minuman tambahan di luar makan"
+    ],
+    "addOns": [
+      { "name": "Trekking Rinjani 2D1N (tambahan)", "price": 1500000 },
+      { "name": "Sewa peralatan trekking lengkap", "price": 200000 },
+      { "name": "Foto underwater profesional", "price": 400000 }
+    ],
+    "terms": "Peserta wajib dalam kondisi fisik sehat. Trekking ke Rinjani memerlukan kondisi fisik prima. Paket tidak direkomendasikan untuk anak di bawah 8 tahun. Pembatalan 14+ hari: refund 100%. Pembatalan 7-13 hari: refund 50%. Kurang dari 7 hari: tidak ada refund.",
+    "status": "active",
+    "soldCount": 0,
+    "viewCount": 0
+  },
+
+  {
+    "_id": "507f1f77bcf86cd799450003",
+    "name": "Raja Ampat Diving Paradise 5D4N",
+    "slug": "raja-ampat-diving-paradise-5d4n",
+    "categories": ["507f1f77bcf86cd799439013"],
+    "types": ["507f1f77bcf86cd79943902c", "507f1f77bcf86cd79943902f"],
+    "tags": ["507f1f77bcf86cd799439043", "507f1f77bcf86cd79943903d", "507f1f77bcf86cd799439042"],
+    "shortDescription": "Selami keajaiban bawah laut tersembunyi di jantung Segitiga Terumbu Karang Dunia. Raja Ampat menawarkan biodiversitas laut tertinggi di bumi yang akan memukau setiap penyelam.",
+    "description": "Raja Ampat adalah surga terakhir yang tersisa di muka bumi — sebuah kepulauan ajaib di Papua Barat dengan lebih dari 1.500 pulau kecil, kekayaan biota laut yang tak tertandingi, dan pemandangan alam yang memukau jiwa.\n\nPaket diving ini memberikan Anda akses ke spot selam terbaik dunia: Misool, Cape Kri, Blue Magic, dan Manta Sandy. Dipandu oleh divemaster bersertifikat internasional, Anda akan menyaksikan keindahan yang hanya ada di Raja Ampat.",
+    "thumbnail": "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%203.jpeg",
+    "gallery": [
+      "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%208.jpeg",
+      "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%2010.jpeg"
+    ],
+    "departureCity": "Makassar",
+    "destinations": ["Raja Ampat", "Waisai", "Misool", "Cape Kri"],
+    "departureDate": "2026-09-10T00:00:00.000Z",
+    "returnDate": "2026-09-14T00:00:00.000Z",
+    "duration": "5 Hari 4 Malam",
+    "meetingPoint": "Bandara Domine Eduard Osok, Sorong",
+    "price": 8500000,
+    "quota": 8,
+    "bookedSlots": 0,
+    "minParticipants": 2,
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Tiba di Sorong — Transfer ke Raja Ampat",
+        "activities": "Tiba di Bandara Sorong, disambut tim kami. Naik speedboat 2 jam menuju Waisai, ibu kota Raja Ampat. Check-in di resort tepi pantai. Sore: Briefing diving dan orientasi area. Malam: Makan malam sambil menikmati sunset spektakuler di atas dermaga kayu.",
+        "hotel": "Papua Paradise Eco Resort",
+        "meals": { "breakfast": false, "lunch": false, "dinner": true }
+      },
+      {
+        "day": 2,
+        "title": "Diving Day 1 — Cape Kri & Manta Sandy",
+        "activities": "Pagi: Sarapan dan persiapan diving. Penyelaman pertama di Cape Kri — spot yang memegang rekor dunia untuk jumlah spesies ikan dalam satu penyelaman (374 spesies!). Istirahat siang di atas kapal. Penyelaman kedua di Manta Sandy untuk menyaksikan manta ray raksasa berenang bebas. Malam: Dinner di resort.",
+        "hotel": "Papua Paradise Eco Resort",
+        "meals": { "breakfast": true, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 3,
+        "title": "Diving Day 2 — Blue Magic & Sardine Reef",
+        "activities": "Pagi: Breakfast dan berangkat ke Blue Magic — spot terkenal dengan arus kencang dan populasi pelagic fish yang luar biasa. Siang: Istirahat dan makan siang di pulau terpencil. Sore: Penyelaman di Sardine Reef, menyaksikan ribuan ikan sarden membentuk formasi menakjubkan. Malam: Bonfire di pantai.",
+        "hotel": "Papua Paradise Eco Resort",
+        "meals": { "breakfast": true, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 4,
+        "title": "Island Hopping & Snorkeling Misool",
+        "activities": "Pagi: Perjalanan ke kepulauan Misool yang ikonik. Snorkeling di laguna berwarna biru kehijauan yang dikelilingi tebing karst spektakuler. Kunjungi lukisan batu prasejarah berusia 5.000 tahun. Siang: Piknik di pantai tersembunyi. Sore: Kembali ke resort, santai menikmati golden hour. Malam: Farewell dinner seafood.",
+        "hotel": "Papua Paradise Eco Resort",
+        "meals": { "breakfast": true, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 5,
+        "title": "Kepulangan",
+        "activities": "Sarapan terakhir di resort. Waktu bebas untuk foto-foto dan perpisahan dengan staf lokal. Speedboat kembali ke Sorong. Transfer ke bandara untuk penerbangan pulang membawa kenangan tak terlupakan.",
+        "hotel": null,
+        "meals": { "breakfast": true, "lunch": false, "dinner": false }
+      }
+    ],
+    "includes": [
+      "Tiket pesawat PP ke Sorong",
+      "Speedboat transfer Sorong-Waisai PP",
+      "Akomodasi 4 malam eco resort",
+      "4x penyelaman + tangki & BCD",
+      "Divemaster bersertifikat PADI",
+      "Peralatan snorkeling",
+      "Semua makan (full board)",
+      "Island hopping Misool",
+      "Tiket masuk Raja Ampat (permit)",
+      "Marine park fee"
+    ],
+    "excludes": [
+      "Tiket pesawat domestik ke Sorong (jika dari luar Papua)",
+      "Sewa regulatordan wetsuit",
+      "Pengeluaran pribadi",
+      "Asuransi diving",
+      "Tip untuk divemaster dan kru"
+    ],
+    "addOns": [
+      { "name": "Sewa regulator + wetsuit", "price": 350000 },
+      { "name": "Foto/video underwater profesional", "price": 750000 },
+      { "name": "Penyelaman malam (night dive)", "price": 450000 }
+    ],
+    "terms": "Peserta wajib memiliki sertifikasi diving minimal Open Water (PADI/SSI). Kondisi fisik harus prima dan bebas penyakit jantung/pernapasan. Wajib membawa kartu selam dan log book. Minimum peserta 4 orang untuk keberangkatan. Cuaca buruk dapat memengaruhi itinerary diving.",
+    "status": "active",
+    "soldCount": 0,
+    "viewCount": 0
+  },
+
+  {
+    "_id": "507f1f77bcf86cd799450004",
+    "name": "Yogyakarta Heritage Tour 3D2N",
+    "slug": "yogyakarta-heritage-tour-3d2n",
+    "categories": ["507f1f77bcf86cd799439018"],
+    "types": ["507f1f77bcf86cd79943902b", "507f1f77bcf86cd79943902d"],
+    "tags": ["507f1f77bcf86cd79943903a", "507f1f77bcf86cd79943903b", "507f1f77bcf86cd799439040"],
+    "shortDescription": "Jelajahi kota pelajar dan budaya Indonesia — Candi Borobudur yang megah, keraton kesultanan yang anggun, Prambanan yang memesona, dan kuliner legendaris yang menggugah selera.",
+    "description": "Yogyakarta adalah jantung kebudayaan Jawa — kota yang menyimpan warisan peradaban ribuan tahun dalam setiap sudutnya. Dari Borobudur yang diakui UNESCO sebagai Warisan Dunia, hingga gang-gang batik Malioboro yang semarak, Yogyakarta selalu punya cerita baru untuk diceritakan.\n\nPaket open trip ini cocok untuk semua kalangan — keluarga, pasangan muda, maupun sahabat yang ingin menikmati kekayaan budaya Jawa dengan panduan profesional dan harga yang sangat terjangkau.",
+    "thumbnail": "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%204.jpeg",
+    "gallery": [
+      "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%209.jpeg"
+    ],
+    "departureCity": "Jakarta",
+    "destinations": ["Yogyakarta", "Borobudur", "Prambanan", "Malioboro"],
+    "departureDate": "2026-07-18T00:00:00.000Z",
+    "returnDate": "2026-07-20T00:00:00.000Z",
+    "duration": "3 Hari 2 Malam",
+    "meetingPoint": "Stasiun Tugu Yogyakarta",
+    "price": 1800000,
+    "quota": 20,
+    "bookedSlots": 0,
+    "minParticipants": 1,
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Tiba Yogya — Prambanan & Malioboro",
+        "activities": "Tiba di Yogyakarta, langsung menuju Candi Prambanan — kompleks candi Hindu terbesar di Indonesia yang menakjubkan. Foto dan jelajahi 3 candi utama (Brahma, Wisnu, Siwa). Sore: Istirahat check-in hotel di kawasan Malioboro. Malam: Jalan-jalan di Malioboro, belanja batik dan oleh-oleh, makan malam lesehan gudeg legendaris.",
+        "hotel": "Hotel Grand Aston Yogyakarta",
+        "meals": { "breakfast": false, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 2,
+        "title": "Sunrise Borobudur & Keraton Yogyakarta",
+        "activities": "Dini hari (04.00): Berangkat ke Candi Borobudur untuk menyaksikan sunrise yang magis dari puncak stupa. Pemandangan matahari terbit di antara candi dan pegunungan adalah pengalaman spiritual yang mengubah hidup. Pagi: Kunjungi Museum Borobudur. Siang: Makan siang di Magelang. Sore: Kembali ke Yogya, kunjungi Keraton Kasultanan Ngayogyakarta dan Museum Sonobudoyo. Malam: Dinner dan waktu bebas.",
+        "hotel": "Hotel Grand Aston Yogyakarta",
+        "meals": { "breakfast": true, "lunch": true, "dinner": false }
+      },
+      {
+        "day": 3,
+        "title": "Batik Workshop & Kepulangan",
+        "activities": "Pagi: Sarapan dan workshop membatik di sanggar batik tradisional — belajar langsung dari pengrajin batik tulis Yogyakarta. Hasilnya dibawa pulang sebagai kenangan. Siang: Makan siang di Soto Kadipiro, warung legendaris yang berdiri sejak 1921. Waktu bebas belanja oleh-oleh terakhir di Pasar Beringharjo. Sore: Transfer ke Stasiun Tugu untuk keberangkatan pulang.",
+        "hotel": null,
+        "meals": { "breakfast": true, "lunch": true, "dinner": false }
+      }
+    ],
+    "includes": [
+      "Tiket kereta PP Jakarta-Yogyakarta (eksekutif)",
+      "Akomodasi 2 malam hotel bintang 4",
+      "Tiket masuk Prambanan + Borobudur",
+      "Workshop batik tulis",
+      "Pemandu wisata profesional",
+      "Transportasi selama tour",
+      "Makan sesuai itinerary",
+      "Air mineral selama perjalanan"
+    ],
+    "excludes": [
+      "Pengeluaran pribadi dan oleh-oleh",
+      "Tip untuk pemandu dan driver",
+      "Asuransi perjalanan",
+      "Penerbangan (jika dari luar Jawa)"
+    ],
+    "addOns": [
+      { "name": "Upgrade ke kamar Deluxe dengan view kota", "price": 300000 },
+      { "name": "Paket foto profesional seharian", "price": 500000 },
+      { "name": "Dinner di Abhayagiri Restaurant dengan panorama Prambanan", "price": 400000 }
+    ],
+    "terms": "Paket cocok untuk semua usia termasuk anak-anak. Untuk menyaksikan sunrise Borobudur, peserta wajib bangun dini hari. Tiket kereta bersifat fix dan tidak dapat diubah jadwalnya. Refund sesuai kebijakan standar Travia.",
+    "status": "active",
+    "soldCount": 0,
+    "viewCount": 0
+  },
+
+  {
+    "_id": "507f1f77bcf86cd799450005",
+    "name": "Labuan Bajo Premium Private 4D3N",
+    "slug": "labuan-bajo-premium-private-4d3n",
+    "categories": ["507f1f77bcf86cd799439011"],
+    "types": ["507f1f77bcf86cd79943902a", "507f1f77bcf86cd79943902c"],
+    "tags": ["507f1f77bcf86cd79943903c", "507f1f77bcf86cd79943903e", "507f1f77bcf86cd799439042"],
+    "shortDescription": "Pengalaman mewah menjelajahi Labuan Bajo dengan kapal phinisi private — Komodo Dragon, snorkeling di Pink Beach, matahari terima di Padar Island, dan glamping di atas laut.",
+    "description": "Labuan Bajo adalah salah satu destinasi paling memukau di dunia — sebuah kota pelabuhan kecil di ujung barat Flores yang menjadi gerbang menuju Taman Nasional Komodo, yang diakui sebagai Situs Warisan Dunia UNESCO.\n\nPaket private premium ini menggunakan kapal phinisi tradisional sebagai hotel terapung Anda selama 3 malam. Tidak ada jadwal yang terburu-buru, tidak ada keramaian turis — hanya Anda, alam liar, dan keindahan yang tak ternilai.",
+    "thumbnail": "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%205.jpeg",
+    "gallery": [
+      "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%2011.jpeg",
+      "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%2012.jpeg"
+    ],
+    "departureCity": "Bali",
+    "destinations": ["Labuan Bajo", "Taman Nasional Komodo", "Pulau Padar", "Pink Beach"],
+    "departureDate": "2026-10-05T00:00:00.000Z",
+    "returnDate": "2026-10-08T00:00:00.000Z",
+    "duration": "4 Hari 3 Malam",
+    "meetingPoint": "Pelabuhan Labuan Bajo, Flores",
+    "price": 7200000,
+    "quota": 6,
+    "bookedSlots": 0,
+    "minParticipants": 2,
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Tiba Labuan Bajo — Boarding Phinisi",
+        "activities": "Tiba di Bandara Komodo Labuan Bajo. Transfer ke pelabuhan dan boarding kapal phinisi mewah Anda. Berlayar sore hari menuju Pulau Rinca sambil menikmati sunset di atas dek. Makan malam di atas kapal dengan pemandangan bintang-bintang di langit Flores yang gelap pekat.",
+        "hotel": "Kapal Phinisi Private (Liveaboard)",
+        "meals": { "breakfast": false, "lunch": false, "dinner": true }
+      },
+      {
+        "day": 2,
+        "title": "Komodo Dragon & Snorkeling Manta Point",
+        "activities": "Pagi: Trekking di Pulau Rinca untuk menyaksikan komodo dragon di habitat aslinya — dipandu ranger berpengalaman. Foto dan pelajari perilaku komodo yang unik. Siang: Makan siang di atas kapal sambil berlayar ke Manta Point. Sore: Snorkeling bersama manta ray di spot terbaik Komodo — pengalaman yang mengubah perspektif hidup Anda. Malam: Berlabuh di perairan tenang.",
+        "hotel": "Kapal Phinisi Private (Liveaboard)",
+        "meals": { "breakfast": true, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 3,
+        "title": "Sunrise Padar Island & Pink Beach",
+        "activities": "Dini hari (05.00): Trekking ke puncak Pulau Padar untuk menyaksikan sunrise dengan pemandangan 360° tiga teluk berwarna — pemandangan paling ikonik di Indonesia. Siang: Snorkeling di Pink Beach, pantai langka dengan pasir berwarna merah muda. Sore: Island hopping ke Pulau Kanawa dan Batu Bolong — spot diving dengan terumbu karang yang masih perawan. Malam: BBQ di atas kapal.",
+        "hotel": "Kapal Phinisi Private (Liveaboard)",
+        "meals": { "breakfast": true, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 4,
+        "title": "Kepulangan",
+        "activities": "Sarapan terakhir di atas kapal sambil menikmati pagi yang tenang di lautan Flores. Check-out dan transfer ke Bandara Komodo Labuan Bajo. Penerbangan pulang membawa kenangan yang akan diingat seumur hidup.",
+        "hotel": null,
+        "meals": { "breakfast": true, "lunch": false, "dinner": false }
+      }
+    ],
+    "includes": [
+      "Tiket pesawat PP Bali-Labuan Bajo",
+      "Akomodasi 3 malam di kapal phinisi private",
+      "Chef pribadi + semua makan (full board)",
+      "Tiket masuk Taman Nasional Komodo",
+      "Ranger trekking Komodo bersertifikat",
+      "Peralatan snorkeling premium",
+      "Bahan bakar kapal",
+      "Kru kapal berpengalaman (kapten + 3 kru)",
+      "Sunset dan sunrise experience"
+    ],
+    "excludes": [
+      "Minuman beralkohol",
+      "Tip untuk kru kapal",
+      "Asuransi perjalanan",
+      "Pengeluaran pribadi",
+      "Sewa alat diving (jika ada)"
+    ],
+    "addOns": [
+      { "name": "Sewa alat diving lengkap", "price": 600000 },
+      { "name": "Paket foto profesional drone + underwater", "price": 1500000 },
+      { "name": "Romantic dinner private di pantai", "price": 800000 }
+    ],
+    "terms": "Minimum pemesanan untuk 2 orang. Kapal dapat menampung maksimal 6 tamu. Kondisi cuaca dapat mempengaruhi perjalanan — keamanan peserta adalah prioritas utama. Trekking Padar memerlukan kondisi fisik cukup baik.",
+    "status": "active",
+    "soldCount": 0,
+    "viewCount": 0
+  },
+
+  {
+    "_id": "507f1f77bcf86cd799450006",
+    "name": "Bromo Sunrise Weekend 2D1N",
+    "slug": "bromo-sunrise-weekend-2d1n",
+    "categories": ["507f1f77bcf86cd799439018"],
+    "types": ["507f1f77bcf86cd79943902a", "507f1f77bcf86cd79943902e"],
+    "tags": ["507f1f77bcf86cd799439041", "507f1f77bcf86cd79943903b", "507f1f77bcf86cd79943903d"],
+    "shortDescription": "Saksikan matahari terbit spektakuler di Puncak Penanjakan, berkuda di lautan pasir Tengger, dan merasakan aura mistis Gunung Bromo yang telah memikat jutaan wisatawan dunia.",
+    "description": "Gunung Bromo adalah salah satu pemandangan paling ikonik Indonesia — lautan pasir seluas 5.250 hektar yang dikelilingi dinding kaldera raksasa, dengan asap belerang mengepul dari kawah yang aktif. Sunrise di Bromo adalah pengalaman yang wajib ada dalam bucket list setiap traveler.\n\nPaket weekend getaway ini dirancang untuk Anda yang ingin melarikan diri sebentar dari rutinitas kota tanpa perlu mengambil cuti panjang. Berangkat Sabtu malam, kembali Minggu sore — praktis dan berkesan!",
+    "thumbnail": "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%206.jpeg",
+    "gallery": [
+      "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%202.jpeg"
+    ],
+    "departureCity": "Surabaya",
+    "destinations": ["Bromo", "Tengger", "Puncak Penanjakan", "Kawah Bromo"],
+    "departureDate": "2026-07-11T00:00:00.000Z",
+    "returnDate": "2026-07-12T00:00:00.000Z",
+    "duration": "2 Hari 1 Malam",
+    "meetingPoint": "Terminal Bungurasih (Purabaya), Surabaya",
+    "price": 850000,
+    "quota": 25,
+    "bookedSlots": 0,
+    "minParticipants": 1,
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Malam — Perjalanan ke Bromo",
+        "activities": "Kumpul di Surabaya pukul 21.00. Perjalanan malam dengan bus AC ke kawasan Bromo Tengger Semeru (~4 jam). Tiba di Cemoro Lawang sekitar pukul 01.00, istirahat singkat di penginapan. Pukul 03.30: Bangun dan bersiap untuk sunrise hunting. Naik jeep 4WD menuju Puncak Penanjakan, saksikan matahari terbit yang membelah cakrawala di ketinggian 2.770 mdpl — pemandangan yang akan membuat Anda terdiam terpesona.",
+        "hotel": "Homestay Cemoro Lawang",
+        "meals": { "breakfast": false, "lunch": false, "dinner": false }
+      },
+      {
+        "day": 2,
+        "title": "Kawah Bromo & Kepulangan",
+        "activities": "Setelah sunrise: Turun ke lautan pasir Tengger. Berkuda menuju kaki Gunung Bromo, lalu mendaki 250 anak tangga menuju bibir kawah. Saksikan kawah belerang yang mengepul — pengalaman yang mendebarkan sekaligus memukau. Foto-foto di lautan pasir. Sarapan di warung lokal. Pukul 10.00: Check-out dan perjalanan kembali ke Surabaya. Tiba Surabaya sekitar pukul 15.00.",
+        "hotel": null,
+        "meals": { "breakfast": true, "lunch": false, "dinner": false }
+      }
+    ],
+    "includes": [
+      "Transportasi bus AC Surabaya-Bromo PP",
+      "Jeep 4WD sunrise tour",
+      "Sewa kuda ke kaki Bromo",
+      "Tiket masuk Taman Nasional Bromo Tengger Semeru",
+      "Penginapan 1 malam (homestay)",
+      "Sarapan pagi",
+      "Pemandu wisata lokal berpengalaman"
+    ],
+    "excludes": [
+      "Makan malam dan makan siang",
+      "Pengeluaran pribadi",
+      "Tip untuk pemandu",
+      "Jaket (sangat direkomendasikan dibawa sendiri)"
+    ],
+    "addOns": [
+      { "name": "Sewa jaket tebal untuk suhu dingin", "price": 50000 },
+      { "name": "Paket foto sunrise profesional", "price": 300000 }
+    ],
+    "terms": "Suhu di Bromo bisa mencapai 0-5°C di dini hari. Peserta wajib membawa jaket tebal, masker, dan sepatu tertutup. Kondisi jalan menuju Bromo dapat berbatu dan berliku — tidak direkomendasikan untuk ibu hamil dan lansia. Jadwal bisa berubah karena cuaca atau kondisi gunung.",
+    "status": "active",
+    "soldCount": 0,
+    "viewCount": 0
+  },
+
+  {
+    "_id": "507f1f77bcf86cd799450007",
+    "name": "Flores Island Hopping 6D5N",
+    "slug": "flores-island-hopping-6d5n",
+    "categories": ["507f1f77bcf86cd799439012"],
+    "types": ["507f1f77bcf86cd79943902c", "507f1f77bcf86cd79943902a"],
+    "tags": ["507f1f77bcf86cd79943903f", "507f1f77bcf86cd79943903d", "507f1f77bcf86cd799439043", "507f1f77bcf86cd799439042"],
+    "shortDescription": "Jelajahi keindahan Flores dari timur ke barat — Danau Kelimutu tiga warna, kampung adat Ende, pantai biru kristal, hingga keajaiban manta ray di Labuan Bajo. Solo trip terbaik untuk jiwa petualang.",
+    "description": "Flores adalah permata tersembunyi Indonesia yang masih belum banyak diketahui wisatawan mainstream. Dari timur di Maumere hingga barat di Labuan Bajo, setiap kilometer Flores menyimpan keajaiban — danau vulkanik tiga warna, rumah adat berusia ratusan tahun, pantai sepi yang masih perawan, dan laut biru yang jernih.\n\nPaket solo traveling ini menawarkan kebebasan menjelajahi Flores secara mandiri dengan didampingi local guide yang memahami setiap sudut pulau. Cocok untuk solo traveler berjiwa petualang yang ingin pengalaman autentik.",
+    "thumbnail": "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%207.jpeg",
+    "gallery": [
+      "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%203.jpeg",
+      "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%205.jpeg"
+    ],
+    "departureCity": "Bali",
+    "destinations": ["Flores", "Maumere", "Kelimutu", "Ende", "Labuan Bajo"],
+    "departureDate": "2026-10-12T00:00:00.000Z",
+    "returnDate": "2026-10-17T00:00:00.000Z",
+    "duration": "6 Hari 5 Malam",
+    "meetingPoint": "Bandara Frans Seda, Maumere",
+    "price": 6500000,
+    "quota": 10,
+    "bookedSlots": 0,
+    "minParticipants": 1,
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Maumere — Kampung Adat Bena",
+        "activities": "Tiba di Maumere, kota terbesar di Flores Timur. Kunjungi Kampung Bena — salah satu kampung megalitikum tertua di Flores yang masih lestari. Sore: Nikmati pantai Maumere yang sepi dan biru. Malam: Makan malam dengan ikan bakar segar di warung tepi pantai.",
+        "hotel": "Hotel Sea World Club, Maumere",
+        "meals": { "breakfast": false, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 2,
+        "title": "Danau Kelimutu — Tiga Warna Ajaib",
+        "activities": "Dini hari berangkat ke Gunung Kelimutu (1.690 mdpl). Tiba tepat saat matahari terbit untuk menyaksikan tiga danau vulkanik dengan warna berbeda — biru tua, hijau tua, dan merah bata. Fenomena alam langka yang tidak ada duanya di Indonesia. Turun dan sarapan di desa Ende. Sore: Jelajahi Kota Ende dan museum Bung Karno.",
+        "hotel": "Guest House Kelimutu, Ende",
+        "meals": { "breakfast": true, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 3,
+        "title": "Riung — 17 Pulau",
+        "activities": "Perjalanan darat ke Riung, kota kecil di pantai utara Flores. Boat trip ke kawasan 17 Pulau Riung — snorkeling di antara terumbu karang yang masih bersih, melihat koloni kelelawar raksasa (kalong), dan berenang di pantai yang hampir tidak pernah diinjak turis.",
+        "hotel": "Homestay Riung",
+        "meals": { "breakfast": true, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 4,
+        "title": "Ruteng — Sawah Laba-Laba",
+        "activities": "Perjalanan ke Ruteng, kota di pegunungan Flores tengah. Kunjungi Sawah Lingko (sawah berbentuk sarang laba-laba) — keunikan agrarian yang hanya ada di Flores. Trekking ringan melihat pemandangan hijau yang membentang. Sore: Kopi Flores di warung lokal sambil menikmati udara pegunungan.",
+        "hotel": "Hotel Sindha, Ruteng",
+        "meals": { "breakfast": true, "lunch": true, "dinner": false }
+      },
+      {
+        "day": 5,
+        "title": "Tiba Labuan Bajo",
+        "activities": "Perjalanan terakhir melintasi pegunungan Flores menuju Labuan Bajo. Sore: Tiba dan check-in di penginapan tepi pelabuhan. Jalan-jalan di kawasan wisata Labuan Bajo, menikmati seafood segar, dan menyaksikan sunset di Puncak Sylvia — titik tertinggi di Labuan Bajo dengan panorama pelabuhan dan pulau-pulau kecil.",
+        "hotel": "Ayana Komodo Resort, Labuan Bajo",
+        "meals": { "breakfast": true, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 6,
+        "title": "Kepulangan dari Labuan Bajo",
+        "activities": "Sarapan santai sambil menikmati pemandangan pelabuhan Labuan Bajo. Waktu bebas untuk berbelanja oleh-oleh khas Flores — kain tenun ikat, kopi Flores, dan kerajinan tangan lokal. Transfer ke Bandara Komodo untuk penerbangan pulang.",
+        "hotel": null,
+        "meals": { "breakfast": true, "lunch": false, "dinner": false }
+      }
+    ],
+    "includes": [
+      "Tiket pesawat Bali-Maumere dan Labuan Bajo-Bali",
+      "Akomodasi 5 malam",
+      "Transportasi darat Maumere-Labuan Bajo (private car)",
+      "Boat trip 17 Pulau Riung",
+      "Peralatan snorkeling",
+      "Local guide berpengalaman",
+      "Tiket masuk semua objek wisata",
+      "Semua makan (full board)"
+    ],
+    "excludes": [
+      "Pengeluaran pribadi dan oleh-oleh",
+      "Tip untuk guide dan driver",
+      "Asuransi perjalanan",
+      "Minuman beralkohol"
+    ],
+    "addOns": [
+      { "name": "Day trip Komodo dari Labuan Bajo", "price": 1200000 },
+      { "name": "Paket foto drone selama perjalanan", "price": 800000 }
+    ],
+    "terms": "Paket ini melibatkan perjalanan darat jarak jauh (total ±500 km). Kondisi jalan di beberapa titik masih berupa jalan pegunungan sempit. Tidak direkomendasikan untuk kondisi fisik yang lemah atau ibu hamil. Jadwal dapat berubah sesuai kondisi jalan dan cuaca.",
+    "status": "active",
+    "soldCount": 0,
+    "viewCount": 0
+  },
+
+  {
+    "_id": "507f1f77bcf86cd799450008",
+    "name": "Derawan Snorkeling & Dive 4D3N",
+    "slug": "derawan-snorkeling-dive-4d3n",
+    "categories": ["507f1f77bcf86cd799439018"],
+    "types": ["507f1f77bcf86cd79943902c"],
+    "tags": ["507f1f77bcf86cd79943903a", "507f1f77bcf86cd79943903d", "507f1f77bcf86cd799439040"],
+    "shortDescription": "Temukan keajaiban tersembunyi Kepulauan Derawan di Kalimantan — berenang bersama ubur-ubur tanpa sengat di Danau Kakaban, snorkeling dengan penyu hijau, dan menikmati pasir putih halus yang luar biasa.",
+    "description": "Kepulauan Derawan di Kalimantan Timur adalah salah satu hidden gem kelautan Indonesia yang mulai mencuri perhatian dunia. Di sini terdapat 4 pulau utama dengan keunikannya masing-masing: Derawan (pantai indah dan penyu), Kakaban (danau air laut dengan ubur-ubur tak bersengat), Sangalaki (manta ray), dan Maratua (atoll yang memesona).\n\nPaket open trip ini terbuka untuk semua usia — dari keluarga muda hingga senior yang masih bersemangat berpetualang.",
+    "thumbnail": "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%208.jpeg",
+    "gallery": [
+      "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%2010.jpeg"
+    ],
+    "departureCity": "Balikpapan",
+    "destinations": ["Derawan", "Kakaban", "Sangalaki", "Maratua"],
+    "departureDate": "2026-08-22T00:00:00.000Z",
+    "returnDate": "2026-08-25T00:00:00.000Z",
+    "duration": "4 Hari 3 Malam",
+    "meetingPoint": "Bandara Sultan Aji Muhammad Sulaiman, Balikpapan",
+    "price": 4200000,
+    "quota": 15,
+    "bookedSlots": 0,
+    "minParticipants": 1,
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Balikpapan — Tanjung Batu — Derawan",
+        "activities": "Tiba di Balikpapan, transfer ke Tanjung Batu (perjalanan darat 3 jam). Dari Tanjung Batu, naik speedboat 1,5 jam menuju Pulau Derawan. Check-in di resort tepi pantai. Sore: Snorkeling pertama di perairan jernih sekitar Derawan — penyu hijau berenang bebas di sini! Makan malam seafood.",
+        "hotel": "Derawan Dive Lodge",
+        "meals": { "breakfast": false, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 2,
+        "title": "Kakaban — Danau Ubur-ubur Ajaib",
+        "activities": "Pagi: Perjalanan ke Pulau Kakaban yang misterius. Di sini terdapat danau air laut purba yang terisolasi selama jutaan tahun — dihuni ribuan ubur-ubur yang telah kehilangan kemampuan menyengat. Berenang dan berfoto bersama makhluk lucu ini adalah pengalaman sekali seumur hidup. Siang: Snorkeling di barrier reef Kakaban yang masih pristine. Sore: Kembali ke Derawan. Malam: Menyaksikan penyu bertelur di pantai (tergantung musim).",
+        "hotel": "Derawan Dive Lodge",
+        "meals": { "breakfast": true, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 3,
+        "title": "Sangalaki & Maratua",
+        "activities": "Pagi: Perjalanan ke Pulau Sangalaki — spot terbaik untuk melihat manta ray di perairan dangkal. Snorkeling bersama pari manta yang elegan. Siang: Makan siang di atas kapal. Sore: Jelajahi Pulau Maratua — atoll berbentuk tapal kuda dengan laguna biru di tengahnya. Snorkeling di drop-off dengan visibilitas hingga 30 meter.",
+        "hotel": "Derawan Dive Lodge",
+        "meals": { "breakfast": true, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 4,
+        "title": "Kepulangan",
+        "activities": "Sarapan pagi dan waktu bebas di Pulau Derawan. Speedboat kembali ke Tanjung Batu. Perjalanan darat ke Balikpapan. Transfer ke bandara untuk penerbangan pulang dengan kenangan indah Kepulauan Derawan.",
+        "hotel": null,
+        "meals": { "breakfast": true, "lunch": true, "dinner": false }
+      }
+    ],
+    "includes": [
+      "Tiket pesawat PP ke Balikpapan",
+      "Transportasi darat Balikpapan-Tanjung Batu PP",
+      "Speedboat Tanjung Batu-Derawan PP",
+      "Akomodasi 3 malam di dive lodge",
+      "Semua island hopping dan snorkeling",
+      "Peralatan snorkeling",
+      "Pemandu wisata berpengalaman",
+      "Semua makan (full board)",
+      "Tiket masuk Danau Kakaban"
+    ],
+    "excludes": [
+      "Pengeluaran pribadi",
+      "Tip untuk guide dan kru kapal",
+      "Asuransi perjalanan",
+      "Sewa alat diving (jika ingin diving)"
+    ],
+    "addOns": [
+      { "name": "Paket diving 3x penyelaman (termasuk peralatan)", "price": 900000 },
+      { "name": "Foto/video underwater profesional", "price": 500000 }
+    ],
+    "terms": "Danau Kakaban dan snorkeling manta ray sangat tergantung kondisi cuaca laut. Pada musim angin kencang (Desember-Maret), beberapa spot mungkin tidak dapat diakses. Anak-anak di bawah 5 tahun tidak direkomendasikan untuk snorkeling.",
+    "status": "active",
+    "soldCount": 0,
+    "viewCount": 0
+  },
+
+  {
+    "_id": "507f1f77bcf86cd799450009",
+    "name": "Toraja Cultural Immersion 5D4N",
+    "slug": "toraja-cultural-immersion-5d4n",
+    "categories": ["507f1f77bcf86cd799439013"],
+    "types": ["507f1f77bcf86cd79943902b", "507f1f77bcf86cd79943902f"],
+    "tags": ["507f1f77bcf86cd799439043", "507f1f77bcf86cd79943903f", "507f1f77bcf86cd799439042"],
+    "shortDescription": "Selami salah satu budaya paling unik di dunia — upacara pemakaman Rambu Solo yang megah, rumah adat Tongkonan yang menakjubkan, dan kehidupan masyarakat Toraja yang masih sangat tradisional.",
+    "description": "Tana Toraja di Sulawesi Selatan adalah salah satu destinasi paling unik dan berkesan di dunia. Masyarakat Toraja memiliki tradisi yang sangat khas — mulai dari upacara pemakaman yang berlangsung berhari-hari dan dihadiri ribuan orang, hingga cara menyimpan jenazah leluhur di tebing batu yang disebut Liang.\n\nIni bukan paket wisata biasa — ini adalah perjalanan lintas budaya yang akan mengubah cara pandang Anda tentang kehidupan dan kematian. Tersedia bagi solo traveler yang mencari makna di balik perjalanan.",
+    "thumbnail": "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%209.jpeg",
+    "gallery": [
+      "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%204.jpeg"
+    ],
+    "departureCity": "Makassar",
+    "destinations": ["Tana Toraja", "Rantepao", "Ke'te' Kesu", "Lemo"],
+    "departureDate": "2026-11-03T00:00:00.000Z",
+    "returnDate": "2026-11-07T00:00:00.000Z",
+    "duration": "5 Hari 4 Malam",
+    "meetingPoint": "Bandara Internasional Sultan Hasanuddin, Makassar",
+    "price": 5500000,
+    "quota": 10,
+    "bookedSlots": 0,
+    "minParticipants": 1,
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Makassar — Rantepao",
+        "activities": "Tiba di Makassar dan langsung melanjutkan perjalanan darat ke Rantepao (±8 jam melewati pemandangan alam Sulawesi yang menakjubkan). Tiba sore hari, check-in, dan makan malam lokal. Istirahat dan bersiap untuk hari-hari yang penuh pengalaman mendalam.",
+        "hotel": "Toraja Heritage Hotel, Rantepao",
+        "meals": { "breakfast": false, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 2,
+        "title": "Desa Adat & Pasar Bolu",
+        "activities": "Pagi: Kunjungi Pasar Bolu yang unik — pasar hewan tradisional Toraja di mana kerbau dan babi diperjualbelikan. Harga seekor kerbau albino (tedong bonga) bisa mencapai ratusan juta rupiah! Siang: Jelajahi Desa Ke'te Kesu dengan rumah Tongkonan berusia ratusan tahun dan lumbung padi tradisional. Sore: Workshop batik Toraja. Malam: Pertunjukan musik tradisional.",
+        "hotel": "Toraja Heritage Hotel, Rantepao",
+        "meals": { "breakfast": true, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 3,
+        "title": "Makam Tebing Lemo & Londa",
+        "activities": "Pagi: Kunjungi Lemo — pemakaman tebing batu yang dihiasi patung tau-tau (replika jenazah dari kayu). Pemandangan deretan patung berwajah manusia yang mengawasi dari tebing adalah pemandangan yang tak terlupakan. Siang: Londa — gua pemakaman yang gelap dengan tulang-tulang leluhur Toraja. Dipandu dengan obor. Sore: Sawah berundak di Batutumonga dengan pemandangan lembah Toraja yang hijau.",
+        "hotel": "Toraja Heritage Hotel, Rantepao",
+        "meals": { "breakfast": true, "lunch": true, "dinner": false }
+      },
+      {
+        "day": 4,
+        "title": "Upacara Adat (Jika Ada) & Tongkonan",
+        "activities": "Pagi: Kunjungi upacara adat Rambu Solo (jika ada jadwal — panduan kami selalu update informasi ini) atau tour ke kampung-kampung terpencil yang lebih autentik. Siang: Makan siang dengan menu masakan Toraja — pa'piong (daging bambu) dan deppa tori (kue tradisional). Sore: Belajar membuat kerajinan tenun sutra Toraja dari ibu-ibu pengrajin lokal.",
+        "hotel": "Toraja Heritage Hotel, Rantepao",
+        "meals": { "breakfast": true, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 5,
+        "title": "Kepulangan",
+        "activities": "Sarapan pagi. Waktu bebas untuk berbelanja oleh-oleh khas Toraja — kopi Toraja, tenun sutra, dan ukiran kayu. Perjalanan kembali ke Makassar (8 jam). Tiba di Makassar sore hari, transfer ke bandara untuk penerbangan pulang.",
+        "hotel": null,
+        "meals": { "breakfast": true, "lunch": true, "dinner": false }
+      }
+    ],
+    "includes": [
+      "Tiket pesawat PP ke Makassar",
+      "Transportasi darat Makassar-Rantepao-Makassar (AC)",
+      "Akomodasi 4 malam hotel bintang 3",
+      "Local guide budaya berpengalaman",
+      "Tiket masuk semua situs",
+      "Workshop tenun Toraja",
+      "Semua makan sesuai itinerary"
+    ],
+    "excludes": [
+      "Donasi untuk upacara adat (jika menghadiri)",
+      "Pengeluaran pribadi dan oleh-oleh",
+      "Tip untuk guide dan driver",
+      "Asuransi perjalanan"
+    ],
+    "addOns": [
+      { "name": "Paket foto dokumentasi perjalanan profesional", "price": 600000 },
+      { "name": "Upgrade kamar hotel ke suite room", "price": 400000 }
+    ],
+    "terms": "Jadwal upacara adat Rambu Solo tidak dapat diprediksi secara pasti. Panduan kami akan memberikan informasi terkini. Hormati adat dan tradisi lokal selama kunjungan. Pengambilan foto di area pemakaman harus dengan izin pemandu.",
+    "status": "active",
+    "soldCount": 0,
+    "viewCount": 0
+  },
+
+  {
+    "_id": "507f1f77bcf86cd79945000a",
+    "name": "Wakatobi Marine Paradise 4D3N",
+    "slug": "wakatobi-marine-paradise-4d3n",
+    "categories": ["507f1f77bcf86cd799439018"],
+    "types": ["507f1f77bcf86cd79943902c", "507f1f77bcf86cd79943902f"],
+    "tags": ["507f1f77bcf86cd799439043", "507f1f77bcf86cd79943903c", "507f1f77bcf86cd799439042"],
+    "shortDescription": "Wakatobi — surga kelautan yang tersembunyi di jantung Segitiga Terumbu Karang. Dengan visibilitas air hingga 40 meter dan lebih dari 900 spesies ikan, ini adalah taman laut terbaik Indonesia.",
+    "description": "Wakatobi (Wangi-Wangi, Kaledupa, Tomia, Binongko) adalah sebuah kabupaten kepulauan di Sulawesi Tenggara yang menyimpan ekosistem kelautan paling kaya di dunia. Para ilmuwan menyebutnya 'the perfect diving destination' — tidak ada tempat lain di bumi yang memiliki kombinasi antara kedalaman, kejernihan air, dan keanekaragaman hayati seperti di Wakatobi.\n\nPaket ini menggunakan speedboat charter privat untuk menjelajahi spot-spot selam terbaik yang belum banyak dikunjungi wisatawan umum.",
+    "thumbnail": "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%2010.jpeg",
+    "gallery": [
+      "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%208.jpeg",
+      "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%203.jpeg"
+    ],
+    "departureCity": "Makassar",
+    "destinations": ["Wakatobi", "Wangi-Wangi", "Tomia", "Kaledupa"],
+    "departureDate": "2026-09-20T00:00:00.000Z",
+    "returnDate": "2026-09-23T00:00:00.000Z",
+    "duration": "4 Hari 3 Malam",
+    "meetingPoint": "Bandara Matahora, Wakatobi",
+    "price": 7800000,
+    "quota": 8,
+    "bookedSlots": 0,
+    "minParticipants": 2,
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Tiba Wakatobi — House Reef Snorkeling",
+        "activities": "Tiba di Bandara Matahora dan transfer ke resort tepi pantai. Check-in dan waktu bebas beristirahat. Sore: Snorkeling di house reef resort — langsung dari dermaga kayu, terumbu karang sehat menanti hanya beberapa meter dari pantai. Makan malam seafood segar dengan pemandangan laut yang memukau.",
+        "hotel": "Patuno Resort Wakatobi",
+        "meals": { "breakfast": false, "lunch": false, "dinner": true }
+      },
+      {
+        "day": 2,
+        "title": "Dive Day 1 — Mari Mabuk & Coral Garden",
+        "activities": "Pagi: Penyelaman pertama di Mari Mabuk — salah satu wall dive terbaik di dunia dengan soft coral berwarna-warni yang menakjubkan. Istirahat dan makan siang di kapal. Sore: Penyelaman kedua di Coral Garden Tomia — taman karang yang luas dan masih sangat terjaga dengan visibilitas hingga 40 meter. Malam: Briefing untuk penyelaman esok hari.",
+        "hotel": "Patuno Resort Wakatobi",
+        "meals": { "breakfast": true, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 3,
+        "title": "Dive Day 2 — Kaledupa & Desa Bajo",
+        "activities": "Pagi: Penyelaman di perairan Kaledupa — menemukan keindahan tersembunyi yang jarang dikunjungi. Terumbu karang pristine dengan nudibranchs warna-warni dan pygmy seahorse yang sulit ditemukan. Siang: Kunjungi Desa Bajo Mola — desa nelayan unik di atas laut yang dihuni suku Bajo (Suku Laut) yang masih hidup tradisional. Sore: Sunset cruise dan foto.",
+        "hotel": "Patuno Resort Wakatobi",
+        "meals": { "breakfast": true, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 4,
+        "title": "Kepulangan",
+        "activities": "Sarapan dan waktu bebas untuk snorkeling terakhir di house reef. Belanja oleh-oleh kain tenun Bajo yang khas. Transfer ke Bandara Matahora dan penerbangan pulang via Makassar.",
+        "hotel": null,
+        "meals": { "breakfast": true, "lunch": false, "dinner": false }
+      }
+    ],
+    "includes": [
+      "Tiket pesawat PP (via Makassar)",
+      "Akomodasi 3 malam resort bintang 4",
+      "4x penyelaman (2 hari diving, 2 penyelaman/hari)",
+      "Tangki + BCD selama diving",
+      "Divemaster bersertifikat internasional",
+      "Speedboat charter privat",
+      "Snorkeling equipment",
+      "Kunjungan Desa Bajo Mola",
+      "Semua makan (full board)"
+    ],
+    "excludes": [
+      "Sewa regulator dan wetsuit",
+      "Tip untuk divemaster dan kru",
+      "Asuransi perjalanan",
+      "Pengeluaran pribadi"
+    ],
+    "addOns": [
+      { "name": "Sewa regulator + wetsuit", "price": 400000 },
+      { "name": "Night dive eksklusif", "price": 500000 },
+      { "name": "Video underwater profesional", "price": 700000 }
+    ],
+    "terms": "Wajib memiliki sertifikasi diving minimal Open Water. Kondisi fisik prima diperlukan. Wakatobi memiliki akses terbatas — tiket pesawat sangat disarankan dipesan jauh hari. Kondisi laut pada musim barat (Desember-Maret) dapat membatasi akses ke beberapa spot.",
+    "status": "active",
+    "soldCount": 0,
+    "viewCount": 0
+  },
+
+  {
+    "_id": "507f1f77bcf86cd79945000b",
+    "name": "Komodo Dragon & Pink Beach 3D2N",
+    "slug": "komodo-dragon-pink-beach-3d2n",
+    "categories": ["507f1f77bcf86cd799439018"],
+    "types": ["507f1f77bcf86cd79943902a", "507f1f77bcf86cd79943902c"],
+    "tags": ["507f1f77bcf86cd79943903d", "507f1f77bcf86cd79943903a", "507f1f77bcf86cd799439041"],
+    "shortDescription": "Petualangan singkat namun tak terlupakan — bertemu komodo dragon di habitat aslinya, snorkeling di Pink Beach yang legendaris, dan menyaksikan sunrise dramatis di Pulau Padar.",
+    "description": "Tidak perlu waktu lama untuk merasakan keajaiban Taman Nasional Komodo. Paket 3 hari 2 malam ini adalah pilihan sempurna untuk Anda yang memiliki waktu terbatas namun tidak ingin melewatkan pengalaman kelas dunia ini.\n\nDipandu oleh ranger berpengalaman dan skipper kapal bersertifikat, Anda akan menjelajahi destinasi-destinasi terbaik Komodo dalam paket yang efisien dan berkesan.",
+    "thumbnail": "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%2011.jpeg",
+    "gallery": [
+      "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%205.jpeg",
+      "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%207.jpeg"
+    ],
+    "departureCity": "Bali",
+    "destinations": ["Labuan Bajo", "Komodo", "Pink Beach", "Pulau Padar"],
+    "departureDate": "2026-08-08T00:00:00.000Z",
+    "returnDate": "2026-08-10T00:00:00.000Z",
+    "duration": "3 Hari 2 Malam",
+    "meetingPoint": "Pelabuhan Labuan Bajo, Flores",
+    "price": 4900000,
+    "quota": 16,
+    "bookedSlots": 0,
+    "minParticipants": 1,
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Tiba Labuan Bajo — Sunset Cruise",
+        "activities": "Tiba di Bandara Komodo Labuan Bajo. Transfer ke pelabuhan dan boarding kapal wisata. Sore: Sunset cruise di sekitar perairan Labuan Bajo, singgah di pulau-pulau kecil untuk foto. Makan malam di atas kapal dengan suasana bintang-bintang di langit terbuka.",
+        "hotel": "Kapal Wisata (Sharing Cabin)",
+        "meals": { "breakfast": false, "lunch": false, "dinner": true }
+      },
+      {
+        "day": 2,
+        "title": "Komodo Dragon & Manta Point",
+        "activities": "Pagi: Trekking di Pulau Komodo dengan ranger bersertifikat. Saksikan komodo dragon — hewan terbesar yang masih hidup di bumi — di habitat aslinya. Pelajari perilaku, cara berburu, dan fakta menarik tentang reptil purba ini. Siang: Snorkeling di Manta Point, spot terkenal untuk melihat manta ray. Sore: Pink Beach — pantai langka dengan pasir berwarna kemerahan. Snorkeling di terumbu karang yang penuh kehidupan. Malam: Berlabuh dan istirahat.",
+        "hotel": "Kapal Wisata (Sharing Cabin)",
+        "meals": { "breakfast": true, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 3,
+        "title": "Padar Island Sunrise & Kepulangan",
+        "activities": "Dini hari (05.00): Trekking ke puncak Pulau Padar untuk sunrise. Pemandangan tiga teluk dengan warna air berbeda adalah ikon destinasi Indonesia yang wajib diabadikan. Kembali ke kapal, sarapan. Snorkeling singkat di Batu Bolong. Siang: Kembali ke Pelabuhan Labuan Bajo. Transfer ke bandara untuk penerbangan pulang.",
+        "hotel": null,
+        "meals": { "breakfast": true, "lunch": true, "dinner": false }
+      }
+    ],
+    "includes": [
+      "Tiket pesawat PP Bali-Labuan Bajo",
+      "Akomodasi 2 malam di kapal (sharing cabin)",
+      "Semua transportasi laut (kapal)",
+      "Ranger trekking Komodo bersertifikat",
+      "Tiket masuk Taman Nasional Komodo",
+      "Peralatan snorkeling",
+      "Pemandu wisata",
+      "Semua makan (full board)"
+    ],
+    "excludes": [
+      "Pengeluaran pribadi",
+      "Tip untuk ranger dan kru kapal",
+      "Asuransi perjalanan",
+      "Upgrade ke kabin private"
+    ],
+    "addOns": [
+      { "name": "Upgrade ke kabin private", "price": 600000 },
+      { "name": "Paket diving 2x penyelaman", "price": 800000 }
+    ],
+    "terms": "Trekking Pulau Padar memerlukan kondisi fisik yang cukup baik (mendaki 30-45 menit). Cuaca di perairan Komodo dapat berubah cepat. Manta ray tidak dijamin terlihat setiap saat — tergantung musim dan kondisi alam.",
+    "status": "active",
+    "soldCount": 0,
+    "viewCount": 0
+  },
+
+  {
+    "_id": "507f1f77bcf86cd79945000c",
+    "name": "Bunaken Underwater World 3D2N",
+    "slug": "bunaken-underwater-world-3d2n",
+    "categories": ["507f1f77bcf86cd799439018"],
+    "types": ["507f1f77bcf86cd79943902c"],
+    "tags": ["507f1f77bcf86cd79943903d", "507f1f77bcf86cd79943903b", "507f1f77bcf86cd799439043"],
+    "shortDescription": "Jelajahi taman laut Bunaken yang legendaris di Sulawesi Utara — wall diving dengan drop-off mencapai 1.500 meter, terumbu karang yang masih terjaga sempurna, dan biodiversitas laut yang menakjubkan.",
+    "description": "Bunaken adalah taman laut yang menjadi salah satu yang pertama dilindungi di Indonesia — dan namanya sudah dikenal oleh penyelam di seluruh dunia. Terletak di teluk Manado, Sulawesi Utara, taman laut ini terkenal dengan wall diving yang dramatis dan visibilitas air yang luar biasa.\n\nPaket open trip ini memberikan akses ke 5 spot selam terbaik di sekitar Pulau Bunaken dengan panduan divemaster lokal yang mengenal setiap inci dasar lautnya.",
+    "thumbnail": "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%2012.jpeg",
+    "gallery": [
+      "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%203.jpeg"
+    ],
+    "departureCity": "Manado",
+    "destinations": ["Bunaken", "Manado", "Siladen", "Mantehage"],
+    "departureDate": "2026-07-19T00:00:00.000Z",
+    "returnDate": "2026-07-21T00:00:00.000Z",
+    "duration": "3 Hari 2 Malam",
+    "meetingPoint": "Dermaga Marina, Manado",
+    "price": 3600000,
+    "quota": 12,
+    "bookedSlots": 0,
+    "minParticipants": 1,
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Manado — Pulau Bunaken",
+        "activities": "Kumpul di Dermaga Marina Manado. Speedboat 45 menit ke Pulau Bunaken. Check-in di bungalow tepi pantai yang sederhana namun nyaman. Sore: Snorkeling pertama di house reef Bunaken — langsung dari tepi pantai, terumbu karang sehat dengan ikan-ikan warna-warni menyambut Anda. Makan malam bersama di bungalow.",
+        "hotel": "Froggies Divers Bunaken",
+        "meals": { "breakfast": false, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 2,
+        "title": "Full Day Diving — Wall & Drop-off",
+        "activities": "Pagi (07.00): Penyelaman pertama di Lekuan I-II — wall diving terbaik Bunaken dengan dinding karang vertikal yang turun hingga 1.500 meter ke kedalaman. Bertemu penyu sisik, napoleon wrasse, dan schooling fish yang luar biasa. Istirahat dan makan siang. Penyelaman kedua di Siladen — terumbu karang bergigi dengan spotted eagle ray yang memukau. Sore: Penyelaman ketiga (opsional) di Fukui Point. Malam: Ngobrol santai dengan traveler lain.",
+        "hotel": "Froggies Divers Bunaken",
+        "meals": { "breakfast": true, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 3,
+        "title": "Snorkeling Mantehage & Kepulangan",
+        "activities": "Pagi: Perjalanan ke Pulau Mantehage — pulau berpenghuni yang masih sangat alami dengan mangrove dan pantai sepi. Snorkeling di perairan sekitar pulau yang masih bersih. Makan siang seafood di warung lokal. Siang: Speedboat kembali ke Manado. Transfer ke bandara atau hotel di Manado.",
+        "hotel": null,
+        "meals": { "breakfast": true, "lunch": true, "dinner": false }
+      }
+    ],
+    "includes": [
+      "Tiket pesawat PP ke Manado",
+      "Speedboat Manado-Bunaken-Manado PP",
+      "Akomodasi 2 malam di bungalow tepi pantai",
+      "3x penyelaman (termasuk tangki + BCD)",
+      "Divemaster berpengalaman",
+      "Peralatan snorkeling",
+      "Tiket masuk Taman Laut Bunaken",
+      "Semua makan sesuai itinerary"
+    ],
+    "excludes": [
+      "Sewa regulator dan wetsuit",
+      "Pengeluaran pribadi",
+      "Tip untuk divemaster",
+      "Asuransi perjalanan"
+    ],
+    "addOns": [
+      { "name": "Sewa regulator + wetsuit", "price": 300000 },
+      { "name": "Penyelaman ke-4 ekstra", "price": 250000 },
+      { "name": "Kelas menyelam dasar (Discover Scuba)", "price": 700000 }
+    ],
+    "terms": "Peserta yang ingin diving wajib bersertifikat PADI/SSI minimal Open Water, atau mengambil paket Discover Scuba Diving yang tersedia sebagai add-on. Untuk snorkeling, semua usia bisa ikut. Kondisi arus di beberapa titik bisa kencang — ikuti instruksi divemaster.",
+    "status": "active",
+    "soldCount": 0,
+    "viewCount": 0
+  },
+
+  {
+    "_id": "507f1f77bcf86cd79945000d",
+    "name": "Bali Family Fun 5D4N",
+    "slug": "bali-family-fun-5d4n",
+    "categories": ["507f1f77bcf86cd799439018"],
+    "types": ["507f1f77bcf86cd79943902b", "507f1f77bcf86cd79943902a"],
+    "tags": ["507f1f77bcf86cd79943903a", "507f1f77bcf86cd799439040", "507f1f77bcf86cd799439042"],
+    "shortDescription": "Liburan keluarga sempurna di Bali — Waterbom Park, Ubud Monkey Forest, Tanah Lot, aktivitas kids-friendly, dan resort keluarga mewah dengan kolam renang anak. Kenangan indah untuk seluruh keluarga!",
+    "description": "Bali bukan hanya untuk pasangan atau petualang solo — Bali adalah surga keluarga! Paket family trip 5 hari 4 malam ini dirancang khusus dengan mempertimbangkan kebutuhan semua anggota keluarga — dari si kecil hingga kakek nenek.\n\nSetiap aktivitas telah dipilih dengan cermat untuk memastikan semua anggota keluarga dapat berpartisipasi dan menikmati, dengan keseimbangan antara petualangan ringan, budaya, dan relaksasi.",
+    "thumbnail": "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%201.jpeg",
+    "gallery": [
+      "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%204.jpeg"
+    ],
+    "departureCity": "Jakarta",
+    "destinations": ["Bali", "Kuta", "Ubud", "Tanah Lot"],
+    "departureDate": "2026-12-22T00:00:00.000Z",
+    "returnDate": "2026-12-26T00:00:00.000Z",
+    "duration": "5 Hari 4 Malam",
+    "meetingPoint": "Bandara Internasional I Gusti Ngurah Rai, Bali",
+    "price": 3500000,
+    "quota": 20,
+    "bookedSlots": 0,
+    "minParticipants": 1,
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Tiba Bali — Resort & Pantai Kuta",
+        "activities": "Tiba di Bali dan transfer ke resort keluarga di kawasan Kuta. Check-in dan langsung menikmati kolam renang resort yang luas. Sore: Jalan-jalan santai di Pantai Kuta, bermain pasir dan menyaksikan sunset yang indah. Makan malam di restoran yang menyediakan menu khusus anak.",
+        "hotel": "Bali Dynasty Resort, Kuta",
+        "meals": { "breakfast": false, "lunch": false, "dinner": true }
+      },
+      {
+        "day": 2,
+        "title": "Waterbom Bali — Seharian Main Air!",
+        "activities": "Pagi: Sarapan di resort. Seharian bermain di Waterbom Bali — taman air terbaik di Asia! Dengan lebih dari 20 wahana air untuk semua usia, ini adalah hari yang akan diingat anak-anak seumur hidup. Ada area khusus untuk anak kecil (Kiddies Paradise) dan wahana adrenalin untuk remaja dan dewasa. Makan siang di dalam taman. Sore: Kembali ke resort untuk istirahat. Malam: Dinner bebas.",
+        "hotel": "Bali Dynasty Resort, Kuta",
+        "meals": { "breakfast": true, "lunch": true, "dinner": false }
+      },
+      {
+        "day": 3,
+        "title": "Ubud — Monyet, Sawah, & Budaya",
+        "activities": "Pagi: Perjalanan ke Ubud. Kunjungi Ubud Monkey Forest — hutan suci yang dihuni ratusan monyet liar. Anak-anak pasti gemas! Siang: Lunch di restoran dengan pemandangan sawah berundak. Sore: Kunjungi Puri Agung Ubud (keraton Ubud) dan Pasar Ubud untuk belanja souvenir. Malam: Menyaksikan pertunjukan tari Legong yang anggun.",
+        "hotel": "Bali Dynasty Resort, Kuta",
+        "meals": { "breakfast": true, "lunch": true, "dinner": false }
+      },
+      {
+        "day": 4,
+        "title": "Tanah Lot & Spa Keluarga",
+        "activities": "Pagi: Kunjungi Pura Tanah Lot yang megah — pura di atas batu karang di tepi laut yang menjadi ikon Bali. Foto bersama keluarga dengan latar belakang yang menakjubkan. Siang: Lunch seafood di warung dekat Tanah Lot. Sore: Spa keluarga — orang tua menikmati pijat Bali, anak-anak menikmati perawatan kuku warna-warni dan masker wajah fun yang sesuai usia. Malam: Farewell dinner keluarga.",
+        "hotel": "Bali Dynasty Resort, Kuta",
+        "meals": { "breakfast": true, "lunch": true, "dinner": true }
+      },
+      {
+        "day": 5,
+        "title": "Belanja Oleh-oleh & Kepulangan",
+        "activities": "Pagi: Sarapan dan waktu bebas untuk berenang terakhir di kolam resort. Belanja oleh-oleh di Krisna Oleh-oleh Bali — terlengkap dan terjangkau! Transfer ke Bandara Ngurah Rai untuk penerbangan pulang.",
+        "hotel": null,
+        "meals": { "breakfast": true, "lunch": false, "dinner": false }
+      }
+    ],
+    "includes": [
+      "Tiket pesawat PP Jakarta-Bali (keluarga, kelas ekonomi)",
+      "Akomodasi 4 malam resort keluarga bintang 4",
+      "Tiket masuk Waterbom Bali",
+      "Tiket masuk Ubud Monkey Forest",
+      "Tiket pertunjukan tari Legong",
+      "Family spa treatment",
+      "Pemandu wisata keluarga",
+      "Transportasi AC (minibus)",
+      "Makan sesuai itinerary",
+      "Air mineral selama tour"
+    ],
+    "excludes": [
+      "Wahana tambahan berbayar di Waterbom",
+      "Pengeluaran pribadi dan oleh-oleh",
+      "Tip untuk pemandu dan driver",
+      "Asuransi perjalanan"
+    ],
+    "addOns": [
+      { "name": "Upgrade kamar ke Family Suite (2 kamar terhubung)", "price": 700000 },
+      { "name": "Aktivitas surfing lesson untuk remaja", "price": 350000 },
+      { "name": "Paket foto profesional seharian", "price": 600000 }
+    ],
+    "terms": "Paket ini dirancang untuk keluarga dengan anak-anak segala usia. Anak di bawah 2 tahun gratis (berbagi tempat duduk/tidur dengan orang tua). Waterbom memiliki batasan tinggi badan untuk beberapa wahana tertentu. Selama liburan Natal, destinasi bisa sangat ramai.",
+    "status": "active",
+    "soldCount": 0,
+    "viewCount": 0
+  },
+
+  {
+    "_id": "507f1f77bcf86cd79945000e",
+    "name": "Singapore City Explorer 4D3N",
+    "slug": "singapore-city-explorer-4d3n",
+    "categories": ["507f1f77bcf86cd799439019"],
+    "types": ["507f1f77bcf86cd799439030", "507f1f77bcf86cd79943902d"],
+    "tags": ["507f1f77bcf86cd79943903a", "507f1f77bcf86cd799439040", "507f1f77bcf86cd799439042"],
+    "shortDescription": "Jelajahi kota singa yang megah bersama keluarga atau teman — Universal Studios, Gardens by the Bay, Sentosa Island, Orchard Road, dan berbagai kuliner internasional yang memanjakan lidah.",
+    "description": "Singapura adalah destinasi wisata luar negeri yang paling mudah dijangkau dari Indonesia — tidak perlu visa, penerbangan hanya 1,5 jam dari Jakarta, dan sangat aman untuk semua kalangan. Kota ini menawarkan perpaduan sempurna antara modernitas, kebersihan, keteraturan, dan keberagaman budaya Asia.\n\nPaket 4 hari 3 malam ini mencakup semua highlight utama Singapura dengan panduan wisata berbahasa Indonesia yang membantu Anda menjelajahi kota tanpa kebingungan.",
+    "thumbnail": "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%202.jpeg",
+    "gallery": [
+      "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%206.jpeg"
+    ],
+    "departureCity": "Jakarta",
+    "destinations": ["Singapura", "Sentosa Island", "Marina Bay", "Orchard Road"],
+    "departureDate": "2026-11-14T00:00:00.000Z",
+    "returnDate": "2026-11-17T00:00:00.000Z",
+    "duration": "4 Hari 3 Malam",
+    "meetingPoint": "Bandara Internasional Soekarno-Hatta, Terminal 3",
+    "price": 8900000,
+    "quota": 20,
+    "bookedSlots": 0,
+    "minParticipants": 1,
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Tiba Singapura — Merlion & Marina Bay",
+        "activities": "Tiba di Bandara Changi (salah satu bandara terbaik di dunia — sempat nikmati fasilitas bandara!). Transfer ke hotel di pusat kota. Sore: Foto di Patung Merlion yang ikonik. Jalan-jalan di Marina Bay Sands Promenade. Malam: Menyaksikan pertunjukan light and water show 'Spectra' di Marina Bay — gratis dan spektakuler!",
+        "hotel": "Hotel Ibis Singapore on Bencoolen",
+        "meals": { "breakfast": false, "lunch": false, "dinner": true }
+      },
+      {
+        "day": 2,
+        "title": "Universal Studios Singapura",
+        "activities": "Seharian di Universal Studios Singapura (USS) di Pulau Sentosa! Nikmati wahana-wahana ikonik dari Transformers, Jurassic World, Minions, hingga Hollywood Movies. Ada zona khusus anak-anak dan wahana adrenalin untuk dewasa. Malam: Singapore Night Safari — kebun binatang malam unik yang memperlihatkan satwa liar beraktivitas dalam suasana alami. Kembali ke hotel larut malam.",
+        "hotel": "Hotel Ibis Singapore on Bencoolen",
+        "meals": { "breakfast": true, "lunch": true, "dinner": false }
+      },
+      {
+        "day": 3,
+        "title": "Gardens by the Bay & Chinatown",
+        "activities": "Pagi: Gardens by the Bay — taman futuristik dengan Supertrees setinggi 50 meter yang menjadi ikon Singapura terbaru. Masuk ke dalam Cloud Forest dome untuk melihat air terjun indoor tertinggi di dunia. Siang: Makan siang dim sum di Chinatown yang autentik. Sore: Little India dan Arab Street untuk belanja souvenir unik. Malam: Orchard Road — jalan belanja mewah Singapura yang melegenda.",
+        "hotel": "Hotel Ibis Singapore on Bencoolen",
+        "meals": { "breakfast": true, "lunch": true, "dinner": false }
+      },
+      {
+        "day": 4,
+        "title": "Belanja & Kepulangan",
+        "activities": "Pagi: Sarapan dan waktu bebas untuk belanja terakhir di Mustafa Centre (buka 24 jam, harga paling bersaing). Check-out dan transfer ke Bandara Changi. Gunakan waktu tunggu di bandara untuk menikmati fasilitas Jewel Changi yang luar biasa sebelum penerbangan pulang ke Jakarta.",
+        "hotel": null,
+        "meals": { "breakfast": true, "lunch": false, "dinner": false }
+      }
+    ],
+    "includes": [
+      "Tiket pesawat PP Jakarta-Singapura",
+      "Akomodasi 3 malam hotel bintang 3 pusat kota",
+      "Tiket Universal Studios Singapura",
+      "Tiket Night Safari",
+      "Tiket Gardens by the Bay (2 dome)",
+      "Transportasi MRT card (isi awal SGD 20)",
+      "Pemandu wisata berbahasa Indonesia",
+      "Sarapan hotel setiap hari",
+      "1x makan siang"
+    ],
+    "excludes": [
+      "Pengeluaran pribadi dan belanja",
+      "Visa (WNI bebas visa ke Singapura)",
+      "Asuransi perjalanan",
+      "Makan siang dan makan malam (kecuali yang tertera)",
+      "Tip untuk pemandu"
+    ],
+    "addOns": [
+      { "name": "Upgrade hotel ke bintang 4 di Orchard", "price": 1200000 },
+      { "name": "Sentosa Cable Car + S.E.A. Aquarium", "price": 600000 },
+      { "name": "Singapore Flyer (roda setan terbesar di dunia)", "price": 350000 }
+    ],
+    "terms": "Warga negara Indonesia tidak memerlukan visa untuk kunjungan ke Singapura hingga 30 hari. Pastikan paspor masih berlaku minimal 6 bulan. Harga dalam IDR berdasarkan kurs SGD saat ini dan dapat berubah. Barang bawaan sesuai ketentuan maskapai.",
+    "status": "active",
+    "soldCount": 0,
+    "viewCount": 0
+  },
+
+  {
+    "_id": "507f1f77bcf86cd79945000f",
+    "name": "Bandung Weekend Getaway 2D1N",
+    "slug": "bandung-weekend-getaway-2d1n",
+    "categories": ["507f1f77bcf86cd799439016"],
+    "types": ["507f1f77bcf86cd799439030", "507f1f77bcf86cd79943902d"],
+    "tags": ["507f1f77bcf86cd799439041", "507f1f77bcf86cd79943903a", "507f1f77bcf86cd79943903b"],
+    "shortDescription": "Escape ke Bandung — kota kembang yang sejuk dengan cafe instagramable, factory outlet terlengkap, kawah vulkanik Tangkuban Parahu, dan kuliner khas Sunda yang menggugah selera.",
+    "description": "Bandung adalah pelarian sempurna dari hiruk-pikuk Jakarta — hanya 3 jam perjalanan namun terasa dunia berbeda. Udara sejuk pegunungan, kuliner khas Sunda yang lezat, shopping factory outlet, dan pemandangan alam yang indah membuat Bandung selalu menjadi destinasi favorit keluarga Jakarta.\n\nPaket weekend 2 hari 1 malam ini merangkum yang terbaik dari Bandung dengan transportasi nyaman dari Jakarta tanpa drama kemacetan.",
+    "thumbnail": "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%209.jpeg",
+    "gallery": [
+      "https://yseqdprjabwdznnrrvfq.supabase.co/storage/v1/object/public/trip-assets/gambar%206.jpeg"
+    ],
+    "departureCity": "Jakarta",
+    "destinations": ["Bandung", "Tangkuban Parahu", "Lembang", "Dago"],
+    "departureDate": "2026-07-04T00:00:00.000Z",
+    "returnDate": "2026-07-05T00:00:00.000Z",
+    "duration": "2 Hari 1 Malam",
+    "meetingPoint": "Stasiun Gambir, Jakarta",
+    "price": 1200000,
+    "quota": 25,
+    "bookedSlots": 0,
+    "minParticipants": 1,
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Tiba Bandung — Lembang & Kuliner",
+        "activities": "Berangkat dari Jakarta dengan kereta Argo Parahyangan (2,5 jam). Tiba di Bandung, langsung menuju Lembang. Kunjungi Floating Market Lembang untuk sarapan telat di atas rakit di danau yang indah. Siang: Farm House Lembang — selfie dengan bangunan bergaya Eropa dan berinteraksi dengan hewan ternak lucu. Sore: Kunjungi Tangkuban Parahu, saksikan kawah vulkanik aktif dari dekat. Malam: Kembali ke kota, makan malam bebas di kawasan Dago yang penuh pilihan kuliner.",
+        "hotel": "Hotel Papandayan, Bandung",
+        "meals": { "breakfast": false, "lunch": true, "dinner": false }
+      },
+      {
+        "day": 2,
+        "title": "Factory Outlet & Kepulangan",
+        "activities": "Pagi: Sarapan di hotel. Jelajahi Factory Outlet terbaik Bandung di kawasan Riau dan Dago — brand-brand internasional dengan harga miring! Siang: Makan siang nasi timbel komplet di restoran Sunda autentik. Wisata kuliner sebentar ke Pasar Baru untuk membeli batagor, siomay, dan oleh-oleh khas Bandung. Sore: Transfer ke Stasiun Bandung untuk kereta pulang ke Jakarta.",
+        "hotel": null,
+        "meals": { "breakfast": true, "lunch": true, "dinner": false }
+      }
+    ],
+    "includes": [
+      "Tiket kereta PP Jakarta-Bandung (kelas eksekutif)",
+      "Akomodasi 1 malam hotel bintang 4",
+      "Transportasi selama tour di Bandung",
+      "Tiket masuk Floating Market Lembang",
+      "Tiket masuk Farm House Lembang",
+      "Tiket masuk Tangkuban Parahu",
+      "Makan sesuai itinerary",
+      "Pemandu wisata lokal"
+    ],
+    "excludes": [
+      "Belanja di factory outlet dan oleh-oleh",
+      "Pengeluaran pribadi",
+      "Makan malam hari pertama",
+      "Tip untuk pemandu dan driver"
+    ],
+    "addOns": [
+      { "name": "Upgrade kamar hotel ke Deluxe dengan view kota", "price": 200000 },
+      { "name": "Paket belanja guided FO terbaik (termasuk diskon khusus)", "price": 150000 }
+    ],
+    "terms": "Jadwal keberangkatan kereta fix dan tidak dapat diubah. Kondisi macet di Bandung (terutama akhir pekan) dapat mempengaruhi jadwal. Agenda bisa sedikit disesuaikan sesuai kondisi di lapangan. Harga berlaku untuk 1 orang dewasa.",
+    "status": "active",
+    "soldCount": 0,
+    "viewCount": 0
+  }
+]

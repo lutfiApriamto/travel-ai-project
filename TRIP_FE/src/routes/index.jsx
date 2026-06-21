@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
+import ScrollToTop    from '../components/shared/ScrollToTop.jsx';
 import UserLayout     from '../components/layout/UserLayout.jsx';
 import AdminLayout    from '../components/layout/AdminLayout.jsx';
 import AuthLayout     from '../components/layout/AuthLayout.jsx';
@@ -40,6 +41,10 @@ const lazyPage = (importFn) => {
 // Ganti satu per satu dengan lazyPage(...) seiring halaman dibangun.
 
 export const router = createBrowserRouter([
+  {
+    // ScrollToTop wraps ALL routes — scroll ke atas setiap ganti halaman
+    element: <ScrollToTop />,
+    children: [
 
   // ── Auth routes ────────────────────────────────────────────────────────────
   {
@@ -129,4 +134,7 @@ export const router = createBrowserRouter([
     path: '*',
     element: <NotFoundPage />,
   },
+
+    ], // end ScrollToTop children
+  },  // end ScrollToTop wrapper
 ]);

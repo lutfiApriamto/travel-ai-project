@@ -1,0 +1,126 @@
+[
+  {
+    "_id": "507f1f77bcf86cd799550001",
+    "userId": "507f1f77bcf86cd799460002",
+    "productId": "507f1f77bcf86cd799450003",
+    "createdAt": "2026-01-10T08:30:00.000Z",
+    "updatedAt": "2026-01-10T08:30:00.000Z",
+    "_note": "Andi Pratama wishlist: Raja Ampat Diving Paradise 5D4N"
+  },
+  {
+    "_id": "507f1f77bcf86cd799550002",
+    "userId": "507f1f77bcf86cd799460002",
+    "productId": "507f1f77bcf86cd799450007",
+    "createdAt": "2026-01-12T09:15:00.000Z",
+    "updatedAt": "2026-01-12T09:15:00.000Z",
+    "_note": "Andi Pratama wishlist: Flores Island Hopping 6D5N"
+  },
+  {
+    "_id": "507f1f77bcf86cd799550003",
+    "userId": "507f1f77bcf86cd799460002",
+    "productId": "507f1f77bcf86cd79945000a",
+    "createdAt": "2026-01-14T10:00:00.000Z",
+    "updatedAt": "2026-01-14T10:00:00.000Z",
+    "_note": "Andi Pratama wishlist: Wakatobi Marine Paradise 4D3N"
+  },
+
+  {
+    "_id": "507f1f77bcf86cd799550004",
+    "userId": "507f1f77bcf86cd799460003",
+    "productId": "507f1f77bcf86cd799450005",
+    "createdAt": "2026-01-08T14:00:00.000Z",
+    "updatedAt": "2026-01-08T14:00:00.000Z",
+    "_note": "Siti Rahayu wishlist: Labuan Bajo Premium Private 4D3N"
+  },
+  {
+    "_id": "507f1f77bcf86cd799550005",
+    "userId": "507f1f77bcf86cd799460003",
+    "productId": "507f1f77bcf86cd79945000e",
+    "createdAt": "2026-01-09T11:30:00.000Z",
+    "updatedAt": "2026-01-09T11:30:00.000Z",
+    "_note": "Siti Rahayu wishlist: Singapore City Explorer 4D3N"
+  },
+  {
+    "_id": "507f1f77bcf86cd799550006",
+    "userId": "507f1f77bcf86cd799460003",
+    "productId": "507f1f77bcf86cd79945000b",
+    "createdAt": "2026-01-11T16:45:00.000Z",
+    "updatedAt": "2026-01-11T16:45:00.000Z",
+    "_note": "Siti Rahayu wishlist: Komodo Dragon & Pink Beach 3D2N"
+  },
+
+  {
+    "_id": "507f1f77bcf86cd799550007",
+    "userId": "507f1f77bcf86cd799460004",
+    "productId": "507f1f77bcf86cd79945000a",
+    "createdAt": "2026-01-05T07:20:00.000Z",
+    "updatedAt": "2026-01-05T07:20:00.000Z",
+    "_note": "Budi Santoso wishlist: Wakatobi Marine Paradise 4D3N"
+  },
+  {
+    "_id": "507f1f77bcf86cd799550008",
+    "userId": "507f1f77bcf86cd799460004",
+    "productId": "507f1f77bcf86cd799450007",
+    "createdAt": "2026-01-07T08:55:00.000Z",
+    "updatedAt": "2026-01-07T08:55:00.000Z",
+    "_note": "Budi Santoso wishlist: Flores Island Hopping 6D5N"
+  },
+  {
+    "_id": "507f1f77bcf86cd799550009",
+    "userId": "507f1f77bcf86cd799460004",
+    "productId": "507f1f77bcf86cd799450009",
+    "createdAt": "2026-01-09T12:00:00.000Z",
+    "updatedAt": "2026-01-09T12:00:00.000Z",
+    "_note": "Budi Santoso wishlist: Toraja Cultural Immersion 5D4N"
+  },
+
+  {
+    "_id": "507f1f77bcf86cd79955000a",
+    "userId": "507f1f77bcf86cd799460005",
+    "productId": "507f1f77bcf86cd799450002",
+    "createdAt": "2026-01-06T15:30:00.000Z",
+    "updatedAt": "2026-01-06T15:30:00.000Z",
+    "_note": "Dewi Kusuma wishlist: Lombok Adventure Trip 3D2N"
+  },
+  {
+    "_id": "507f1f77bcf86cd79955000b",
+    "userId": "507f1f77bcf86cd799460005",
+    "productId": "507f1f77bcf86cd79945000c",
+    "createdAt": "2026-01-08T17:15:00.000Z",
+    "updatedAt": "2026-01-08T17:15:00.000Z",
+    "_note": "Dewi Kusuma wishlist: Bunaken Underwater World 3D2N"
+  },
+  {
+    "_id": "507f1f77bcf86cd79955000c",
+    "userId": "507f1f77bcf86cd799460005",
+    "productId": "507f1f77bcf86cd799450006",
+    "createdAt": "2026-01-10T19:00:00.000Z",
+    "updatedAt": "2026-01-10T19:00:00.000Z",
+    "_note": "Dewi Kusuma wishlist: Bromo Sunrise Weekend 2D1N"
+  },
+
+  {
+    "_id": "507f1f77bcf86cd79955000d",
+    "userId": "507f1f77bcf86cd799460006",
+    "productId": "507f1f77bcf86cd79945000d",
+    "createdAt": "2026-01-04T09:00:00.000Z",
+    "updatedAt": "2026-01-04T09:00:00.000Z",
+    "_note": "Rizky Firmansyah wishlist: Bali Family Fun 5D4N"
+  },
+  {
+    "_id": "507f1f77bcf86cd79955000e",
+    "userId": "507f1f77bcf86cd799460006",
+    "productId": "507f1f77bcf86cd799450004",
+    "createdAt": "2026-01-06T10:30:00.000Z",
+    "updatedAt": "2026-01-06T10:30:00.000Z",
+    "_note": "Rizky Firmansyah wishlist: Yogyakarta Heritage Tour 3D2N"
+  },
+  {
+    "_id": "507f1f77bcf86cd79955000f",
+    "userId": "507f1f77bcf86cd799460006",
+    "productId": "507f1f77bcf86cd799450003",
+    "createdAt": "2026-01-08T13:45:00.000Z",
+    "updatedAt": "2026-01-08T13:45:00.000Z",
+    "_note": "Rizky Firmansyah wishlist: Raja Ampat Diving Paradise 5D4N"
+  }
+]

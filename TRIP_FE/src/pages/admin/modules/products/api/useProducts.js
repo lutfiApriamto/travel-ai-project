@@ -16,7 +16,13 @@ export const useProducts = (params = {}) =>
         status:  params.status  || undefined,
         page:    params.page    || 1,
         limit:   params.limit   || 12,
-      }}).then(r => r.data.data.data),
+      }}).then(r => ({
+        products: r.data.data.data ?? [],
+        meta: {
+          total:      r.data.data.totalData ?? 0,
+          totalPages: r.data.data.totalPage ?? 1,
+        },
+      })),
     staleTime: 30_000,
     placeholderData: prev => prev,
   });

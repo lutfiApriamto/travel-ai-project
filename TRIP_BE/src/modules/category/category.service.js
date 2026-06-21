@@ -70,7 +70,8 @@ export const getBySlug = async (slug) => {
 export const create = async (body, file) => {
   const slug = await generateUniqueSlug(body.name);
 
-  let image = null;
+  // file takes precedence; fall back to URL sent by frontend (already uploaded to Supabase)
+  let image = body.image || null;
   if (file) {
     image = await uploadImage(file.buffer, `categories/${slug}-${Date.now()}.webp`);
   }
@@ -91,12 +92,19 @@ export const update = async (id, body, file) => {
   }
 
   if (file) {
+    // New file provided → delete old from Supabase, upload new
     if (category.image) {
       const oldPath = extractStoragePath(category.image);
       if (oldPath) await deleteFile(oldPath).catch(() => {});
     }
     const slug = body.slug || category.slug;
     body.image = await uploadImage(file.buffer, `categories/${slug}-${Date.now()}.webp`);
+  } else if ('image' in body) {
+    // image field explicitly sent by frontend (URL string or empty = cleared)
+    body.image = body.image || null;
+  } else {
+    // image not included in body → keep existing, remove from body to avoid overwrite
+    delete body.image;
   }
 
   Object.assign(category, body);

@@ -16,11 +16,14 @@ export const useCategories = (search = '') =>
 const toFormData = (data) => {
   const fd = new FormData();
   if (data.name)        fd.append('name',        data.name);
-  if (data.description) fd.append('description', data.description);
+  if (data.description !== undefined) fd.append('description', data.description);
   if (data.sortOrder !== undefined && data.sortOrder !== '')
     fd.append('sortOrder', data.sortOrder);
   if (data.status)      fd.append('status',      data.status);
-  if (data.image instanceof File) fd.append('image', data.image);
+  // image can be a File (legacy), a URL string (new flow), or null/'' (cleared)
+  if (data.image instanceof File)                 fd.append('image', data.image);
+  else if (typeof data.image === 'string')        fd.append('image', data.image);
+  else if (data.image === null)                   fd.append('image', '');
   return fd;
 };
 
