@@ -10,6 +10,8 @@ import {
 import toast               from 'react-hot-toast';
 import { useAuthStore }          from '../../../stores/useAuthStore.js';
 import { useNotificationStore }  from '../../../stores/useNotificationStore.js';
+import { useCartStore }          from '../../../stores/useCartStore.js';
+import { useWishlistStore }      from '../../../stores/useWishlistStore.js';
 import { useTheme }              from '../../../context/ThemeContext.jsx';
 import { useDebounce }           from '../../../hooks/useDebounce.js';
 import { ROUTES }                from '../../../utils/consts/routes.js';
@@ -308,7 +310,10 @@ const ProfileDropdown = () => {
   const navigate            = useNavigate();
   const location            = useLocation();
   const { user, clearAuth, isAuthenticated } = useAuthStore();
-  const unreadCount = useNotificationStore((s) => s.unreadCount);
+  const unreadCount    = useNotificationStore((s) => s.unreadCount);
+  const cartCount      = useCartStore((s) => s.itemCount);
+  const wishlistCount  = useWishlistStore((s) => s.itemCount);
+  const totalBadge     = unreadCount + cartCount + wishlistCount;
 
   useEffect(() => {
     const handler = (e) => {
@@ -325,17 +330,20 @@ const ProfileDropdown = () => {
     try { await api.post('/auth/logout'); } catch { /* lanjut */ }
     clearAuth();
     queryClient.clear();
+    useCartStore.getState().reset();
+    useWishlistStore.getState().reset();
+    useNotificationStore.getState().reset();
     toast.success('Berhasil keluar. Sampai jumpa!');
     navigate(ROUTES.AUTH.LOGIN, { replace: true });
   };
 
   const USER_MENU = [
-    { label: 'Keranjang',    Icon: ShoppingCart,  to: ROUTES.CART          },
-    { label: 'Wishlist',     Icon: Heart,         to: ROUTES.WISHLIST      },
-    { label: 'Pesanan Saya', Icon: Package,       to: ROUTES.ORDERS        },
-    { label: 'Tiket Saya',   Icon: Ticket,        to: ROUTES.TICKETS       },
-    { label: 'Notifikasi',   Icon: Bell,          to: ROUTES.NOTIFICATIONS },
-    { label: 'Profil Saya',  Icon: User,          to: ROUTES.PROFILE       },
+    { label: 'Keranjang',    Icon: ShoppingCart,  to: ROUTES.CART,          badge: cartCount      },
+    { label: 'Wishlist',     Icon: Heart,         to: ROUTES.WISHLIST,      badge: wishlistCount  },
+    { label: 'Pesanan Saya', Icon: Package,       to: ROUTES.ORDERS,        badge: 0              },
+    { label: 'Tiket Saya',   Icon: Ticket,        to: ROUTES.TICKETS,       badge: 0              },
+    { label: 'Notifikasi',   Icon: Bell,          to: ROUTES.NOTIFICATIONS, badge: unreadCount    },
+    { label: 'Profil Saya',  Icon: User,          to: ROUTES.PROFILE,       badge: 0              },
   ];
 
   return (
@@ -345,7 +353,7 @@ const ProfileDropdown = () => {
         onClick={() => setOpen((v) => !v)}
         aria-label="Menu akun"
         className={cn(
-          'flex items-center gap-2 h-10 pl-3 pr-3 rounded-full border transition-all duration-200',
+          'relative flex items-center gap-2 h-10 pl-3 pr-3 rounded-full border transition-all duration-200',
           open
             ? 'border-travia-orange bg-accent shadow-sm'
             : 'border-border hover:shadow-sm hover:border-muted-foreground/40',
@@ -368,6 +376,16 @@ const ProfileDropdown = () => {
           'w-3.5 h-3.5 text-muted-foreground transition-transform duration-200',
           open && 'rotate-180',
         )} />
+
+        {/* Total badge — muncul hanya jika login dan ada aktivitas */}
+        {isAuthenticated && totalBadge > 0 && (
+          <span className="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-1
+            rounded-full bg-travia-orange text-white text-[10px] font-bold
+            flex items-center justify-center leading-none shadow-sm
+            ring-2 ring-background">
+            {totalBadge > 99 ? '99+' : totalBadge}
+          </span>
+        )}
       </button>
 
       {/* Dropdown */}
@@ -391,7 +409,7 @@ const ProfileDropdown = () => {
 
                 {/* Menu items */}
                 <div className="py-1.5">
-                  {USER_MENU.map(({ label, Icon, to }) => (
+                  {USER_MENU.map(({ label, Icon, to, badge }) => (
                     <Link
                       key={to}
                       to={to}
@@ -401,12 +419,11 @@ const ProfileDropdown = () => {
                     >
                       <Icon className="w-4 h-4 text-muted-foreground shrink-0" />
                       <span className="flex-1">{label}</span>
-                      {/* Badge unread untuk Notifikasi */}
-                      {to === ROUTES.NOTIFICATIONS && unreadCount > 0 && (
+                      {badge > 0 && (
                         <span className="min-w-[18px] h-[18px] px-1 rounded-full
                           bg-travia-orange text-white text-[10px] font-bold
-                          flex items-center justify-center">
-                          {unreadCount > 99 ? '99+' : unreadCount}
+                          flex items-center justify-center leading-none">
+                          {badge > 99 ? '99+' : badge}
                         </span>
                       )}
                     </Link>
@@ -478,10 +495,11 @@ const ProfileDropdown = () => {
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const { isAuthenticated }     = useAuthStore();
-  const unreadCount             = useNotificationStore((s) => s.unreadCount);
   const setUnreadCount          = useNotificationStore((s) => s.setUnreadCount);
+  const setCartCount            = useCartStore((s) => s.setItemCount);
+  const setWishlistCount        = useWishlistStore((s) => s.setItemCount);
 
-  // Fetch unread notification count → sync ke Zustand untuk badge bell
+  // Fetch unread notification count → sync ke Zustand
   const { data: unreadData } = useQuery({
     queryKey:        ['notifications', 'unread-count'],
     queryFn:         () =>
@@ -492,9 +510,39 @@ const Navbar = () => {
     refetchInterval: 60_000,
   });
 
+  // Fetch cart item count → sync ke Zustand (initial load & setelah invalidate)
+  const { data: cartCountData } = useQuery({
+    queryKey:  ['cart-count'],
+    queryFn:   () =>
+      api.get('/cart', { params: { limit: 1 } })
+        .then((r) => r.data.data.totalData ?? 0),
+    enabled:         isAuthenticated,
+    staleTime:       30_000,
+    refetchInterval: 120_000,
+  });
+
+  // Fetch wishlist item count → sync ke Zustand
+  const { data: wishlistCountData } = useQuery({
+    queryKey:  ['wishlist-count'],
+    queryFn:   () =>
+      api.get('/wishlist', { params: { limit: 1 } })
+        .then((r) => r.data.data.totalData ?? 0),
+    enabled:         isAuthenticated,
+    staleTime:       30_000,
+    refetchInterval: 120_000,
+  });
+
   useEffect(() => {
     if (unreadData !== undefined) setUnreadCount(unreadData);
   }, [unreadData, setUnreadCount]);
+
+  useEffect(() => {
+    if (cartCountData !== undefined) setCartCount(cartCountData);
+  }, [cartCountData, setCartCount]);
+
+  useEffect(() => {
+    if (wishlistCountData !== undefined) setWishlistCount(wishlistCountData);
+  }, [wishlistCountData, setWishlistCount]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);

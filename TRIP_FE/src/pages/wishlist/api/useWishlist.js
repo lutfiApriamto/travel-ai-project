@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import api   from '../../../lib/axios.js';
+import { useWishlistStore } from '../../../stores/useWishlistStore.js';
 
 // ─── Response shapes ──────────────────────────────────────────────────────────
 // GET /wishlist → sendSuccess(res, products, '...', 200, meta) → paginated
@@ -39,10 +40,9 @@ export const useRemoveFromWishlist = () => {
   return useMutation({
     mutationFn: (productId) => api.delete(`/wishlist/${productId}`),
     onSuccess: (_, productId) => {
-      // Invalidate wishlist list
       qc.invalidateQueries({ queryKey: WISHLIST_KEY });
-      // Update check cache for this product
       qc.setQueryData(['wishlist', 'check', productId], { isWishlisted: false });
+      useWishlistStore.getState().decrement();
       toast.success('Dihapus dari wishlist');
     },
     onError: (e) =>

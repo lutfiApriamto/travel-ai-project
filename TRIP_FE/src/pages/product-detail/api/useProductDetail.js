@@ -1,7 +1,8 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import api   from '../../../lib/axios.js';
-import { useCartStore } from '../../../stores/useCartStore.js';
+import { useCartStore }     from '../../../stores/useCartStore.js';
+import { useWishlistStore } from '../../../stores/useWishlistStore.js';
 
 // ─── Response format (sendSuccess) ───────────────────────────────────────────
 // r.data.data.data      = actual payload
@@ -38,12 +39,13 @@ export const useToggleWishlist = () => {
         ? api.delete(`/wishlist/${productId}`)
         : api.post(`/wishlist/${productId}`),
     onSuccess: (_, { productId, isWishlisted }) => {
-      // Optimistic update — flip isWishlisted in cache
-      qc.setQueryData(['wishlist', 'check', productId], {
-        isWishlisted: !isWishlisted,
-      });
-      // Invalidate wishlist list if cached
+      qc.setQueryData(['wishlist', 'check', productId], { isWishlisted: !isWishlisted });
       qc.invalidateQueries({ queryKey: ['wishlist'], exact: false });
+      if (isWishlisted) {
+        useWishlistStore.getState().decrement();
+      } else {
+        useWishlistStore.getState().increment();
+      }
       toast.success(isWishlisted ? 'Dihapus dari wishlist' : 'Ditambahkan ke wishlist');
     },
     onError: (e) =>

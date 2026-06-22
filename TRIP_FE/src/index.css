@@ -5,44 +5,44 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ─── Light Mode — Default Theme Values ──────────────────────────────────── */
-/* Gunakan @theme (bukan @theme inline) agar Tailwind expose sebagai         */
-/* CSS custom property yang bisa di-override oleh .dark {} di runtime.       */
+/* Palette: Slate v2.0 — 60% neutral white/gray, 30% surface, 10% orange     */
 
 @theme {
   /* ── shadcn semantic tokens ──────────────────────────────── */
-  --color-background:           #FAF7F0;
-  --color-foreground:           #1A1510;
-  --color-card:                 #F0E8D8;
-  --color-card-foreground:      #1A1510;
-  --color-popover:              #FAF7F0;
-  --color-popover-foreground:   #1A1510;
+  --color-background:           #FFFFFF;
+  --color-foreground:           #1C1C1E;
+  --color-card:                 #F2F2F7;
+  --color-card-foreground:      #1C1C1E;
+  --color-popover:              #FFFFFF;
+  --color-popover-foreground:   #1C1C1E;
   --color-primary:              #FF6B35;
-  --color-primary-foreground:   #FAF7F0;
-  --color-secondary:            #F0E8D8;
-  --color-secondary-foreground: #1A1510;
-  --color-muted:                #F0E8D8;
-  --color-muted-foreground:     #8B7355;
-  --color-accent:               #FFF0E8;
+  --color-primary-foreground:   #FFFFFF;
+  --color-secondary:            #F2F2F7;
+  --color-secondary-foreground: #3A3A3C;
+  --color-muted:                #F2F2F7;
+  --color-muted-foreground:     #AEAEB2;
+  --color-accent:               #FFE8D8;
   --color-accent-foreground:    #C44A10;
   --color-destructive:          #F04438;
-  --color-border:               #E4DDD0;
-  --color-input:                #E4DDD0;
+  --color-border:               #E5E5EA;
+  --color-input:                #E5E5EA;
   --color-ring:                 #FF6B35;
 
-  /* ── Page shell (outer background, darker than content) ─── */
-  --color-page-shell: #D5CFC7;
+  /* ── Page shell (outer background, sedikit lebih gelap dari content) ── */
+  --color-page-shell: #E5E5EA;
 
-  /* ── Travia brand static colors ──────────────────────────── */
+  /* ── Travia brand static colors (Slate palette) ──────────── */
   --color-travia-orange:   #FF6B35;
   --color-travia-orange-h: #E85D20;
-  --color-travia-orange-s: #FFAB76;
-  --color-travia-dark:     #1A1510;
-  --color-travia-dark2:    #211A11;
-  --color-travia-dark3:    #2E2518;
-  --color-travia-ivory:    #EDE0CC;
-  --color-travia-light:    #FAF7F0;
-  --color-travia-light2:   #F0E8D8;
-  --color-travia-light3:   #E4DDD0;
+  --color-travia-orange-s: #FFB07A;
+  --color-travia-dark:     #1C1C1E;
+  --color-travia-dark2:    #2C2C2E;
+  --color-travia-dark3:    #3A3A3C;
+  --color-travia-slate600: #636366;
+  --color-travia-gray400:  #AEAEB2;
+  --color-travia-light:    #FFFFFF;
+  --color-travia-light2:   #F2F2F7;
+  --color-travia-light3:   #E5E5EA;
 
   /* ── Status colors (tetap sama di kedua mode) ────────────── */
   --color-status-success: #17B26A;
@@ -63,29 +63,27 @@
 }
 
 /* ─── Dark Mode Overrides ─────────────────────────────────────────────────── */
-/* Saat class .dark ada di <html>, semua --color-* di bawah ini menggantikan  */
-/* nilai default di @theme. Utility class seperti bg-background akan otomatis */
-/* membaca nilai yang baru karena menggunakan var(--color-background).         */
+/* Slate 900/800/700 — clean neutral dark, bukan warm brown                   */
 
 .dark {
-  --color-page-shell:           #0B0904;
-  --color-background:           #1A1510;
-  --color-foreground:           #F0F0F0;
-  --color-card:                 #211A11;
-  --color-card-foreground:      #EDE0CC;
-  --color-popover:              #211A11;
-  --color-popover-foreground:   #EDE0CC;
+  --color-page-shell:           #0D0D0F;
+  --color-background:           #1C1C1E;
+  --color-foreground:           #EBEBF5;
+  --color-card:                 #2C2C2E;
+  --color-card-foreground:      #EBEBF5;
+  --color-popover:              #2C2C2E;
+  --color-popover-foreground:   #EBEBF5;
   --color-primary:              #FF6B35;
-  --color-primary-foreground:   #FAF7F0;
-  --color-secondary:            #2E2518;
-  --color-secondary-foreground: #EDE0CC;
-  --color-muted:                #2E2518;
-  --color-muted-foreground:     #FFAB76;
-  --color-accent:               #2E2518;
-  --color-accent-foreground:    #FFAB76;
+  --color-primary-foreground:   #FFFFFF;
+  --color-secondary:            #3A3A3C;
+  --color-secondary-foreground: #EBEBF5;
+  --color-muted:                #3A3A3C;
+  --color-muted-foreground:     #636366;
+  --color-accent:               #3A3A3C;
+  --color-accent-foreground:    #FF6B35;
   --color-destructive:          #F04438;
-  --color-border:               #2E2518;
-  --color-input:                #2E2518;
+  --color-border:               #3A3A3C;
+  --color-input:                #3A3A3C;
   --color-ring:                 #FF6B35;
 }
 
@@ -119,9 +117,6 @@
 }
 
 /* ─── Smooth Theme Transition ─────────────────────────────────────────────── */
-/* Seluruh elemen mendapat transisi otomatis saat dark/light mode berganti.   */
-/* Explicit Tailwind transition class (transition-none, dll) bisa override.   */
-
 *,
 *::before,
 *::after {
