@@ -8,6 +8,17 @@ const orderAddOnSchema = new mongoose.Schema(
   { _id: false }
 );
 
+// Data penumpang yang diisi saat checkout
+const orderPassengerSchema = new mongoose.Schema(
+  {
+    nik:   { type: String, required: true },
+    name:  { type: String, required: true },
+    age:   { type: Number, required: true },
+    email: { type: String, required: true },
+  },
+  { _id: false }
+);
+
 const orderSchema = new mongoose.Schema(
   {
     // kode unik yang ditampilkan ke user, format: ORD-20260619-XXXX
@@ -49,6 +60,9 @@ const orderSchema = new mongoose.Schema(
       required: true,
       min:      1,
     },
+
+    // data lengkap setiap penumpang (diisi saat checkout, satu entri per peserta)
+    passengers: [orderPassengerSchema],
 
     // add-on yang dipilih saat checkout
     addOns: [orderAddOnSchema],

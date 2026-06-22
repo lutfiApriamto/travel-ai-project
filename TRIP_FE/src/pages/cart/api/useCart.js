@@ -21,7 +21,7 @@ import { useCartStore } from '../../../stores/useCartStore.js';
 
 const CART_KEY = ['cart'];
 
-export const useCartData = (params = {}) =>
+export const useCartData = (params = {}, options = {}) =>
   useQuery({
     queryKey:  [...CART_KEY, params],
     queryFn:   () =>
@@ -40,6 +40,7 @@ export const useCartData = (params = {}) =>
         })),
     staleTime:       30_000,
     placeholderData: (prev) => prev,
+    enabled:         options.enabled ?? true,
   });
 
 export const useAddToCart = () => {

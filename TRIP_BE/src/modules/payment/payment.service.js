@@ -104,10 +104,11 @@ export const handleWebhook = async (body) => {
     order.paymentMethod = payment_type || null;
     await order.save();
 
-    // 2. Update product: bookedSlots +1, soldCount +1, cek full
+    // 2. Update product: bookedSlots += jumlah peserta, soldCount += peserta, cek full
+    const seatCount = order.participants ?? (order.passengers?.length || 1);
     const updatedProduct = await Product.findByIdAndUpdate(
       order.productId,
-      { $inc: { bookedSlots: 1, soldCount: 1 } },
+      { $inc: { bookedSlots: seatCount, soldCount: seatCount } },
       { new: true }
     );
 
@@ -116,16 +117,39 @@ export const handleWebhook = async (body) => {
       await Product.findByIdAndUpdate(order.productId, { status: 'full' });
     }
 
-    // 3. Generate e-tiket
-    await Ticket.create({
-      ticketCode:      generateTicketCode(),
-      orderId:         order._id,
-      userId:          order.userId,
-      productId:       order.productId,
-      productSnapshot: order.productSnapshot,
-      participants:    order.participants,
-      totalPrice:      order.totalPrice,
-    });
+    // 3. Generate e-tiket — satu tiket per penumpang jika ada data penumpang
+    const passengers = order.passengers ?? [];
+    if (passengers.length > 0) {
+      const pricePerPerson = Math.round(order.totalPrice / passengers.length);
+      await Promise.all(passengers.map((passenger) =>
+        Ticket.create({
+          ticketCode:      generateTicketCode(),
+          orderId:         order._id,
+          userId:          order.userId,
+          productId:       order.productId,
+          productSnapshot: order.productSnapshot,
+          participants:    1,
+          totalPrice:      pricePerPerson,
+          passenger: {
+            nik:   passenger.nik,
+            name:  passenger.name,
+            age:   passenger.age,
+            email: passenger.email,
+          },
+        })
+      ));
+    } else {
+      // Fallback: satu tiket per order (data lama / tanpa penumpang)
+      await Ticket.create({
+        ticketCode:      generateTicketCode(),
+        orderId:         order._id,
+        userId:          order.userId,
+        productId:       order.productId,
+        productSnapshot: order.productSnapshot,
+        participants:    order.participants,
+        totalPrice:      order.totalPrice,
+      });
+    }
 
     // 4. Catat pemasukan di finance
     const lastFinance = await Finance.findOne().sort({ createdAt: -1 }).lean();

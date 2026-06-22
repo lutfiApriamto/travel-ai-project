@@ -17,6 +17,11 @@ export const checkout = asyncHandler(async (req, res) => {
   sendSuccess(res, data, `${data.length} order berhasil dibuat`, 201);
 });
 
+export const expressCheckout = asyncHandler(async (req, res) => {
+  const data = await svc.expressCheckout(req.user._id, req.body);
+  sendSuccess(res, data, 'Order berhasil dibuat', 201);
+});
+
 export const cancelOrder = asyncHandler(async (req, res) => {
   const data = await svc.cancelOrder(req.params.id, req.user._id);
   sendSuccess(res, data, 'Order berhasil dibatalkan');

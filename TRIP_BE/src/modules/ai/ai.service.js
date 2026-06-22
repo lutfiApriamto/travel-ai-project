@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import genAI    from '../../config/gemini.js';
 import Product  from '../../models/product.model.js';
 
-const MODEL       = 'gemini-1.5-flash';
+const MODEL       = 'gemini-2.5-flash';
 const MAX_HISTORY = 10; // potong history ke N pesan terakhir sebelum dikirim ke Gemini
 
 // ─── System Prompt ────────────────────────────────────────────────────────────

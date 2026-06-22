@@ -4,7 +4,8 @@
   "description": "Standalone database seeder untuk Travia — jalankan sekali untuk mengisi data dummy ke MongoDB.",
   "type": "module",
   "scripts": {
-    "seed": "node seed.js"
+    "seed": "node seed.js",
+    "fix-ticket-index": "node fix-ticket-index.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",

@@ -215,7 +215,9 @@ const BoardingPass = ({ ticket }) => {
             value={formatDateShort(snap.returnDate)}
           />
           <InfoField label="Durasi"    value={snap.duration} />
-          <InfoField label="Peserta"   value={`${ticket.participants ?? 0} orang`} />
+          {!ticket.passenger?.name && (
+            <InfoField label="Peserta" value={`${ticket.participants ?? 0} orang`} />
+          )}
           {snap.meetingPoint && (
             <InfoField
               label="Titik Kumpul"
@@ -241,6 +243,28 @@ const BoardingPass = ({ ticket }) => {
             />
           )}
         </div>
+
+        {/* ── Data Penumpang ───────────────────────────────────────────── */}
+        {ticket.passenger?.name && (
+          <div className="mt-5 rounded-2xl border border-travia-orange/20 bg-travia-orange/5 p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <Users className="w-4 h-4 text-travia-orange" />
+              <p className="text-[11px] font-bold text-travia-orange uppercase tracking-widest">
+                Data Penumpang
+              </p>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-3">
+              <InfoField label="Nama" value={ticket.passenger.name} className="col-span-2" />
+              <InfoField label="NIK"  value={ticket.passenger.nik} mono className="col-span-2" />
+              {ticket.passenger.age != null && (
+                <InfoField label="Umur" value={`${ticket.passenger.age} tahun`} />
+              )}
+              {ticket.passenger.email && (
+                <InfoField label="Email" value={ticket.passenger.email} className="col-span-2 sm:col-span-3" />
+              )}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* ── Perforation ──────────────────────────────────────────────────── */}

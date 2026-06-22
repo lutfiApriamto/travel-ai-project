@@ -231,16 +231,17 @@ export const approveRefund = async (id, adminId) => {
   // 2. Update order
   await Order.findByIdAndUpdate(order._id, { status: 'refunded' });
 
-  // 3. Invalidasi tiket
-  await Ticket.findOneAndUpdate(
+  // 3. Invalidasi SEMUA tiket order ini (satu order kini punya banyak tiket)
+  await Ticket.updateMany(
     { orderId: order._id },
     { isValid: false, invalidatedAt: new Date() }
   );
 
-  // 4. Kembalikan slot produk jika belum expired
+  // 4. Kembalikan slot produk jika belum expired (sejumlah peserta order)
   const product = await Product.findById(order.productId);
   if (product && product.status !== 'expired' && product.status !== 'cancelled') {
-    const newBookedSlots = Math.max(0, product.bookedSlots - 1);
+    const seatCount      = order.participants ?? 1;
+    const newBookedSlots = Math.max(0, product.bookedSlots - seatCount);
     const newStatus      = product.status === 'full' && newBookedSlots < product.quota
       ? 'active'
       : product.status;

@@ -68,6 +68,19 @@ const CheckInResult = ({ result, onReset }) => {
                 {data.passenger?.name ?? '—'}
               </span>
             </div>
+            {data.passenger?.nik && data.passenger.nik !== '-' && (
+              <div className="flex items-center gap-2.5">
+                <span className="w-3.5 h-3.5 shrink-0 text-[9px] font-bold text-muted-foreground
+                  flex items-center justify-center">ID</span>
+                <span className="text-sm font-mono text-foreground">{data.passenger.nik}</span>
+              </div>
+            )}
+            {data.passenger?.age != null && (
+              <div className="flex items-center gap-2.5">
+                <Clock className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
+                <span className="text-sm text-foreground">{data.passenger.age} tahun</span>
+              </div>
+            )}
             {data.passenger?.email && (
               <div className="flex items-center gap-2.5">
                 <Mail className="w-3.5 h-3.5 text-muted-foreground shrink-0" />

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
@@ -17,8 +17,15 @@ import api from './lib/axios.js';
 const AppContent = () => {
   const [isInitializing, setIsInitializing] = useState(true);
   const { setAuth } = useAuthStore();
+  // Guard agar session restore hanya berjalan sekali —
+  // React 18 StrictMode memanggil useEffect dua kali di development,
+  // yang akan merusak token rotation (token lama sudah dirotasi di invoke pertama).
+  const hasRestored = useRef(false);
 
   useEffect(() => {
+    if (hasRestored.current) return;
+    hasRestored.current = true;
+
     const restoreSession = async () => {
       try {
         const res = await api.post('/auth/refresh');

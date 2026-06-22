@@ -1,6 +1,6 @@
 import { useState }    from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Heart, ShoppingCart, Minus, Plus, ChevronDown, ChevronUp, Loader2 } from 'lucide-react';
+import { Heart, ShoppingCart, Minus, Plus, ChevronDown, ChevronUp, Loader2, CreditCard } from 'lucide-react';
 import { cn }          from '../../../lib/utils.js';
 import { ROUTES }      from '../../../utils/consts/routes.js';
 import { useToggleWishlist, useAddToCart } from '../api/useProductDetail.js';
@@ -95,7 +95,43 @@ const BookingCard = ({
     addToCart.mutate({
       productId,
       participants,
-      addOns: selectedAddOns.map((name) => ({ name })),
+      addOns: selectedAddOns.map((name) => {
+        const found = product?.addOns?.find((a) => a.name === name);
+        return { name, price: found?.price ?? 0 };
+      }),
+    });
+  };
+
+  const handleCheckoutLangsung = () => {
+    if (!isAuthenticated) { setShowAuthModal(true); return; }
+    if (!productId || isFull) return;
+
+    const resolvedAddOns = selectedAddOns.map((name) => {
+      const found = product?.addOns?.find((a) => a.name === name);
+      return { name, price: found?.price ?? 0 };
+    });
+
+    navigate(ROUTES.CHECKOUT, {
+      state: {
+        express: {
+          productId,
+          productSnapshot: {
+            name:          product?.name,
+            price:         product?.price,
+            departureDate: product?.departureDate,
+            returnDate:    product?.returnDate,
+            duration:      product?.duration,
+            departureCity: product?.departureCity,
+            destinations:  product?.destinations,
+            meetingPoint:  product?.meetingPoint,
+            thumbnail:     product?.thumbnail,
+          },
+          participants,
+          addOns:     resolvedAddOns,
+          note:       null,
+          totalPrice,
+        },
+      },
     });
   };
 
@@ -209,9 +245,10 @@ const BookingCard = ({
 
       {/* CTA buttons */}
       <div className="space-y-2.5">
+        {/* Checkout langsung — primary CTA */}
         <button
-          onClick={handleAddToCart}
-          disabled={isFull || addToCart.isPending}
+          onClick={handleCheckoutLangsung}
+          disabled={isFull}
           className={cn(
             'w-full h-11 rounded-xl font-semibold text-sm flex items-center justify-center gap-2',
             'transition-colors',
@@ -220,13 +257,24 @@ const BookingCard = ({
               : 'bg-travia-orange text-white hover:bg-travia-orange/90',
           )}
         >
-          {addToCart.isPending ? (
-            <><Loader2 className="w-4 h-4 animate-spin" /> Menambahkan...</>
-          ) : isFull ? (
-            'Slot Penuh'
-          ) : (
-            <><ShoppingCart className="w-4 h-4" /> Pesan Sekarang</>
+          {isFull ? 'Slot Penuh' : <><CreditCard className="w-4 h-4" /> Checkout Langsung</>}
+        </button>
+
+        {/* Tambah ke keranjang — secondary */}
+        <button
+          onClick={handleAddToCart}
+          disabled={isFull || addToCart.isPending}
+          className={cn(
+            'w-full h-10 rounded-xl border font-medium text-sm flex items-center justify-center gap-2',
+            'transition-colors',
+            isFull
+              ? 'border-muted text-muted-foreground cursor-not-allowed'
+              : 'border-border text-foreground hover:bg-accent',
           )}
+        >
+          {addToCart.isPending
+            ? <><Loader2 className="w-4 h-4 animate-spin" /> Menambahkan...</>
+            : <><ShoppingCart className="w-4 h-4" /> Tambah ke Keranjang</>}
         </button>
 
         <button

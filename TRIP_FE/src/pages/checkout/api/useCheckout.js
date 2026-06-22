@@ -3,33 +3,26 @@ import toast                           from 'react-hot-toast';
 import api                             from '../../../lib/axios.js';
 import { useCartStore }                from '../../../stores/useCartStore.js';
 
-// ─── Response shape ───────────────────────────────────────────────────────────
-// POST /orders { productIds: string[] }
-//   → sendSuccess(res, data, '...', 201)  (data = Order[])
-//   → r.data.data.data = Order[]
-//
-// Each Order: { _id, orderCode, totalPrice, status: 'pending_payment',
-//              productSnapshot, participants, addOns, note, ... }
-// ─────────────────────────────────────────────────────────────────────────────
+// ─── Checkout dari keranjang ──────────────────────────────────────────────────
+// POST /orders { productIds: string[], passengersMap: { [pid]: Passenger[] } }
+// → r.data.data.data = Order[]
 
 export const useCheckout = () => {
   const qc = useQueryClient();
 
   return useMutation({
-    mutationFn: (productIds) =>
+    mutationFn: ({ productIds, passengersMap }) =>
       api
-        .post('/orders', { productIds })
+        .post('/orders', { productIds, passengersMap })
         .then((r) => {
           const d = r.data.data.data;
           return Array.isArray(d) ? d : [];
         }),
 
-    onSuccess: (orders, productIds) => {
-      // Invalidate cart (backend sudah hapus item yang di-checkout)
+    onSuccess: (orders, { productIds }) => {
       qc.invalidateQueries({ queryKey: ['cart'] });
-      // Invalidate orders list
       qc.invalidateQueries({ queryKey: ['orders'] });
-      // Kurangi badge navbar sesuai jumlah item yang di-checkout
+      qc.invalidateQueries({ queryKey: ['passengers'] });
       const current = useCartStore.getState().itemCount;
       useCartStore.getState().setItemCount(Math.max(0, current - productIds.length));
     },
@@ -37,6 +30,35 @@ export const useCheckout = () => {
     onError: (e) => {
       const msg =
         e.response?.data?.data?.message ??
+        e.response?.data?.errors?.[0]?.message ??
+        'Gagal membuat pesanan. Silakan coba lagi.';
+      toast.error(msg);
+    },
+  });
+};
+
+// ─── Express checkout (langsung dari halaman produk) ─────────────────────────
+// POST /orders/express { productId, addOns, note, passengers }
+// → r.data.data.data = Order (single)
+
+export const useExpressCheckout = () => {
+  const qc = useQueryClient();
+
+  return useMutation({
+    mutationFn: (payload) =>
+      api
+        .post('/orders/express', payload)
+        .then((r) => r.data.data.data),
+
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['orders'] });
+      qc.invalidateQueries({ queryKey: ['passengers'] });
+    },
+
+    onError: (e) => {
+      const msg =
+        e.response?.data?.data?.message ??
+        e.response?.data?.errors?.[0]?.message ??
         'Gagal membuat pesanan. Silakan coba lagi.';
       toast.error(msg);
     },

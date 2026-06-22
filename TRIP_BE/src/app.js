@@ -30,6 +30,7 @@ import financeRoutes     from './modules/finance/finance.routes.js';
 import notificationRoutes from './modules/notification/notification.routes.js';
 import adminRoutes       from './modules/admin/admin.routes.js';
 import aiRoutes          from './modules/ai/ai.routes.js';
+import passengerRoutes   from './modules/passenger/passenger.routes.js';
 
 const app = express();
 
@@ -39,8 +40,21 @@ app.use(helmet());
 app.use(compression());
 if (process.env.NODE_ENV !== 'production') app.use(morgan('dev'));
 
+// CORS — izinkan frontend mengakses API dengan credentials (cookie)
+// Mendukung beberapa origin: localhost dev + Vercel production + URL dari CLIENT_URL
+const ALLOWED_ORIGINS = [
+  process.env.CLIENT_URL,
+  'http://localhost:5173',
+  'http://localhost:3000',
+].filter(Boolean);
+
 app.use('/api', cors({
-  origin:      process.env.CLIENT_URL,
+  origin: (origin, callback) => {
+    // Izinkan request tanpa origin (Postman, curl, server-to-server)
+    if (!origin) return callback(null, true);
+    if (ALLOWED_ORIGINS.includes(origin)) return callback(null, true);
+    callback(new Error(`Origin ${origin} tidak diizinkan oleh CORS`));
+  },
   credentials: true,
 }));
 
@@ -87,6 +101,7 @@ app.use('/api/finance',       financeRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/admin',         adminRoutes);
 app.use('/api/ai',            aiRoutes);
+app.use('/api/passengers',    passengerRoutes);
 
 // ─── Error Handling ───────────────────────────────────────────────────────────
 

@@ -13,7 +13,7 @@ const ticketSchema = new mongoose.Schema(
       type:     mongoose.Schema.Types.ObjectId,
       ref:      'Order',
       required: true,
-      unique:   true, // satu order hanya punya satu tiket
+      // tidak unique — satu order bisa punya beberapa tiket (satu per penumpang)
     },
 
     userId: {
@@ -49,6 +49,14 @@ const ticketSchema = new mongoose.Schema(
       type: Number,
     },
 
+    // data penumpang pemilik tiket ini (satu tiket = satu penumpang)
+    passenger: {
+      nik:   { type: String, default: null },
+      name:  { type: String, default: null },
+      age:   { type: Number, default: null },
+      email: { type: String, default: null },
+    },
+
     // false jika order di-refund atau produk di-cancelled
     isValid: {
       type:    Boolean,
@@ -77,5 +85,10 @@ const ticketSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+// Index non-unique untuk query tiket per order (satu order punya banyak tiket).
+// PENTING: index unik lama `orderId_1` harus di-drop dari DB (jalankan
+// seeder/fix-ticket-index.js sekali), karena mongoose tidak otomatis drop index lama.
+ticketSchema.index({ orderId: 1 });
 
 export default mongoose.model('Ticket', ticketSchema);

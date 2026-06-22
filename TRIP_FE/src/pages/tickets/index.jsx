@@ -222,6 +222,17 @@ const TicketCard = ({ ticket }) => {
               </p>
             </Link>
 
+            {/* Nama penumpang (jika ada) */}
+            {ticket.passenger?.name && (
+              <div className="flex items-center gap-1.5">
+                <span className="flex items-center gap-1 text-xs font-semibold text-travia-orange
+                  bg-travia-orange/10 px-2 py-0.5 rounded-full">
+                  <Users className="w-3 h-3 shrink-0" />
+                  {ticket.passenger.name}
+                </span>
+              </div>
+            )}
+
             {/* Meta */}
             <div className="flex flex-wrap gap-x-3 gap-y-1">
               {snap.departureDate && (
@@ -236,10 +247,12 @@ const TicketCard = ({ ticket }) => {
                   {snap.departureCity}
                 </span>
               )}
-              <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                <Users className="w-3 h-3 shrink-0 text-travia-orange" />
-                {ticket.participants} peserta
-              </span>
+              {!ticket.passenger?.name && (
+                <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                  <Users className="w-3 h-3 shrink-0 text-travia-orange" />
+                  {ticket.participants} peserta
+                </span>
+              )}
             </div>
 
             {/* Dynamic indicators */}

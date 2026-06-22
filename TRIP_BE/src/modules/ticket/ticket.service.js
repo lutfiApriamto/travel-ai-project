@@ -149,10 +149,13 @@ export const checkIn = async (ticketCode) => {
     ticketCode:   ticket.ticketCode,
     checkedInAt:  ticket.checkedInAt,
     participants: ticket.participants,
+    // Data penumpang pemilik tiket — fallback ke data pembeli (tiket lama tanpa passenger)
     passenger: {
-      name:  ticket.userId?.name  || '-',
-      email: ticket.userId?.email || '-',
-      phone: ticket.userId?.phone || '-',
+      name:  ticket.passenger?.name  || ticket.userId?.name  || '-',
+      nik:   ticket.passenger?.nik   || '-',
+      age:   ticket.passenger?.age   ?? null,
+      email: ticket.passenger?.email || ticket.userId?.email || '-',
+      phone: ticket.userId?.phone    || '-',
     },
     trip: {
       productName:   ticket.productSnapshot?.name          || '-',

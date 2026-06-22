@@ -1,10 +1,12 @@
 import { useState }                      from 'react';
 import { useParams, Link, useNavigate }  from 'react-router-dom';
+import { AnimatePresence, motion }       from 'framer-motion';
 import {
   MapPin, Calendar, Clock, Users, Navigation,
   Check, X as XIcon, ChevronRight, Utensils,
   BedDouble, ShoppingCart, Heart, Loader2,
   Coffee, UtensilsCrossed, PackageSearch,
+  CreditCard, ChevronUp,
 } from 'lucide-react';
 import { cn }                            from '../../lib/utils.js';
 import { ROUTES }                        from '../../utils/consts/routes.js';
@@ -17,6 +19,7 @@ import {
 }                                        from './api/useProductDetail.js';
 import Gallery                           from './components/Gallery.jsx';
 import BookingCard                       from './components/BookingCard.jsx';
+import AuthRequiredModal                 from '../../components/shared/AuthRequiredModal.jsx';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -168,54 +171,68 @@ const Itinerary = ({ items = [] }) => {
                       {day.title}
                     </p>
                   </div>
-                  <ChevronRight className={cn(
-                    'w-4 h-4 text-muted-foreground shrink-0 mt-1 transition-transform',
-                    isOpen && 'rotate-90',
-                  )} />
+                  <motion.div
+                    animate={{ rotate: isOpen ? 90 : 0 }}
+                    transition={{ duration: 0.22, ease: 'easeInOut' }}
+                    className="shrink-0 mt-1"
+                  >
+                    <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                  </motion.div>
                 </button>
 
-                {isOpen && (
-                  <div className="mt-2 space-y-3 bg-accent/40 rounded-xl p-4 border border-border">
-                    <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
-                      {day.activities}
-                    </p>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      key={`day-${i}`}
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+                      style={{ overflow: 'hidden' }}
+                    >
+                      <div className="mt-2 space-y-3 bg-accent/40 rounded-xl p-4 border border-border">
+                        <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
+                          {day.activities}
+                        </p>
 
-                    {/* Hotel */}
-                    {day.hotel && (
-                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <BedDouble className="w-3.5 h-3.5 shrink-0 text-travia-orange" />
-                        <span>Menginap di: <strong className="text-foreground">{day.hotel}</strong></span>
-                      </div>
-                    )}
+                        {/* Hotel */}
+                        {day.hotel && (
+                          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                            <BedDouble className="w-3.5 h-3.5 shrink-0 text-travia-orange" />
+                            <span>Menginap di: <strong className="text-foreground">{day.hotel}</strong></span>
+                          </div>
+                        )}
 
-                    {/* Meals */}
-                    {(day.meals?.breakfast || day.meals?.lunch || day.meals?.dinner) && (
-                      <div className="flex flex-wrap gap-1.5">
-                        {day.meals.breakfast && (
-                          <span className="flex items-center gap-1 text-[10px] font-medium
-                            px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/30
-                            text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800/50">
-                            <Coffee className="w-3 h-3" /> Sarapan
-                          </span>
-                        )}
-                        {day.meals.lunch && (
-                          <span className="flex items-center gap-1 text-[10px] font-medium
-                            px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/30
-                            text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/50">
-                            <Utensils className="w-3 h-3" /> Makan Siang
-                          </span>
-                        )}
-                        {day.meals.dinner && (
-                          <span className="flex items-center gap-1 text-[10px] font-medium
-                            px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/30
-                            text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800/50">
-                            <UtensilsCrossed className="w-3 h-3" /> Makan Malam
-                          </span>
+                        {/* Meals */}
+                        {(day.meals?.breakfast || day.meals?.lunch || day.meals?.dinner) && (
+                          <div className="flex flex-wrap gap-1.5">
+                            {day.meals.breakfast && (
+                              <span className="flex items-center gap-1 text-[10px] font-medium
+                                px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/30
+                                text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800/50">
+                                <Coffee className="w-3 h-3" /> Sarapan
+                              </span>
+                            )}
+                            {day.meals.lunch && (
+                              <span className="flex items-center gap-1 text-[10px] font-medium
+                                px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/30
+                                text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/50">
+                                <Utensils className="w-3 h-3" /> Makan Siang
+                              </span>
+                            )}
+                            {day.meals.dinner && (
+                              <span className="flex items-center gap-1 text-[10px] font-medium
+                                px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/30
+                                text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800/50">
+                                <UtensilsCrossed className="w-3 h-3" /> Makan Malam
+                              </span>
+                            )}
+                          </div>
                         )}
                       </div>
-                    )}
-                  </div>
-                )}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </div>
           );
@@ -279,34 +296,78 @@ const IncludesExcludes = ({ includes = [], excludes = [] }) => {
 // ─── Mobile sticky bottom bar ─────────────────────────────────────────────────
 
 const MobileBottomBar = ({ product, isAuthenticated, isWishlisted, productId }) => {
-  const navigate      = useNavigate();
+  const navigate       = useNavigate();
   const toggleWishlist = useToggleWishlist();
   const addToCart      = useAddToCart();
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showOptions,   setShowOptions]   = useState(false);
 
-  const remaining = Math.max(0, (product?.quota ?? 0) - (product?.bookedSlots ?? 0));
-  const isFull    = remaining === 0;
+  const remaining    = Math.max(0, (product?.quota ?? 0) - (product?.bookedSlots ?? 0));
+  const isFull       = remaining === 0;
+  const participants = product?.minParticipants ?? 1;
 
-  const handleCart = () => {
-    if (!isAuthenticated) {
-      navigate(`${ROUTES.AUTH.LOGIN}?redirect=${encodeURIComponent(window.location.pathname)}`);
-      return;
-    }
+  const requireAuth = () => {
+    if (!isAuthenticated) { setShowAuthModal(true); return false; }
+    return true;
+  };
+
+  const handleAddToCart = () => {
+    setShowOptions(false);
+    if (!requireAuth()) return;
     if (isFull || !productId) return;
-    addToCart.mutate({ productId, participants: product?.minParticipants ?? 1, addOns: [] });
+    addToCart.mutate({ productId, participants, addOns: [] });
+  };
+
+  const handleCheckoutLangsung = () => {
+    setShowOptions(false);
+    if (!requireAuth()) return;
+    if (isFull || !productId) return;
+
+    navigate(ROUTES.CHECKOUT, {
+      state: {
+        express: {
+          productId,
+          productSnapshot: {
+            name:          product?.name,
+            price:         product?.price,
+            departureDate: product?.departureDate,
+            returnDate:    product?.returnDate,
+            duration:      product?.duration,
+            departureCity: product?.departureCity,
+            destinations:  product?.destinations,
+            meetingPoint:  product?.meetingPoint,
+            thumbnail:     product?.thumbnail,
+          },
+          participants,
+          addOns:     [],
+          note:       null,
+          totalPrice: (product?.price ?? 0) * participants,
+        },
+      },
+    });
+  };
+
+  const handleOrderClick = () => {
+    if (isFull) return;
+    if (!requireAuth()) return;
+    setShowOptions((v) => !v);
   };
 
   const handleWishlist = () => {
-    if (!isAuthenticated) {
-      navigate(`${ROUTES.AUTH.LOGIN}?redirect=${encodeURIComponent(window.location.pathname)}`);
-      return;
-    }
+    if (!requireAuth()) return;
     toggleWishlist.mutate({ productId, isWishlisted });
   };
 
   return (
+    <>
+    <AuthRequiredModal
+      isOpen={showAuthModal}
+      onClose={() => setShowAuthModal(false)}
+      onLogin={() => navigate(`${ROUTES.AUTH.LOGIN}?redirect=${encodeURIComponent(window.location.pathname)}`)}
+    />
     <div className="fixed bottom-0 left-0 right-0 z-30 lg:hidden
       bg-card/95 backdrop-blur-sm border-t border-border px-4 py-3 safe-area-pb">
-      <div className="flex items-center gap-3 max-w-lg mx-auto">
+      <div className="relative flex items-center gap-3 max-w-lg mx-auto">
         {/* Price */}
         <div className="flex-1 min-w-0">
           <p className="text-[10px] text-muted-foreground">Mulai dari</p>
@@ -326,14 +387,14 @@ const MobileBottomBar = ({ product, isAuthenticated, isWishlisted, productId }) 
               : 'border-border text-muted-foreground hover:bg-accent',
           )}
         >
-          <Heart className={cn('w-4.5 h-4.5', isWishlisted && 'fill-current')}
+          <Heart className={cn(isWishlisted && 'fill-current')}
             style={{ width: 18, height: 18 }} />
         </button>
 
-        {/* Cart button */}
+        {/* Order button — toggles drop-up options */}
         <button
-          onClick={handleCart}
-          disabled={isFull || addToCart.isPending}
+          onClick={handleOrderClick}
+          disabled={isFull}
           className={cn(
             'h-10 px-5 rounded-full font-semibold text-sm flex items-center gap-2',
             'transition-colors shrink-0',
@@ -342,13 +403,71 @@ const MobileBottomBar = ({ product, isAuthenticated, isWishlisted, productId }) 
               : 'bg-travia-orange text-white hover:bg-travia-orange/90',
           )}
         >
-          {addToCart.isPending
-            ? <Loader2 className="w-4 h-4 animate-spin" />
-            : <ShoppingCart className="w-4 h-4" />}
+          <ShoppingCart className="w-4 h-4" />
           {isFull ? 'Penuh' : 'Pesan'}
+          {!isFull && (
+            <ChevronUp className={cn('w-3.5 h-3.5 transition-transform', !showOptions && 'rotate-180')} />
+          )}
         </button>
+
+        {/* Drop-up menu */}
+        <AnimatePresence>
+          {showOptions && !isFull && (
+            <>
+              {/* Invisible backdrop to close on outside tap */}
+              <div
+                className="fixed inset-0 z-40"
+                onClick={() => setShowOptions(false)}
+              />
+              <motion.div
+                initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 8, scale: 0.97 }}
+                transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
+                className="absolute z-50 right-0 bottom-full mb-3 w-60
+                  bg-card border border-border rounded-2xl shadow-2xl overflow-hidden"
+              >
+                {/* Checkout langsung */}
+                <button
+                  onClick={handleCheckoutLangsung}
+                  className="w-full flex items-center gap-3 px-4 py-3.5 text-left
+                    hover:bg-accent transition-colors border-b border-border"
+                >
+                  <span className="w-9 h-9 rounded-xl bg-travia-orange/10 text-travia-orange
+                    flex items-center justify-center shrink-0">
+                    <CreditCard className="w-4 h-4" />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-foreground">Checkout Langsung</p>
+                    <p className="text-[11px] text-muted-foreground">Langsung ke pembayaran</p>
+                  </div>
+                </button>
+
+                {/* Tambah ke keranjang */}
+                <button
+                  onClick={handleAddToCart}
+                  disabled={addToCart.isPending}
+                  className="w-full flex items-center gap-3 px-4 py-3.5 text-left
+                    hover:bg-accent transition-colors disabled:opacity-60"
+                >
+                  <span className="w-9 h-9 rounded-xl bg-accent text-foreground
+                    flex items-center justify-center shrink-0">
+                    {addToCart.isPending
+                      ? <Loader2 className="w-4 h-4 animate-spin" />
+                      : <ShoppingCart className="w-4 h-4" />}
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-foreground">Masukkan ke Keranjang</p>
+                    <p className="text-[11px] text-muted-foreground">Simpan untuk nanti</p>
+                  </div>
+                </button>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
       </div>
     </div>
+    </>
   );
 };
 

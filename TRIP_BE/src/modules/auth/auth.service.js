@@ -98,15 +98,25 @@ export const login = async ({ email, password }) => {
   return { accessToken, rawRefreshToken, user: sanitizeUser(user) };
 };
 
-export const refreshAccessToken = async (rawRefreshToken) => {
-  if (!rawRefreshToken) {
+export const refreshAccessToken = async (rawTokens) => {
+  // Terima string tunggal (lama) atau array kandidat (handle cookie duplikat)
+  const candidates = Array.isArray(rawTokens)
+    ? rawTokens.filter(Boolean)
+    : (rawTokens ? [rawTokens] : []);
+
+  if (candidates.length === 0) {
     const err = new Error('Sesi tidak ditemukan, silakan login kembali');
     err.statusCode = 401;
     throw err;
   }
 
-  const hashed = crypto.createHash('sha256').update(rawRefreshToken).digest('hex');
-  const user   = await User.findOne({ refreshToken: hashed });
+  // Coba tiap kandidat token sampai ada yang cocok di DB
+  let user = null;
+  for (const raw of candidates) {
+    const hashed = crypto.createHash('sha256').update(raw).digest('hex');
+    user = await User.findOne({ refreshToken: hashed }); // eslint-disable-line no-await-in-loop
+    if (user) break;
+  }
 
   if (!user) {
     const err = new Error('Sesi tidak valid, silakan login kembali');
@@ -130,10 +140,17 @@ export const refreshAccessToken = async (rawRefreshToken) => {
   return { accessToken, rawRefreshToken: newRaw, user: sanitizeUser(user) };
 };
 
-export const logout = async (rawRefreshToken) => {
-  if (!rawRefreshToken) return;
-  const hashed = crypto.createHash('sha256').update(rawRefreshToken).digest('hex');
-  await User.findOneAndUpdate({ refreshToken: hashed }, { refreshToken: null });
+export const logout = async (rawTokens) => {
+  const candidates = Array.isArray(rawTokens)
+    ? rawTokens.filter(Boolean)
+    : (rawTokens ? [rawTokens] : []);
+  if (candidates.length === 0) return;
+
+  // Invalidasi user yang cocok dengan salah satu kandidat token
+  for (const raw of candidates) {
+    const hashed = crypto.createHash('sha256').update(raw).digest('hex');
+    await User.findOneAndUpdate({ refreshToken: hashed }, { refreshToken: null }); // eslint-disable-line no-await-in-loop
+  }
 };
 
 export const forgotPassword = async ({ email }) => {
