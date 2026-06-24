@@ -57,7 +57,7 @@ Developer mengusulkan pendekatan yang lebih baik dan akhirnya disepakati sebagai
 
 ---
 
-## Konsep Aplikasi: "TripSense" (nama sementara)
+## Konsep Aplikasi: "Travia" (nama sementara)
 
 ### Fitur MVP (Wajib, untuk demo)
 
@@ -125,6 +125,6 @@ Diskusi sudah mencapai tahap konsep matang dan keputusan strategi final (10 kate
 - Desain prompt engineering detail untuk signal extraction dari chat ke kategori
 - Breakdown timeline harian (Day 1 - Day 7)
 - Detail UI/UX flow tiap fitur
-- Penamaan final aplikasi (saat ini masih working title "TripSense")
+- Penamaan final aplikasi (saat ini masih working title "Travia")
 
 Dokumen ini dibuat untuk transfer knowledge ke sesi kerja berikutnya (Claude Code) agar pengembangan dapat dilanjutkan tanpa perlu re-explain konteks dari awal.
