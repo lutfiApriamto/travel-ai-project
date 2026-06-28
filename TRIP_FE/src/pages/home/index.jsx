@@ -1,158 +1,187 @@
-import { useEffect, useState }        from 'react';
-import { Link }                         from 'react-router-dom';
-import { motion, AnimatePresence }      from 'framer-motion';
+import { useEffect, useState }   from 'react';
+import { Link }                    from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  ArrowRight, Shield, Sparkles, Clock, Send,
+  ArrowRight, ArrowDown, Sparkles, Shield, Clock, Send,
 } from 'lucide-react';
-import { ROUTES }       from '../../utils/consts/routes.js';
-import { useBanners }   from './api/useHome.js';
-import BannerCarousel   from './components/BannerCarousel.jsx';
-import ProductSection   from './components/ProductSection.jsx';
+import { ROUTES }     from '../../utils/consts/routes.js';
+import { useBanners } from './api/useHome.js';
+import BannerCarousel from './components/BannerCarousel.jsx';
+import ProductSection from './components/ProductSection.jsx';
 
-// ─── Hero Section ─────────────────────────────────────────────────────────────
+// ─── Hero Section ──────────────────────────────────────────────────────────────
 
 const HeroSection = () => {
   const [loopKey,      setLoopKey]      = useState(0);
+  const [showGreeting, setShowGreeting] = useState(false);
   const [showUser,     setShowUser]     = useState(false);
   const [showTyping,   setShowTyping]   = useState(false);
   const [showAi,       setShowAi]       = useState(false);
   const [showProduct,  setShowProduct]  = useState(false);
 
   useEffect(() => {
+    setShowGreeting(false);
     setShowUser(false);
     setShowTyping(false);
     setShowAi(false);
     setShowProduct(false);
 
     const timers = [
-      setTimeout(() => setShowUser(true),                           350),
-      setTimeout(() => setShowTyping(true),                        1800),
-      setTimeout(() => { setShowTyping(false); setShowAi(true); }, 3200),
-      setTimeout(() => setShowProduct(true),                       4000),
-      setTimeout(() => setLoopKey((k) => k + 1),                  9500),
+      setTimeout(() => setShowGreeting(true),                          200),
+      setTimeout(() => setShowUser(true),                             1400),
+      setTimeout(() => setShowTyping(true),                           2600),
+      setTimeout(() => { setShowTyping(false); setShowAi(true); },   4000),
+      setTimeout(() => setShowProduct(true),                          4700),
+      setTimeout(() => setLoopKey((k) => k + 1),                    10500),
     ];
-
     return () => timers.forEach(clearTimeout);
   }, [loopKey]);
 
   return (
-    <section className="pt-6 pb-4 sm:pt-10 sm:pb-6">
-      <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+    <section className="relative py-14 sm:py-20 overflow-hidden">
 
-        {/* ── Kiri: Teks + CTA ────────────────────────────────────────────── */}
-        <div className="space-y-6 order-2 lg:order-1">
+      {/* Ambient orange glow — atas kanan */}
+      <div className="absolute -z-10 top-0 right-0 w-[700px] h-[700px] rounded-full
+        bg-travia-orange/7 blur-3xl pointer-events-none translate-x-1/3 -translate-y-1/3" />
 
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full
-            bg-travia-orange/10 border border-travia-orange/20">
-            <Sparkles className="w-3.5 h-3.5 text-travia-orange shrink-0" />
-            <span className="text-[11px] font-semibold text-travia-orange uppercase tracking-widest">
-              AI Travel Agent
-            </span>
-          </div>
+      <div className="grid lg:grid-cols-[45%_55%] gap-12 lg:gap-10 items-center">
 
-          {/* Heading */}
-          <h1 className="font-serif italic font-bold text-4xl sm:text-5xl lg:text-[52px]
-            leading-[1.15] text-foreground">
-            Temukan perjalanan{' '}
-            <span className="text-travia-orange">impian</span>{' '}
-            kamu bersama AI
+        {/* ── Kiri ──────────────────────────────────────────────────────── */}
+        <div className="space-y-8 order-2 lg:order-1">
+
+          {/* Heading — pendek, percakapan */}
+          <h1 className="font-serif italic font-bold text-foreground
+            text-[44px] sm:text-[58px] lg:text-[66px] leading-[1.06]">
+            Mau ke mana?<br />
+            <span className="text-travia-orange">Ceritakan aja.</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-md">
-            Ceritakan ke AI kami — budget, durasi, jumlah orang, dan vibe trip
-            yang kamu mau. Kami bantu rekomendasikan paket terbaik.
+          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-[400px]">
+            Travia AI bantu kamu temukan paket perjalanan terbaik sesuai budget,
+            durasi, dan vibe tripmu — cukup dengan ngobrol.
           </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-wrap gap-3 pt-1">
+          {/* CTA */}
+          <div className="flex flex-wrap gap-3">
             <Link
               to={ROUTES.AI}
-              className="inline-flex items-center gap-2 h-12 px-7 rounded-full
+              className="inline-flex items-center gap-2 h-12 px-8 rounded-full
                 bg-travia-orange hover:bg-travia-orange-h text-white font-semibold
-                text-sm transition-colors shadow-sm"
+                text-sm transition-colors shadow-md"
             >
-              Mulai Chat
+              Mulai Ngobrol
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               to={ROUTES.PRODUCTS}
-              className="inline-flex items-center h-12 px-7 rounded-full
+              className="inline-flex items-center h-12 px-8 rounded-full
                 border border-border text-foreground font-semibold text-sm
                 hover:bg-accent transition-colors"
             >
-              Lihat Produk
+              Lihat Paket
             </Link>
+          </div>
+
+          {/* Micro stats */}
+          <div className="flex items-center gap-6 pt-2">
+            {[
+              { v: '500+', l: 'destinasi' },
+              { v: '100%', l: 'terverifikasi' },
+              { v: '24/7', l: 'dukungan' },
+            ].map(({ v, l }, i) => (
+              <div key={l} className="flex items-baseline gap-1.5">
+                {i > 0 && (
+                  <span className="mr-4 -ml-2 w-px h-4 bg-border inline-block self-center" />
+                )}
+                <span className="font-serif italic font-bold text-lg text-travia-orange">{v}</span>
+                <span className="text-xs text-muted-foreground">{l}</span>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* ── Kanan: Chat Preview ─────────────────────────────────────────── */}
+        {/* ── Kanan: Chat Preview ───────────────────────────────────────── */}
         <div className="relative order-1 lg:order-2">
 
-          {/* Decorative blur blobs */}
-          <div className="absolute -z-10 -bottom-8 -right-8 w-52 h-52 rounded-full
-            bg-travia-orange/6 blur-3xl pointer-events-none" />
-          <div className="absolute -z-10 -top-8 -left-8 w-40 h-40 rounded-full
-            bg-travia-orange/4 blur-2xl pointer-events-none" />
+          {/* Glow behind card */}
+          <div className="absolute -z-10 -inset-4 bg-travia-orange/6 rounded-3xl
+            blur-2xl pointer-events-none" />
 
           {/* Card */}
-          <div className="bg-card border border-border rounded-2xl shadow-xl
-            overflow-hidden max-w-[420px] mx-auto lg:max-w-none">
+          <div className="bg-background rounded-2xl shadow-2xl overflow-hidden border border-border
+            max-w-[440px] mx-auto lg:max-w-none">
+
+            {/* Orange accent bar */}
+            <div className="h-0.5 w-full bg-travia-orange" />
 
             {/* Window chrome */}
-            <div className="flex items-center gap-3 px-4 py-3
-              border-b border-border bg-muted/40">
+            <div className="flex items-center gap-3 px-4 py-3 border-b border-border bg-card/50">
               <div className="flex gap-1.5 shrink-0">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
-                <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
-                <div className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
+                <div className="w-2.5 h-2.5 rounded-full bg-red-400/60" />
+                <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/60" />
+                <div className="w-2.5 h-2.5 rounded-full bg-green-400/60" />
               </div>
               <div className="flex-1 flex items-center justify-center gap-1.5">
                 <Sparkles className="w-3 h-3 text-travia-orange" />
-                <span className="text-xs font-medium text-muted-foreground">Travia AI</span>
+                <span className="text-xs font-semibold text-foreground/70">Travia AI</span>
               </div>
-              {/* Spacer untuk balance dengan dots */}
-              <div className="w-12 shrink-0" />
+              {/* Online indicator */}
+              <div className="flex items-center gap-1.5 shrink-0">
+                <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                <span className="text-[10px] text-muted-foreground">Online</span>
+              </div>
             </div>
 
-            {/* Chat messages area */}
-            <div className="p-4 space-y-3 h-[280px] overflow-hidden">
+            {/* Chat messages */}
+            <div className="p-4 space-y-3 h-[420px] overflow-hidden bg-background">
               <AnimatePresence>
+
+                {/* AI greeting */}
+                {showGreeting && (
+                  <motion.div key="greeting"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex justify-start"
+                  >
+                    <div className="max-w-[82%] bg-card border border-border text-foreground
+                      text-sm px-4 py-2.5 rounded-2xl rounded-tl-none">
+                      Hai! 👋 Mau trip kemana nih?
+                    </div>
+                  </motion.div>
+                )}
 
                 {/* User message */}
                 {showUser && (
-                  <motion.div
-                    key="user-msg"
-                    initial={{ opacity: 0, y: 10, scale: 0.97 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                  <motion.div key="user-msg"
+                    initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0,  scale: 1    }}
                     transition={{ duration: 0.3, ease: 'easeOut' }}
                     className="flex justify-end"
                   >
                     <div className="max-w-[78%] bg-travia-orange text-white text-sm
                       px-4 py-2.5 rounded-2xl rounded-tr-none shadow-sm">
-                      Mau liburan ke Bali 4 hari buat 2 orang, budget 3 jutaan
+                      Bali, 4 hari buat 2 orang. Budget 3 jutaan, suka pantai!
                     </div>
                   </motion.div>
                 )}
 
                 {/* Typing indicator */}
                 {showTyping && (
-                  <motion.div
-                    key="typing"
+                  <motion.div key="typing"
                     initial={{ opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 6 }}
+                    exit={{    opacity: 0, y: 6 }}
                     transition={{ duration: 0.2 }}
                     className="flex justify-start"
                   >
-                    <div className="bg-secondary border border-border
+                    <div className="bg-card border border-border
                       px-4 py-3 rounded-2xl rounded-tl-none">
                       <div className="flex items-center gap-1">
                         {[0, 1, 2].map((i) => (
-                          <div
-                            key={i}
-                            className="w-1.5 h-1.5 rounded-full bg-muted-foreground animate-bounce"
+                          <div key={i}
+                            className="w-1.5 h-1.5 rounded-full bg-muted-foreground/40 animate-bounce"
                             style={{ animationDelay: `${i * 150}ms` }}
                           />
                         ))}
@@ -161,51 +190,47 @@ const HeroSection = () => {
                   </motion.div>
                 )}
 
-                {/* AI message */}
+                {/* AI reply + products */}
                 {showAi && (
-                  <motion.div
-                    key="ai-msg"
-                    initial={{ opacity: 0, y: 10, scale: 0.97 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                  <motion.div key="ai-msg"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, ease: 'easeOut' }}
                     className="flex flex-col gap-2.5"
                   >
-                    <div className="self-start max-w-[82%] bg-secondary border border-border
+                    <div className="self-start max-w-[82%] bg-card border border-border
                       text-foreground text-sm px-4 py-2.5 rounded-2xl rounded-tl-none">
-                      Oke! Aku temukan paket yang pas buatmu&nbsp;🎉
+                      Cocok banget! Ini 2 paket yang aku rekomendasikan 🎉
                     </div>
 
-                    {/* Product card preview */}
+                    {/* Product cards — keduanya muncul saat showProduct */}
                     {showProduct && (
-                      <motion.div
-                        key="product-card"
-                        initial={{ opacity: 0, scale: 0.95, y: 6 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        transition={{ duration: 0.35, ease: 'easeOut' }}
-                        className="self-start w-[88%] border border-border rounded-xl
-                          overflow-hidden bg-background shadow-sm"
-                      >
-                        {/* Fake thumbnail */}
-                        <div className="h-[70px] bg-gradient-to-br
-                          from-travia-orange/15 via-travia-orange/8 to-transparent
-                          flex items-center justify-center">
-                          <span className="text-3xl select-none">🏖️</span>
-                        </div>
-                        <div className="px-3 py-2.5">
-                          <p className="text-sm font-semibold text-foreground leading-tight">
-                            Bali Open Trip
-                          </p>
-                          <p className="text-[11px] text-muted-foreground mt-0.5">
-                            4 Hari 3 Malam&nbsp;·&nbsp;2 Peserta
-                          </p>
-                          <p className="text-sm font-bold text-travia-orange mt-1.5">
-                            Rp 2.800.000
-                            <span className="text-[11px] font-normal text-muted-foreground">
-                              &nbsp;/orang
-                            </span>
-                          </p>
-                        </div>
-                      </motion.div>
+                      <div className="flex flex-col gap-2 w-[90%]">
+                        {[
+                          { emoji: '🏖️', name: 'Bali Coastal Trip', meta: '4H3M · 2 Peserta', price: 'Rp 2.600.000' },
+                          { emoji: '🌴', name: 'Bali Alam & Pantai', meta: '4H3M · 2 Peserta', price: 'Rp 2.850.000' },
+                        ].map((pkg, i) => (
+                          <motion.div key={pkg.name}
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.3, delay: i * 0.18 }}
+                            className="flex items-center gap-3 bg-background border border-border
+                              rounded-xl px-3 py-2.5 shadow-sm"
+                          >
+                            <div className="w-10 h-10 rounded-lg bg-travia-orange/10 flex items-center
+                              justify-center text-xl shrink-0">
+                              {pkg.emoji}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-semibold text-foreground leading-tight truncate">
+                                {pkg.name}
+                              </p>
+                              <p className="text-[11px] text-muted-foreground mt-0.5">{pkg.meta}</p>
+                            </div>
+                            <p className="text-sm font-bold text-travia-orange shrink-0">{pkg.price}</p>
+                          </motion.div>
+                        ))}
+                      </div>
                     )}
                   </motion.div>
                 )}
@@ -214,10 +239,10 @@ const HeroSection = () => {
             </div>
 
             {/* Input bar (dekoratif) */}
-            <div className="px-4 py-3 border-t border-border flex items-center gap-2">
-              <div className="flex-1 h-9 px-3.5 rounded-full bg-muted/60 border border-border
+            <div className="px-4 py-3 border-t border-border flex items-center gap-2 bg-card/40">
+              <div className="flex-1 h-9 px-4 rounded-full bg-background border border-border
                 text-xs text-muted-foreground flex items-center select-none">
-                Ceritakan trip impianmu...
+                Ketik destinasi atau pertanyaanmu...
               </div>
               <button
                 tabIndex={-1}
@@ -236,75 +261,103 @@ const HeroSection = () => {
   );
 };
 
-// ─── Trust Bar ────────────────────────────────────────────────────────────────
+// ─── How It Works ─────────────────────────────────────────────────────────────
+// Sequence genuinely 3 steps: tell → AI finds → book
 
-const TRUST_ITEMS = [
-  { value: '500+', label: 'Destinasi Tersedia'  },
-  { value: 'AI',   label: 'Rekomendasi Cerdas'  },
-  { value: '100%', label: 'Paket Terverifikasi' },
-  { value: '24/7', label: 'Dukungan Perjalanan' },
-];
-
-const TrustBar = () => (
-  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-6 border-y border-border">
-    {TRUST_ITEMS.map(({ value, label }) => (
-      <div key={label} className="text-center">
-        <p className="font-bold text-xl sm:text-2xl text-travia-orange">{value}</p>
-        <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">{label}</p>
-      </div>
-    ))}
-  </div>
-);
-
-// ─── Why Travia Section ───────────────────────────────────────────────────────
-
-const WHY_ITEMS = [
+const HOW_ITEMS = [
   {
     Icon:  Sparkles,
-    title: 'Rekomendasi Cerdas',
-    desc:  'Travia AI memahami preferensi perjalananmu dan menyarankan paket yang benar‑benar sesuai, bukan sekadar iklan.',
+    title: 'Ceritakan tripmu',
+    desc:  'Budget, destinasi, berapa hari, dan vibe yang kamu mau. Tidak perlu form — cukup ngobrol.',
   },
   {
     Icon:  Shield,
-    title: 'Paket Terpercaya',
-    desc:  'Setiap paket dikurasi dan diverifikasi secara menyeluruh — detail itinerary, harga, dan ketersediaan selalu akurat.',
+    title: 'AI rekomendasikan',
+    desc:  'AI kami analisa kebutuhanmu dan temukan paket terbaik dari ratusan pilihan yang sudah terverifikasi.',
   },
   {
     Icon:  Clock,
-    title: 'Pemesanan Kilat',
-    desc:  'Dari pencarian hingga konfirmasi dalam hitungan menit. Pembayaran aman, tiket langsung di tanganmu.',
+    title: 'Pesan & berangkat',
+    desc:  'Pilih paket, bayar aman lewat berbagai metode, dan tiket langsung di tangan kamu.',
   },
 ];
 
-const WhyTravia = () => (
+const HowItWorks = () => (
   <section>
-    <div className="text-center mb-10">
-      <h2 className="font-serif italic text-2xl sm:text-3xl text-foreground">
-        Kenapa Memilih Tr<span className="text-travia-orange">avi</span>a?
+    <div className="text-center mb-12">
+      <h2 className="font-serif italic text-3xl sm:text-4xl text-foreground">
+        Cara kerjanya{' '}
+        <span className="text-travia-orange">sederhana</span>
       </h2>
-      <p className="text-sm text-muted-foreground mt-2 max-w-xl mx-auto">
-        Kami menggabungkan kecerdasan buatan dengan pilihan paket perjalanan terbaik
-        untuk pengalaman liburan yang tak terlupakan.
+      <p className="text-sm sm:text-base text-muted-foreground mt-3 max-w-lg mx-auto leading-relaxed">
+        Dari cerita sampai tiket — semuanya cepat, mudah, dan terpercaya.
       </p>
     </div>
 
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-      {WHY_ITEMS.map(({ Icon, title, desc }) => (
-        <div
-          key={title}
-          className="bg-card border border-border rounded-2xl p-6 hover:shadow-md
-            hover:-translate-y-0.5 transition-all duration-200"
-        >
-          <div className="w-11 h-11 rounded-xl bg-travia-orange/10 flex items-center
-            justify-center text-travia-orange mb-4">
-            <Icon className="w-5 h-5" />
+    {/* 3 steps — responsive: stacked mobile, horizontal desktop */}
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-0">
+      {HOW_ITEMS.map(({ Icon, title, desc }, idx) => (
+        <div key={title} className="relative flex sm:flex-col items-start sm:items-center
+          gap-5 sm:gap-4 p-6 sm:p-8 text-left sm:text-center
+          border-b sm:border-b-0 sm:border-r border-border last:border-0">
+
+          {/* Step circle */}
+          <div className="relative shrink-0">
+            <div className="w-12 h-12 rounded-full border-2 border-travia-orange/30
+              bg-travia-orange/8 flex items-center justify-center text-travia-orange">
+              <Icon className="w-5 h-5" />
+            </div>
+            {/* Step number */}
+            <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full
+              bg-travia-orange text-white text-[10px] font-bold
+              flex items-center justify-center leading-none">
+              {idx + 1}
+            </span>
           </div>
-          <h3 className="font-semibold text-foreground mb-2">{title}</h3>
-          <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
+
+          {/* Content */}
+          <div>
+            <h3 className="font-semibold text-foreground text-base mb-1.5">{title}</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
+          </div>
+
+          {/* Connector arrow (desktop only, not on last) */}
+          {idx < HOW_ITEMS.length - 1 && (
+            <ArrowDown className="hidden sm:block absolute top-8 -right-3 w-5 h-5
+              text-muted-foreground/40 rotate-[-90deg] z-10 bg-background" />
+          )}
         </div>
       ))}
     </div>
   </section>
+);
+
+// ─── Stats Row ────────────────────────────────────────────────────────────────
+
+const STATS = [
+  { value: '500+', label: 'Destinasi' },
+  { value: 'AI',   label: 'Powered'   },
+  { value: '100%', label: 'Terverifikasi' },
+  { value: '24/7', label: 'Dukungan'  },
+];
+
+const StatsRow = () => (
+  <div className="flex flex-wrap items-center justify-center sm:justify-between
+    gap-y-5 gap-x-0 border-y border-border py-6 sm:py-8">
+    {STATS.map(({ value, label }, i) => (
+      <div key={label} className="flex items-center">
+        {i > 0 && (
+          <span className="hidden sm:block w-px h-8 bg-border mx-8 shrink-0" />
+        )}
+        <div className="text-center sm:text-left px-6 sm:px-0">
+          <p className="font-serif italic font-bold text-2xl sm:text-3xl text-travia-orange leading-none">
+            {value}
+          </p>
+          <p className="text-xs text-muted-foreground mt-1.5 font-medium">{label}</p>
+        </div>
+      </div>
+    ))}
+  </div>
 );
 
 // ─── HomePage ─────────────────────────────────────────────────────────────────
@@ -313,12 +366,10 @@ const HomePage = () => {
   const { data: banners = [], isLoading: bannersLoading } = useBanners();
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-6 space-y-12 sm:space-y-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-14 sm:space-y-20 pb-12">
 
-      {/* Hero Section — above the fold, langsung tampilkan value prop + AI */}
       <HeroSection />
 
-      {/* Banner Carousel */}
       {bannersLoading ? (
         <div className="w-full aspect-[21/7] sm:aspect-[21/6] lg:aspect-[21/5]
           rounded-2xl bg-muted animate-pulse" />
@@ -326,14 +377,11 @@ const HomePage = () => {
         <BannerCarousel banners={banners} />
       )}
 
-      {/* Trust Bar */}
-      <TrustBar />
+      <StatsRow />
 
-      {/* Product Section (category filter + infinite scroll) */}
       <ProductSection />
 
-      {/* Why Travia */}
-      <WhyTravia />
+      <HowItWorks />
 
     </div>
   );

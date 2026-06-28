@@ -1,6 +1,6 @@
 import { useState }    from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Heart, ShoppingCart, Minus, Plus, ChevronDown, ChevronUp, Loader2, CreditCard } from 'lucide-react';
+import { Heart, ShoppingCart, Minus, Plus, ChevronDown, ChevronUp, Loader2, CreditCard, AlertTriangle } from 'lucide-react';
 import { cn }          from '../../../lib/utils.js';
 import { ROUTES }      from '../../../utils/consts/routes.js';
 import { useToggleWishlist, useAddToCart } from '../api/useProductDetail.js';
@@ -192,6 +192,12 @@ const BookingCard = ({
             </button>
             <span className="text-xs text-muted-foreground ml-1">orang</span>
           </div>
+          {participants >= remaining && (
+            <div className="flex items-center gap-1.5 mt-2 text-xs text-amber-600 dark:text-amber-400">
+              <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
+              <span>Sudah mencapai batas maksimum sisa slot</span>
+            </div>
+          )}
         </div>
       )}
 

@@ -6,7 +6,7 @@ import {
   Check, X as XIcon, ChevronRight, Utensils,
   BedDouble, ShoppingCart, Heart, Loader2,
   Coffee, UtensilsCrossed, PackageSearch,
-  CreditCard, ChevronUp,
+  CreditCard, ChevronUp, Minus, Plus, AlertTriangle,
 } from 'lucide-react';
 import { cn }                            from '../../lib/utils.js';
 import { ROUTES }                        from '../../utils/consts/routes.js';
@@ -139,101 +139,129 @@ const Itinerary = ({ items = [] }) => {
   return (
     <section>
       <h3 className="font-serif italic text-xl text-foreground mb-4">Itinerary</h3>
-      <div className="space-y-0">
+      <div className="space-y-2">
         {items.map((day, i) => {
           const isOpen = expanded === i;
+          const hasMeals = day.meals?.breakfast || day.meals?.lunch || day.meals?.dinner;
+
           return (
-            <div key={i} className="flex gap-4">
-              {/* Timeline connector */}
-              <div className="flex flex-col items-center shrink-0">
-                <div className="w-8 h-8 rounded-full bg-travia-orange/10 border-2 border-travia-orange
-                  flex items-center justify-center shrink-0 z-10">
-                  <span className="text-[10px] font-bold text-travia-orange">{day.day}</span>
+            <div key={i} className="border border-border rounded-xl overflow-hidden bg-background">
+
+              {/* Header — seluruhnya bisa diklik */}
+              <button
+                onClick={() => setExpanded(isOpen ? null : i)}
+                className="w-full flex items-center gap-3 sm:gap-4 px-4 py-3.5 text-left
+                  hover:bg-accent/50 transition-colors group"
+              >
+                {/* Day badge */}
+                <div className={cn(
+                  'w-10 h-10 rounded-full flex items-center justify-center shrink-0',
+                  'border-2 transition-colors duration-200',
+                  isOpen
+                    ? 'bg-travia-orange border-travia-orange text-white'
+                    : 'bg-travia-orange/8 border-travia-orange/30 text-travia-orange',
+                )}>
+                  <span className="text-[11px] font-bold leading-none">H{day.day}</span>
                 </div>
-                {i < items.length - 1 && (
-                  <div className="w-px flex-1 bg-border my-1" />
-                )}
-              </div>
 
-              {/* Content */}
-              <div className={cn('flex-1 pb-6', i === items.length - 1 && 'pb-0')}>
-                <button
-                  onClick={() => setExpanded(isOpen ? null : i)}
-                  className="w-full flex items-start justify-between gap-3 text-left
-                    py-1.5 group"
-                >
-                  <div>
-                    <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-wide">
-                      Hari ke-{day.day}
-                    </p>
-                    <p className="font-semibold text-foreground group-hover:text-travia-orange
-                      transition-colors text-sm sm:text-base">
-                      {day.title}
-                    </p>
+                {/* Text */}
+                <div className="flex-1 min-w-0">
+                  <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-wider">
+                    Hari ke-{day.day}
+                  </p>
+                  <p className={cn(
+                    'text-sm font-semibold leading-tight mt-0.5 transition-colors',
+                    isOpen ? 'text-travia-orange' : 'text-foreground group-hover:text-travia-orange',
+                  )}>
+                    {day.title}
+                  </p>
+                </div>
+
+                {/* Meal icons preview (visible tanpa harus expand) */}
+                {hasMeals && (
+                  <div className="hidden sm:flex items-center gap-1.5 shrink-0">
+                    {day.meals?.breakfast && (
+                      <Coffee className="w-3.5 h-3.5 text-muted-foreground/50" />
+                    )}
+                    {day.meals?.lunch && (
+                      <Utensils className="w-3.5 h-3.5 text-muted-foreground/50" />
+                    )}
+                    {day.meals?.dinner && (
+                      <UtensilsCrossed className="w-3.5 h-3.5 text-muted-foreground/50" />
+                    )}
                   </div>
+                )}
+
+                {/* Chevron */}
+                <motion.div
+                  animate={{ rotate: isOpen ? 90 : 0 }}
+                  transition={{ duration: 0.22, ease: 'easeInOut' }}
+                  className="shrink-0"
+                >
+                  <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                </motion.div>
+              </button>
+
+              {/* Expanded content */}
+              <AnimatePresence initial={false}>
+                {isOpen && (
                   <motion.div
-                    animate={{ rotate: isOpen ? 90 : 0 }}
-                    transition={{ duration: 0.22, ease: 'easeInOut' }}
-                    className="shrink-0 mt-1"
+                    key={`day-${i}`}
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+                    style={{ overflow: 'hidden' }}
                   >
-                    <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    <div className="border-t border-border px-4 pt-4 pb-5 space-y-4">
+
+                      {/* Activities */}
+                      <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
+                        {day.activities}
+                      </p>
+
+                      {/* Hotel */}
+                      {day.hotel && (
+                        <div className="flex items-center gap-2.5 text-sm bg-card
+                          border border-border rounded-lg px-3 py-2.5">
+                          <BedDouble className="w-4 h-4 text-travia-orange shrink-0" />
+                          <span className="text-muted-foreground">
+                            Menginap di:{' '}
+                            <strong className="text-foreground font-medium">{day.hotel}</strong>
+                          </span>
+                        </div>
+                      )}
+
+                      {/* Meals — neutral pills, warna dari icon saja */}
+                      {hasMeals && (
+                        <div className="flex flex-wrap gap-2">
+                          {day.meals?.breakfast && (
+                            <span className="inline-flex items-center gap-1.5 text-xs font-medium
+                              px-3 py-1 rounded-full bg-card border border-border text-foreground">
+                              <Coffee className="w-3.5 h-3.5 text-travia-orange" />
+                              Sarapan
+                            </span>
+                          )}
+                          {day.meals?.lunch && (
+                            <span className="inline-flex items-center gap-1.5 text-xs font-medium
+                              px-3 py-1 rounded-full bg-card border border-border text-foreground">
+                              <Utensils className="w-3.5 h-3.5 text-travia-orange" />
+                              Makan Siang
+                            </span>
+                          )}
+                          {day.meals?.dinner && (
+                            <span className="inline-flex items-center gap-1.5 text-xs font-medium
+                              px-3 py-1 rounded-full bg-card border border-border text-foreground">
+                              <UtensilsCrossed className="w-3.5 h-3.5 text-travia-orange" />
+                              Makan Malam
+                            </span>
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </motion.div>
-                </button>
-
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      key={`day-${i}`}
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
-                      style={{ overflow: 'hidden' }}
-                    >
-                      <div className="mt-2 space-y-3 bg-accent/40 rounded-xl p-4 border border-border">
-                        <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
-                          {day.activities}
-                        </p>
-
-                        {/* Hotel */}
-                        {day.hotel && (
-                          <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                            <BedDouble className="w-3.5 h-3.5 shrink-0 text-travia-orange" />
-                            <span>Menginap di: <strong className="text-foreground">{day.hotel}</strong></span>
-                          </div>
-                        )}
-
-                        {/* Meals */}
-                        {(day.meals?.breakfast || day.meals?.lunch || day.meals?.dinner) && (
-                          <div className="flex flex-wrap gap-1.5">
-                            {day.meals.breakfast && (
-                              <span className="flex items-center gap-1 text-[10px] font-medium
-                                px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/30
-                                text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800/50">
-                                <Coffee className="w-3 h-3" /> Sarapan
-                              </span>
-                            )}
-                            {day.meals.lunch && (
-                              <span className="flex items-center gap-1 text-[10px] font-medium
-                                px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/30
-                                text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/50">
-                                <Utensils className="w-3 h-3" /> Makan Siang
-                              </span>
-                            )}
-                            {day.meals.dinner && (
-                              <span className="flex items-center gap-1 text-[10px] font-medium
-                                px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/30
-                                text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800/50">
-                                <UtensilsCrossed className="w-3 h-3" /> Makan Malam
-                              </span>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+                )}
+              </AnimatePresence>
             </div>
           );
         })}
@@ -249,43 +277,47 @@ const IncludesExcludes = ({ includes = [], excludes = [] }) => {
 
   return (
     <section>
-      <h3 className="font-serif italic text-xl text-foreground mb-4">
+      <h3 className="font-serif italic text-xl text-foreground mb-5">
         Sudah Termasuk & Tidak Termasuk
       </h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="space-y-5">
         {includes.length > 0 && (
-          <div className="bg-emerald-50 dark:bg-emerald-950/20 rounded-xl p-4
-            border border-emerald-200 dark:border-emerald-800/40">
-            <p className="text-xs font-bold text-emerald-700 dark:text-emerald-400
-              uppercase tracking-wide mb-3">
-              Sudah Termasuk
-            </p>
-            <ul className="space-y-1.5">
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <Check className="w-3.5 h-3.5 text-emerald-500" />
+              <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-widest">
+                Sudah Termasuk
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
               {includes.map((item, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-foreground">
-                  <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5
+                  rounded-full text-sm bg-card border border-border text-foreground">
+                  <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
                   {item}
-                </li>
+                </span>
               ))}
-            </ul>
+            </div>
           </div>
         )}
 
         {excludes.length > 0 && (
-          <div className="bg-red-50 dark:bg-red-950/20 rounded-xl p-4
-            border border-red-200 dark:border-red-800/40">
-            <p className="text-xs font-bold text-red-600 dark:text-red-400
-              uppercase tracking-wide mb-3">
-              Tidak Termasuk
-            </p>
-            <ul className="space-y-1.5">
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <XIcon className="w-3.5 h-3.5 text-red-400" />
+              <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-widest">
+                Tidak Termasuk
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
               {excludes.map((item, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-foreground">
-                  <XIcon className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5
+                  rounded-full text-sm bg-card border border-border text-foreground">
+                  <XIcon className="w-3.5 h-3.5 text-red-400 shrink-0" />
                   {item}
-                </li>
+                </span>
               ))}
-            </ul>
+            </div>
           </div>
         )}
       </div>
@@ -302,9 +334,17 @@ const MobileBottomBar = ({ product, isAuthenticated, isWishlisted, productId }) 
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showOptions,   setShowOptions]   = useState(false);
 
-  const remaining    = Math.max(0, (product?.quota ?? 0) - (product?.bookedSlots ?? 0));
-  const isFull       = remaining === 0;
-  const participants = product?.minParticipants ?? 1;
+  const remaining = Math.max(0, (product?.quota ?? 0) - (product?.bookedSlots ?? 0));
+  const isFull    = remaining === 0;
+  const minPax    = product?.minParticipants ?? 1;
+
+  const [participants, setParticipants] = useState(minPax);
+
+  const handleParticipants = (delta) => {
+    setParticipants((p) => Math.max(minPax, Math.min(remaining, p + delta)));
+  };
+
+  const slotWarning = !isFull && participants >= remaining;
 
   const requireAuth = () => {
     if (!isAuthenticated) { setShowAuthModal(true); return false; }
@@ -424,9 +464,49 @@ const MobileBottomBar = ({ product, isAuthenticated, isWishlisted, productId }) 
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 8, scale: 0.97 }}
                 transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
-                className="absolute z-50 right-0 bottom-full mb-3 w-60
+                className="absolute z-50 right-0 bottom-full mb-3 w-72
                   bg-card border border-border rounded-2xl shadow-2xl overflow-hidden"
               >
+                {/* Participant stepper */}
+                <div className="px-4 py-3 border-b border-border">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="text-xs font-semibold text-foreground">Jumlah Peserta</p>
+                      <p className="text-[11px] text-muted-foreground mt-0.5">
+                        {remaining} slot tersisa
+                        {minPax > 1 && ` · min ${minPax} orang`}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2 shrink-0">
+                      <button
+                        onClick={() => handleParticipants(-1)}
+                        disabled={participants <= minPax}
+                        className="w-8 h-8 rounded-lg border border-border flex items-center justify-center
+                          text-foreground hover:bg-accent disabled:opacity-30 transition-colors"
+                      >
+                        <Minus className="w-3.5 h-3.5" />
+                      </button>
+                      <span className="w-6 text-center text-sm font-bold text-foreground">
+                        {participants}
+                      </span>
+                      <button
+                        onClick={() => handleParticipants(1)}
+                        disabled={participants >= remaining}
+                        className="w-8 h-8 rounded-lg border border-border flex items-center justify-center
+                          text-foreground hover:bg-accent disabled:opacity-30 transition-colors"
+                      >
+                        <Plus className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                  {slotWarning && (
+                    <div className="flex items-center gap-1.5 mt-2.5 text-[11px] text-amber-600 dark:text-amber-400">
+                      <AlertTriangle className="w-3 h-3 shrink-0" />
+                      <span>Sudah mencapai batas maksimum sisa slot</span>
+                    </div>
+                  )}
+                </div>
+
                 {/* Checkout langsung */}
                 <button
                   onClick={handleCheckoutLangsung}

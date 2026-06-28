@@ -77,17 +77,17 @@ const App = () => {
         toastOptions={{
           duration: 3500,
           style: {
-            background: isDark ? '#2C2C2E' : '#FFFFFF',
-            color:      isDark ? '#EBEBF5' : '#1C1C1E',
-            border:     isDark ? '1px solid #3A3A3C' : '1px solid #E5E5EA',
+            background: isDark ? '#1E1C19' : '#FFFFFF',
+            color:      isDark ? '#F8FAFC' : '#0F172A',
+            border:     isDark ? '1px solid #2C2926' : '1px solid #E2E8F0',
             fontSize:   '14px',
-            fontFamily: 'Inter, Arial, sans-serif',
+            fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
           },
           success: {
-            iconTheme: { primary: '#17B26A', secondary: isDark ? '#2C2C2E' : '#FFFFFF' },
+            iconTheme: { primary: '#17B26A', secondary: isDark ? '#1E1C19' : '#FFFFFF' },
           },
           error: {
-            iconTheme: { primary: '#F04438', secondary: isDark ? '#2C2C2E' : '#FFFFFF' },
+            iconTheme: { primary: '#F04438', secondary: isDark ? '#1E1C19' : '#FFFFFF' },
           },
         }}
       />

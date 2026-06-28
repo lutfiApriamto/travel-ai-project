@@ -4,55 +4,54 @@
 /* ─── Dark mode variant ───────────────────────────────────────────────────── */
 @custom-variant dark (&:is(.dark *));
 
-/* ─── Light Mode — Default Theme Values ──────────────────────────────────── */
-/* Palette: Slate v2.0 — 60% neutral white/gray, 30% surface, 10% orange     */
+/* ─── Light Mode ──────────────────────────────────────────────────────────── */
 
 @theme {
   /* ── shadcn semantic tokens ──────────────────────────────── */
   --color-background:           #FFFFFF;
-  --color-foreground:           #1C1C1E;
-  --color-card:                 #F2F2F7;
-  --color-card-foreground:      #1C1C1E;
+  --color-foreground:           #0F172A;
+  --color-card:                 #F8FAFC;
+  --color-card-foreground:      #0F172A;
   --color-popover:              #FFFFFF;
-  --color-popover-foreground:   #1C1C1E;
+  --color-popover-foreground:   #0F172A;
   --color-primary:              #FF6B35;
   --color-primary-foreground:   #FFFFFF;
-  --color-secondary:            #F2F2F7;
-  --color-secondary-foreground: #3A3A3C;
-  --color-muted:                #F2F2F7;
-  --color-muted-foreground:     #AEAEB2;
-  --color-accent:               #FFE8D8;
-  --color-accent-foreground:    #C44A10;
+  --color-secondary:            #F1F5F9;
+  --color-secondary-foreground: #334155;
+  --color-muted:                #F1F5F9;
+  --color-muted-foreground:     #64748B;
+  --color-accent:               #FFF4F0;
+  --color-accent-foreground:    #0F172A;
   --color-destructive:          #F04438;
-  --color-border:               #E5E5EA;
-  --color-input:                #E5E5EA;
+  --color-border:               #E2E8F0;
+  --color-input:                #E2E8F0;
   --color-ring:                 #FF6B35;
 
-  /* ── Page shell (outer background, sedikit lebih gelap dari content) ── */
-  --color-page-shell: #E5E5EA;
+  /* ── Page shell ──────────────────────────────────────────── */
+  --color-page-shell: #F1F5F9;
 
-  /* ── Travia brand static colors (Slate palette) ──────────── */
+  /* ── Travia brand tokens ──────────────────────────────────── */
   --color-travia-orange:   #FF6B35;
   --color-travia-orange-h: #E85D20;
   --color-travia-orange-s: #FFB07A;
-  --color-travia-dark:     #1C1C1E;
-  --color-travia-dark2:    #2C2C2E;
-  --color-travia-dark3:    #3A3A3C;
-  --color-travia-slate600: #636366;
-  --color-travia-gray400:  #AEAEB2;
+  --color-travia-dark:     #0F0E0C;
+  --color-travia-dark2:    #1E1C19;
+  --color-travia-dark3:    #2C2926;
+  --color-travia-slate600: #475569;
+  --color-travia-gray400:  #94A3B8;
   --color-travia-light:    #FFFFFF;
-  --color-travia-light2:   #F2F2F7;
-  --color-travia-light3:   #E5E5EA;
+  --color-travia-light2:   #F8FAFC;
+  --color-travia-light3:   #F1F5F9;
 
-  /* ── Status colors (tetap sama di kedua mode) ────────────── */
+  /* ── Status colors ───────────────────────────────────────── */
   --color-status-success: #17B26A;
   --color-status-warning: #F79009;
   --color-status-danger:  #F04438;
   --color-status-info:    #3B82F6;
 
   /* ── Typography ──────────────────────────────────────────── */
-  --font-serif: Georgia, 'Times New Roman', serif;
-  --font-sans:  Inter, Arial, sans-serif;
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-sans:  'Plus Jakarta Sans', system-ui, sans-serif;
 
   /* ── Border radius ───────────────────────────────────────── */
   --radius:    0.5rem;
@@ -60,30 +59,36 @@
   --radius-md: 0.375rem;
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;
+
+  /* ── Custom animations ───────────────────────────────────── */
+  --animate-ticker: ticker 40s linear infinite;
 }
 
-/* ─── Dark Mode Overrides ─────────────────────────────────────────────────── */
-/* Slate 900/800/700 — clean neutral dark, bukan warm brown                   */
+@keyframes ticker {
+  to { transform: translateX(-50%); }
+}
+
+/* ─── Dark Mode ───────────────────────────────────────────────────────────── */
 
 .dark {
-  --color-page-shell:           #0D0D0F;
-  --color-background:           #1C1C1E;
-  --color-foreground:           #EBEBF5;
-  --color-card:                 #2C2C2E;
-  --color-card-foreground:      #EBEBF5;
-  --color-popover:              #2C2C2E;
-  --color-popover-foreground:   #EBEBF5;
+  --color-page-shell:           #0D0B09;
+  --color-background:           #141210;
+  --color-foreground:           #F8FAFC;
+  --color-card:                 #1E1C19;
+  --color-card-foreground:      #F8FAFC;
+  --color-popover:              #1E1C19;
+  --color-popover-foreground:   #F8FAFC;
   --color-primary:              #FF6B35;
   --color-primary-foreground:   #FFFFFF;
-  --color-secondary:            #3A3A3C;
-  --color-secondary-foreground: #EBEBF5;
-  --color-muted:                #3A3A3C;
-  --color-muted-foreground:     #636366;
-  --color-accent:               #3A3A3C;
+  --color-secondary:            #252220;
+  --color-secondary-foreground: #F8FAFC;
+  --color-muted:                #252220;
+  --color-muted-foreground:     #94A3B8;
+  --color-accent:               #252220;
   --color-accent-foreground:    #FF6B35;
   --color-destructive:          #F04438;
-  --color-border:               #3A3A3C;
-  --color-input:                #3A3A3C;
+  --color-border:               #2C2926;
+  --color-input:                #2C2926;
   --color-ring:                 #FF6B35;
 }
 
