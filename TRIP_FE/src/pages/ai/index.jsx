@@ -278,10 +278,12 @@ const AiChatPage = () => {
   const [requestTimestamps, setRequestTimestamps] = useState([]);
   const [showClearConfirm,  setShowClearConfirm]  = useState(false);
   const [forceShowAll,      setForceShowAll]      = useState(false);
+  const [chatHeight,        setChatHeight]        = useState(null); // null = pakai tinggi default responsif (CSS)
 
   const messagesContainerRef = useRef(null);
   const textareaRef          = useRef(null);
   const productRef           = useRef(null);
+  const wasPendingRef        = useRef(false); // lacak transisi loading: true → false
 
   const aiChat = useAiChat();
 
@@ -332,6 +334,20 @@ const AiChatPage = () => {
     if (!container) return;
     container.scrollTop = container.scrollHeight;
   }, [messages, aiChat.isPending]);
+
+  // ── (1) Auto-focus input saat halaman pertama dibuka ──────────────────────
+  useEffect(() => {
+    textareaRef.current?.focus();
+  }, []);
+
+  // ── (2) Kembalikan fokus ke input setelah AI selesai loading ──────────────
+  // Hanya saat transisi pending true → false, dan input tidak sedang disabled.
+  useEffect(() => {
+    if (wasPendingRef.current && !aiChat.isPending && !rateLimitHit) {
+      textareaRef.current?.focus();
+    }
+    wasPendingRef.current = aiChat.isPending;
+  }, [aiChat.isPending, rateLimitHit]);
 
   // ── Scroll ke bagian produk HANYA saat AI punya rekomendasi spesifik ──────
   useEffect(() => {
@@ -414,6 +430,28 @@ const AiChatPage = () => {
     setForceShowAll(false);
   };
 
+  // ── (3) Resize tinggi area chat via drag handle ──────────────────────────
+  // Pakai pointer events agar jalan di mouse maupun touch. Tinggi dibatasi
+  // MIN dan MAX yang dihitung dari tinggi viewport → tetap responsif per device.
+  const startResize = (e) => {
+    e.preventDefault();
+    const startY      = e.clientY;
+    const startHeight = messagesContainerRef.current?.offsetHeight ?? 380;
+    const MIN = 240;
+    const MAX = Math.max(MIN, Math.round(window.innerHeight * 0.7));
+
+    const onMove = (ev) => {
+      const next = Math.min(MAX, Math.max(MIN, startHeight + (ev.clientY - startY)));
+      setChatHeight(next);
+    };
+    const onUp = () => {
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerup',   onUp);
+    };
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerup',   onUp);
+  };
+
   const productSectionLabel = isFiltered
     ? `Rekomendasi AI · ${effectiveResponse.recommendedProductIds.length} paket`
     : 'Semua Paket Perjalanan';
@@ -461,7 +499,14 @@ const AiChatPage = () => {
           <div className="bg-card border border-border rounded-2xl overflow-hidden">
 
             {/* Messages area */}
-            <div ref={messagesContainerRef} className="h-[320px] sm:h-[380px] overflow-y-auto px-4 sm:px-6 py-5 space-y-4">
+            <div
+              ref={messagesContainerRef}
+              className={cn(
+                'overflow-y-auto px-4 sm:px-6 py-5 space-y-4',
+                chatHeight == null && 'h-[320px] sm:h-[380px]', // default responsif sebelum di-resize
+              )}
+              style={chatHeight != null ? { height: chatHeight } : undefined}
+            >
               {messages.length === 0 ? (
                 /* Welcome */
                 <div className="flex flex-col items-center justify-center h-full text-center gap-5">
@@ -507,6 +552,21 @@ const AiChatPage = () => {
               )}
 
               <div />
+            </div>
+
+            {/* Drag handle — tarik untuk ubah tinggi area chat (mouse & touch) */}
+            <div
+              onPointerDown={startResize}
+              role="separator"
+              aria-orientation="horizontal"
+              aria-label="Tarik untuk mengubah tinggi area chat"
+              title="Tarik untuk mengubah tinggi"
+              className="group flex items-center justify-center h-3.5 cursor-row-resize
+                border-t border-border bg-card/40 hover:bg-accent transition-colors
+                select-none touch-none"
+            >
+              <div className="w-10 h-1 rounded-full bg-border
+                group-hover:bg-muted-foreground/40 transition-colors" />
             </div>
 
             {/* Input area */}

@@ -44,7 +44,7 @@ const HeroSection = () => {
       <div className="absolute -z-10 top-0 right-0 w-[700px] h-[700px] rounded-full
         bg-travia-orange/7 blur-3xl pointer-events-none translate-x-1/3 -translate-y-1/3" />
 
-      <div className="grid lg:grid-cols-[45%_55%] gap-12 lg:gap-10 items-center">
+      <div className="grid lg:grid-cols-[45%_1fr] gap-12 lg:gap-10 items-center">
 
         {/* ── Kiri ──────────────────────────────────────────────────────── */}
         <div className="space-y-8 order-2 lg:order-1">
@@ -134,7 +134,7 @@ const HeroSection = () => {
             </div>
 
             {/* Chat messages */}
-            <div className="p-4 space-y-3 h-[420px] overflow-hidden bg-background">
+            <div className="p-4 space-y-3 min-h-[380px] bg-background">
               <AnimatePresence>
 
                 {/* AI greeting */}

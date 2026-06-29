@@ -5,6 +5,47 @@ import Product  from '../../models/product.model.js';
 const MODEL       = 'gemini-2.5-flash';
 const MAX_HISTORY = 10; // potong history ke N pesan terakhir sebelum dikirim ke Gemini
 
+// ─── JSON parse tahan-banting ──────────────────────────────────────────────────
+// Gemini kadang mengeluarkan control character MENTAH (newline, tab, dll) di dalam
+// nilai string JSON tanpa di-escape — JSON.parse strict menolaknya
+// ("Bad control character in string literal"). Helper ini menelusuri string,
+// melacak apakah posisi sedang di dalam string literal, lalu meng-escape control
+// character yang ditemukan di dalamnya. Whitespace struktural antar token (di luar
+// string) dibiarkan apa adanya.
+
+const escapeControlCharsInStrings = (raw) => {
+  let result   = '';
+  let inString = false;
+  let escaped  = false;
+
+  for (const ch of raw) {
+    if (escaped)        { result += ch; escaped = false; continue; }
+    if (ch === '\\')    { result += ch; escaped = true;  continue; }
+    if (ch === '"')     { inString = !inString; result += ch; continue; }
+
+    if (inString && ch.charCodeAt(0) < 0x20) {
+      if      (ch === '\n') result += '\\n';
+      else if (ch === '\r') result += '\\r';
+      else if (ch === '\t') result += '\\t';
+      else                  result += `\\u${ch.charCodeAt(0).toString(16).padStart(4, '0')}`;
+      continue;
+    }
+
+    result += ch;
+  }
+  return result;
+};
+
+// Parse JSON dari Gemini; jika gagal karena control character mentah, sanitasi
+// lalu coba sekali lagi sebelum menyerah.
+const parseGeminiJson = (raw) => {
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return JSON.parse(escapeControlCharsInStrings(raw));
+  }
+};
+
 // ─── System Prompt ────────────────────────────────────────────────────────────
 
 const buildSystemPrompt = (catalog) => `
@@ -88,7 +129,7 @@ export const chat = async ({ message, conversationHistory = [] }) => {
       throw new Error('Gemini response kosong atau diblokir');
     }
 
-    parsed = JSON.parse(rawText);
+    parsed = parseGeminiJson(rawText);
   } catch (err) {
     console.error('[AI] Gemini error:', err.message);
     console.error('[AI] Pastikan GEMINI_API_KEY sudah diisi di file .env backend');
